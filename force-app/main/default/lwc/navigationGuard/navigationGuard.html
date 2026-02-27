@@ -1,0 +1,15 @@
+<template>
+    <lightning-card title="Submit Before Leaving">
+        <div class="slds-p-around_medium">
+            <lightning-button
+                label="Submit"
+                onclick={handleSubmit}
+                disabled={isSubmitted}
+                variant="brand">
+            </lightning-button>
+            <template if:true={isSubmitted}>
+                <p class="slds-text-color_success">Submitted! You can now navigate away.</p>
+            </template>
+        </div>
+    </lightning-card>
+</template>

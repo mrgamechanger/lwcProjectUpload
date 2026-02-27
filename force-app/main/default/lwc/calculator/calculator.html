@@ -1,0 +1,29 @@
+<template>
+    <div class="container">
+        <div class="calculator">
+            <div class="calculator__display">{displayValue}</div>
+            <div class="calculator__keys">
+                <button class="key--operator" data-action="add" onclick={handleButtonClick}>+</button>
+                <button class="key--operator" data-action="subtract" onclick={handleButtonClick}>-</button>
+                <button class="key--operator" data-action="multiply" onclick={handleButtonClick}>&times;</button>
+                <button class="key--operator" data-action="divide" onclick={handleButtonClick}>÷</button>
+                <button onclick={handleButtonClick}>7</button>
+                <button onclick={handleButtonClick}>8</button>
+                <button onclick={handleButtonClick}>9</button>
+                <button onclick={handleButtonClick}>4</button>
+                <button onclick={handleButtonClick}>5</button>
+                <button onclick={handleButtonClick}>6</button>
+                <button onclick={handleButtonClick}>1</button>
+                <button onclick={handleButtonClick}>2</button>
+                <button onclick={handleButtonClick}>3</button>
+                <button onclick={handleButtonClick}>0</button>
+                <button data-action="decimal" onclick={handleButtonClick}>.</button>
+                <button data-action="clear" onclick={handleButtonClick}>AC</button>
+                <button class="key--operator" data-action="sqrt" onclick={handleButtonClick}>√</button>
+                <button class="key--operator" data-action="power" onclick={handleButtonClick}>^</button>
+                <button class="key--operator" data-action="log" onclick={handleButtonClick}>log</button>
+                <button class="key--equal" data-action="calculate" onclick={handleButtonClick}>=</button>
+            </div>
+        </div>
+    </div>
+</template>

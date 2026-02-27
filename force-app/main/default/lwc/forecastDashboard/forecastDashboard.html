@@ -1,0 +1,40 @@
+<template>
+    <lightning-card title="Sales Forecast Dashboard (Quarterly)">
+        <div class="slds-p-horizontal_medium slds-p-vertical_small">
+            <div class="slds-grid slds-wrap slds-gutters">
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                    <lightning-combobox
+                        name="owner"
+                        label="Owner"
+                        value={selectedOwnerId}
+                        options={ownerOptions}
+                        placeholder="All Owners"
+                        onchange={handleOwnerChange}>
+                    </lightning-combobox>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                    <lightning-input type="number" name="horizon" label="Horizon (quarters)" value={horizon}
+                        min="1" max="8" onchange={handleHorizonChange}></lightning-input>
+                </div>
+            </div>
+
+            <div class="slds-m-top_medium">
+                <template if:true={chartData}>
+                    <canvas class="chart" lwc:dom="manual"></canvas>
+                </template>
+                <template if:false={chartData}>
+                    <div class="slds-text-color_weak">No data to display yet.</div>
+                </template>
+            </div>
+
+            <div class="slds-m-top_medium slds-grid slds-wrap slds-gutters">
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                    <lightning-button variant="brand" label="Refresh Forecast" onclick={refreshForecast}></lightning-button>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-text-align_right">
+                    <lightning-button variant="neutral" label="Generate & Persist" onclick={generateAndPersist}></lightning-button>
+                </div>
+            </div>
+        </div>
+    </lightning-card>
+</template>

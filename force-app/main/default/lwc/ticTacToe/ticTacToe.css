@@ -1,0 +1,107 @@
+/* Tic-Tac-Toe Container Styling */
+.tic-tac-toe {
+    font-family: 'Open Sans', sans-serif;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+    width: 450px;
+    margin: 50px auto;
+    position: relative;
+    padding: 10px;
+    border: 2px solid #3d4250;
+    border-radius: 8px;
+    background-color: #f7f7f7;
+  }
+  
+  /* Responsive styling for smaller screens */
+  @media (max-width: 450px) {
+    .tic-tac-toe {
+      width: 300px;
+    }
+  }
+  
+  /* Input Radio Buttons - Hidden */
+  input[type="radio"] {
+    display: none;
+  }
+  
+  /* Labels (Cells) Styling */
+  label {
+    background-color: #78bec5;
+    border-radius: 8px;
+    cursor: pointer;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    width: 100%;
+    height: 100%;
+    transition: background-color 0.3s;
+    position: relative;
+    font-family: "FontAwesome";
+  }
+  
+  /* Hover Effect for Labels */
+  label:hover {
+    background-color: #3d4250;
+  }
+  
+  /* Player 1 and Player 2 Styles */
+  input[type="radio"].player-1:checked + label {
+    background-color: #dc685a; /* Player 1 color */
+    content: "\f00d"; /* Player 1 icon */
+  }
+  
+  input[type="radio"].player-2:checked + label {
+    background-color: #ecaf4f; /* Player 2 color */
+    content: "\f10c"; /* Player 2 icon */
+  }
+  
+  /* Showing Icons */
+  input[type="radio"].player-1:checked + label::after,
+  input[type="radio"].player-2:checked + label::after {
+    content: attr(data-icon);
+    font-size: 2.5rem;
+    opacity: 1;
+    position: absolute;
+  }
+  
+  /* End Screen Styling */
+  .end {
+    background: rgba(255, 255, 255, 0.8);
+    color: #3d4250;
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    z-index: 10;
+    width: 80%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* End Screen Header */
+  .end h3 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  /* Restart Button */
+  .end a {
+    background-color: #3d4250;
+    border-radius: 4px;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-size: 18px;
+    transition: background-color 0.2s;
+  }
+  
+  /* Restart Button Hover Effect */
+  .end a:hover {
+    background-color: #262934;
+  }

@@ -1,0 +1,20 @@
+<template>
+    <lightning-card title="Account Details" icon-name="standard:account">
+        <div class="slds-p-around_medium">
+            <lightning-layout vertical-align="start">
+                <lightning-layout-item size="12">
+                    <p><strong>Name:</strong> {accountName}</p>
+                </lightning-layout-item>
+                <lightning-layout-item size="12">
+                    <p><strong>Phone:</strong> {accountPhone}</p>
+                </lightning-layout-item>
+                <lightning-layout-item size="12">
+                    <p><strong>Email:</strong> <a href={accountEmail} target="_blank">{accountEmail}</a></p>
+                </lightning-layout-item>
+                <lightning-layout-item size="12">
+                    <p><strong>Annual Revenue:</strong> {accountAnnualRevenue}</p>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+    </lightning-card>
+</template>

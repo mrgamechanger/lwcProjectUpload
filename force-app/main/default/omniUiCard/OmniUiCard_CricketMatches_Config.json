@@ -1,0 +1,9 @@
+{
+  "Name": "CricketMatchesCard",
+  "Description": "Displays cricket matches fetched from Integration Procedure api_cricket",
+  "OmniUiCardType": "Parent",
+  "IsActive": true,
+  "DataSourceConfig": "{\"type\":\"IntegrationProcedure\",\"value\":{\"ipName\":\"api_cricket\",\"input\":{}}}",
+  "SampleDataSourceResponse": "[{\"id\":\"1\",\"series\":\"World Cup\",\"t1\":\"India\",\"t2\":\"Australia\",\"t1img\":\"https://example.com/india.png\",\"t2img\":\"https://example.com/aus.png\",\"dateTimeGMT\":\"2026-02-21T10:00:00Z\",\"ms\":\"Live\",\"status\":\"LIVE\",\"matchType\":\"ODI\",\"t1s\":\"250/8\",\"t2s\":\"120/3\"}]",
+  "PropertySetConfig": "{\"states\":[{\"props\":{\"label\":\"Cricket Matches\"},\"children\":[{\"descriptor\":\"Text\",\"props\":{\"label\":\"Series\",\"value\":\"{series}\"}},{\"descriptor\":\"Text\",\"props\":{\"label\":\"Match\",\"value\":\"{t1} vs {t2}\"}},{\"descriptor\":\"Text\",\"props\":{\"label\":\"Date\",\"value\":\"{dateTimeGMT}\"}},{\"descriptor\":\"Text\",\"props\":{\"label\":\"Status\",\"value\":\"{ms}\"}},{\"descriptor\":\"Action\",\"props\":{\"label\":\"Refresh\",\"actionType\":\"Update Datasource\"}}]}]}"
+}

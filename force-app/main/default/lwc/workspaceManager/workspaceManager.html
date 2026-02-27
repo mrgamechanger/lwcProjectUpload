@@ -1,0 +1,179 @@
+<template>
+    <lightning-card title="Workspace Manager" icon-name="utility:workspace">
+        <div class="slds-p-around_medium">
+            <!-- Console Navigation Warning -->
+            <template if:false={isConsoleNavigation}>
+                <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_warning">
+                    <span class="slds-assistive-text">warning</span>
+                    <h2>This component is designed for Lightning Console Navigation</h2>
+                </div>
+            </template>
+
+            <!-- Tab Selection -->
+            <div class="slds-box slds-m-bottom_medium">
+                <h3 class="slds-text-heading_small slds-m-bottom_small">Tab Selection</h3>
+                <div class="slds-form-element">
+                    <label class="slds-form-element__label" for="tabSelect">Select Tab</label>
+                    <div class="slds-form-element__control">
+                        <select id="tabSelect" class="slds-select" onchange={handleTabSelect}>
+                            <option value="">Select a tab</option>
+                            <template for:each={allTabsInfo} for:item="tab">
+                                <option key={tab.tabId} value={tab.tabId}>{tab.label}</option>
+                            </template>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Information -->
+            <template if:true={focusedTabInfo}>
+                <div class="slds-box slds-m-bottom_medium">
+                    <h3 class="slds-text-heading_small slds-m-bottom_small">Current Tab Info</h3>
+                    <p><strong>Label:</strong> {focusedTabInfo.label}</p>
+                    <p><strong>Tab ID:</strong> {focusedTabInfo.tabId}</p>
+                    <p><strong>Is Subtab:</strong> {focusedTabInfo.isSubtab}</p>
+                </div>
+            </template>
+
+            <!-- Basic Tab Operations -->
+            <div class="slds-box slds-m-bottom_medium">
+                <h3 class="slds-text-heading_small slds-m-bottom_small">Basic Tab Operations</h3>
+                <div class="slds-grid slds-gutters slds-wrap">
+                    <div class="slds-col slds-size_1-of-2 slds-p-around_xx-small">
+                        <lightning-button 
+                            label="Open Account List" 
+                            onclick={openTab}
+                            variant="brand"
+                            class="slds-m-bottom_small"
+                            disabled={isConsoleNavigation}>
+                        </lightning-button>
+                    </div>
+                    <div class="slds-col slds-size_1-of-2 slds-p-around_xx-small">
+                        <lightning-button 
+                            label="Close Selected Tab" 
+                            onclick={closeTab}
+                            variant="neutral"
+                            class="slds-m-bottom_small"
+                            disabled={isConsoleNavigation}>
+                        </lightning-button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Customization -->
+            <div class="slds-box slds-m-bottom_medium">
+                <h3 class="slds-text-heading_small slds-m-bottom_small">Tab Customization</h3>
+                <div class="slds-form-element slds-m-bottom_small">
+                    <label class="slds-form-element__label" for="newLabel">New Label</label>
+                    <div class="slds-form-element__control">
+                        <input type="text" id="newLabel" class="slds-input" onchange={handleLabelChange} placeholder="Enter new label"/>
+                    </div>
+                </div>
+                <div class="slds-form-element slds-m-bottom_small">
+                    <label class="slds-form-element__label" for="newIcon">New Icon</label>
+                    <div class="slds-form-element__control">
+                        <input type="text" id="newIcon" class="slds-input" onchange={handleIconChange} value={newTabIcon}/>
+                    </div>
+                </div>
+                <div class="slds-grid slds-gutters slds-wrap">
+                    <div class="slds-col slds-size_1-of-2 slds-p-around_xx-small">
+                        <lightning-button 
+                            label="Update Label" 
+                            onclick={updateTabLabel}
+                            variant="brand-outline"
+                            class="slds-m-bottom_small"
+                            disabled={isConsoleNavigation}>
+                        </lightning-button>
+                    </div>
+                    <div class="slds-col slds-size_1-of-2 slds-p-around_xx-small">
+                        <lightning-button 
+                            label="Update Icon" 
+                            onclick={updateTabIcon}
+                            variant="brand-outline"
+                            class="slds-m-bottom_small"
+                            disabled={isConsoleNavigation}>
+                        </lightning-button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Management -->
+            <div class="slds-box slds-m-bottom_medium">
+                <h3 class="slds-text-heading_small slds-m-bottom_small">Tab Management</h3>
+                <div class="slds-grid slds-gutters slds-wrap">
+                    <div class="slds-col slds-size_1-of-2 slds-p-around_xx-small">
+                        <lightning-button 
+                            label={isHighlighted}
+                            onclick={toggleHighlight}
+                            variant="brand-outline"
+                            class="slds-m-bottom_small"
+                            disabled={isConsoleNavigation}>
+                        </lightning-button>
+                    </div>
+                    <div class="slds-col slds-size_1-of-2 slds-p-around_xx-small">
+                        <lightning-button 
+                            label="Focus Tab" 
+                            onclick={focusSelectedTab}
+                            variant="brand-outline"
+                            class="slds-m-bottom_small"
+                            disabled={isConsoleNavigation}>
+                        </lightning-button>
+                    </div>
+                    <div class="slds-col slds-size_1-of-2 slds-p-around_xx-small">
+                        <lightning-button 
+                            label="Refresh Tab" 
+                            onclick={refreshSelectedTab}
+                            variant="brand-outline"
+                            class="slds-m-bottom_small"
+                            disabled={isConsoleNavigation}>
+                        </lightning-button>
+                    </div>
+                    <div class="slds-col slds-size_1-of-2 slds-p-around_xx-small">
+                        <lightning-button 
+                            label={isTabCloseDisabled}
+                            onclick={toggleTabClose}
+                            variant="brand-outline"
+                            class="slds-m-bottom_small"
+                            disabled={isConsoleNavigation}>
+                        </lightning-button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Subtab Operations -->
+            <div class="slds-box slds-m-bottom_medium">
+                <h3 class="slds-text-heading_small slds-m-bottom_small">Subtab Operations</h3>
+                <div class="slds-form-element slds-m-bottom_small">
+                    <label class="slds-form-element__label" for="parentTabSelect">Select Parent Tab</label>
+                    <div class="slds-form-element__control">
+                        <select id="parentTabSelect" class="slds-select" onchange={handleParentTabSelect}>
+                            <option value="">Select a parent tab</option>
+                            <template for:each={allTabsInfo} for:item="tab">
+                                <option key={tab.tabId} value={tab.tabId}>{tab.label}</option>
+                            </template>
+                        </select>
+                    </div>
+                </div>
+                <div class="slds-grid slds-gutters slds-wrap">
+                    <div class="slds-col slds-size_1-of-2 slds-p-around_xx-small">
+                        <lightning-button 
+                            label="Open Contact Subtab" 
+                            onclick={openSubtab}
+                            variant="brand"
+                            class="slds-m-bottom_small"
+                            disabled={isConsoleNavigation}>
+                        </lightning-button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Error Display -->
+            <template if:true={error}>
+                <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error slds-m-top_medium">
+                    <span class="slds-assistive-text">error</span>
+                    <h2>{error}</h2>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>

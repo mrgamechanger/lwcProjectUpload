@@ -1,0 +1,90 @@
+<template>
+    <div class="chat-container" role="complementary" aria-label="Assistant chat">
+        <!-- Chat Widget Button -->
+        <button 
+            class="chat-toggle-btn" 
+            onclick={toggleChat}
+            title="Open chat"
+            aria-label="Open chat"
+            aria-expanded={isOpen}
+            aria-controls="chatWindow"
+        >
+            <lightning-icon 
+                icon-name="utility:chat" 
+                size="small" 
+                alternative-text="Chat"
+                class="chat-icon"
+            ></lightning-icon>
+        </button>
+
+        <!-- Chat Window -->
+        <div class={chatWindowClass} id="chatWindow" role="dialog" aria-modal="false" aria-live="polite" aria-labelledby="chatTitle">
+            <!-- Chat Header -->
+            <div class="chat-header">
+                <span id="chatTitle" class="chat-title">Salesforce Assistant</span>
+                <button class="close-btn" onclick={closeChat} title="Close chat" aria-label="Close chat">
+                    <lightning-icon 
+                        icon-name="utility:close" 
+                        size="x-small" 
+                        alternative-text="Close"
+                    ></lightning-icon>
+                </button>
+            </div>
+
+            <!-- Chat Messages -->
+            <div class="chat-messages" id="chatMessages" role="log" aria-live="polite" aria-relevant="additions text">
+                <template for:each={messages} for:item="message">
+                    <template key={message.id}>
+                        <div class={message.type} data-type={message.type}>
+                            <span class="message-text">{message.text}</span>
+                        </div>
+                    </template>
+                </template>
+                <template if:true={isLoading}>
+                    <template key="typing">
+                        <div class="bot-message">
+                            <span class="message-text">Assistant is typing…</span>
+                        </div>
+                    </template>
+                </template>
+            </div>
+
+            <!-- Quick Replies -->
+            <template if:true={showQuickReplies}>
+                <div class="quick-replies" role="group" aria-label="Suggested prompts">
+                    <template for:each={quickReplies} for:item="reply">
+                        <lightning-button 
+                            key={reply.label}
+                            label={reply.label}
+                            variant="neutral"
+                            onclick={handleQuickReply}
+                            data-value={reply.value}
+                            class="quick-reply-btn"
+                        ></lightning-button>
+                    </template>
+                </div>
+            </template>
+
+            <!-- Input Area -->
+            <div class="chat-input-area">
+                <lightning-textarea
+                    value={inputValue}
+                    onchange={handleInputChange}
+                    onkeypress={handleKeyPress}
+                    placeholder="Type your message (Enter to send, Shift+Enter for new line)…"
+                    rows="2"
+                    class="chat-input"
+                    aria-label="Message input"
+                ></lightning-textarea>
+                <lightning-button
+                    label="Send"
+                    onclick={sendMessage}
+                    disabled={isSending}
+                    variant="brand"
+                    class="send-btn"
+                    aria-label="Send message"
+                ></lightning-button>
+            </div>
+        </div>
+    </div>
+</template>

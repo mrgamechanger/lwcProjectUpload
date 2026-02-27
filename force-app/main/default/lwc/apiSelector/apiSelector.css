@@ -1,0 +1,68 @@
+.slds-card {
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.slds-radio-group {
+    margin-bottom: 1rem;
+}
+
+.slds-radio {
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+
+.slds-radio:hover {
+    background-color: #f3f3f3;
+}
+
+.slds-radio input[type="radio"]:checked + .slds-radio__label {
+    font-weight: bold;
+    color: #0176d3;
+}
+
+.slds-button {
+    margin-top: 1rem;
+}
+
+.api-description {
+    font-size: 0.875rem;
+    color: #706e6b;
+    line-height: 1.4;
+}
+
+.selected-api-card {
+    background-color: #f8f9fa;
+    border-left: 4px solid #0176d3;
+}
+
+.navigation-buttons {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid #dddbda;
+}
+
+.slds-button {
+    margin: 0 0.25rem;
+}
+
+.slds-grid.slds-gutters {
+    align-items: center;
+}
+
+/* Button container to position Next button at right side end */
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1.5rem;
+    padding: 0 1rem;
+}
+
+/* Alternative approach using SLDS utility classes */
+.button-container-right {
+    text-align: right;
+    margin-top: 1.5rem;
+    padding: 0 1rem;
+}

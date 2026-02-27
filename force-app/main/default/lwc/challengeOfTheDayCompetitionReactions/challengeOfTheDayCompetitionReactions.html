@@ -1,0 +1,21 @@
+<!-- sldsValidatorIgnore -->
+<template>
+    <lightning-card title="Challenge of the Day Competition - Reactions">
+        <div style="height:500px">
+            <template if:false={showWarning}>
+                <lightning-datatable key-field="Id"
+                        data={reactions}
+                        columns={columns}
+                        enable-infinite-loading={enableInfiniteLoading}
+                        onloadmore={loadMoreData}
+                        hide-checkbox-column="true"
+                        show-row-number-column="true">
+                </lightning-datatable>
+            </template>
+            <template if:true={showWarning}>
+                <div class="div-warning slds-p-left_large slds-p-top_large">There are no participants yet.</div>
+            </template>
+        </div>
+    </lightning-card>
+</template>
+<!-- sldsValidatorAllow -->

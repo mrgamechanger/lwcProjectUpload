@@ -1,0 +1,107 @@
+.related-listings {
+    margin-top: 2rem;
+  }
+  
+  .related-listings h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .related-listings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .related-listing-item {
+    border: 1px solid #d8d8d8;
+    border-radius: 0.25rem;
+    overflow: hidden;
+  }
+  
+  .listing-image-placeholder {
+    background-color: #f3f2f2;
+    height: 150px;
+  }
+  
+  .listing-info {
+    padding: 1rem;
+  }
+  
+  .listing-category {
+    color: #706e6b;
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .listing-title {
+    font-size: 1.125rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+  
+  .listing-description {
+    font-size: 0.875rem;
+    color: #706e6b;
+    margin-bottom: 0.5rem;
+  }
+  
+  .listing-author {
+    display: flex;
+    align-items: center;
+  }
+  
+  .author-avatar-small {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+  }
+  
+  .view-all-link {
+    display: inline-block;
+    color: #0070d2;
+    text-decoration: none;
+  }
+  
+  /* relatedListings.css */
+
+.related-listings-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+@media only screen and (max-width: 768px) {
+  .related-listings-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .listing-info {
+    padding: 0.5rem;
+  }
+
+  .listing-title {
+    font-size: 1rem;
+  }
+
+  .listing-description {
+    font-size: 0.875rem;
+  }
+}
+
+.view-all-link {
+  display: inline-block;
+  color: #0070d2;
+  text-decoration: none;
+  margin-top: 1rem;
+}
+
+@media only screen and (max-width: 768px) {
+  .view-all-link {
+    text-align: center;
+    display: block;
+  }
+}

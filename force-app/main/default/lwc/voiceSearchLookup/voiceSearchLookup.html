@@ -1,0 +1,77 @@
+<template>
+    <div class="lookup-container">
+        <label class="slds-form-element__label" for="inputId">{label}</label>
+        <div class="slds-combobox_container slds-has-input-focus">
+            <div class={comboboxClass} aria-expanded={isOpen} aria-haspopup="listbox" role="combobox">
+                <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right" role="none">
+                    <lightning-input
+                        type="search"
+                        value={searchKey}
+                        placeholder={placeholder}
+                        onchange={handleChange}
+                        oninput={handleInput}
+                        onfocus={openDropdown}
+                        onblur={handleBlur}
+                        variant="label-hidden"
+                        class="lookup-input">
+                    </lightning-input>
+
+                    <button class="slds-button slds-button_icon slds-input__icon slds-input__icon_right" title="Start voice search" onclick={toggleVoice}>
+                        <lightning-icon icon-name={micIcon} size="x-small" alternative-text="Voice"></lightning-icon>
+                    </button>
+                </div>
+
+                <div if:true={isOpen} class="slds-combobox__dropdown slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid" role="listbox">
+                    <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                        <template if:true={hasResults}>
+                            <template for:each={results} for:item="item">
+                                <li key={item.id} role="presentation" class="slds-listbox__item">
+                                    <div data-id={item.id} data-name={item.title} class="slds-media slds-listbox__option slds-listbox__option_entity slds-media_center" role="option" onclick={handleSelect}>
+                                        <span class="slds-media__figure slds-listbox__option-icon">
+                                            <lightning-icon icon-name={listIcon} size="small" alternative-text="Record"></lightning-icon>
+                                        </span>
+                                        <span class="slds-media__body">
+                                            <span class="slds-listbox__option-text slds-listbox__option-text_entity">{item.title}</span>
+                                            <span class="slds-listbox__option-meta slds-listbox__option-meta_entity">{item.subtitle}</span>
+                                        </span>
+                                    </div>
+                                </li>
+                            </template>
+                        </template>
+                        <template if:false={hasResults}>
+                            <li role="presentation" class="slds-listbox__item">
+                                <div class="slds-media slds-listbox__option slds-media_center" role="option">
+                                    <span class="slds-media__body">
+                                        <span class="slds-truncate">{emptyMessage}</span>
+                                    </span>
+                                </div>
+                            </li>
+                        </template>
+                    </ul>
+                </div>
+            </div>
+
+            <template if:true={selectedRecord}>
+                <div class="slds-pill_container">
+                    <span class="slds-pill">
+                        <span class="slds-pill__label">{selectedRecord.title}</span>
+                        <button class="slds-button slds-button_icon slds-button_icon" title="Remove" onclick={clearSelection}>
+                            <lightning-icon icon-name="utility:close" size="x-small" alternative-text="Remove"></lightning-icon>
+                        </button>
+                    </span>
+                </div>
+            </template>
+
+            <div class="controls">
+                <lightning-combobox
+                    name="objectPick"
+                    label="Search In"
+                    value={objectApiName}
+                    placeholder="Select Object"
+                    options={objectOptions}
+                    onchange={handleObjectChange}>
+                </lightning-combobox>
+            </div>
+        </div>
+    </div>
+</template>

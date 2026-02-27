@@ -1,0 +1,131 @@
+<template>
+    <lightning-card title="OmniStudio Tracking Dashboard" icon-name="utility:metrics">
+        <div class="slds-p-around_medium">
+            <!-- Error Handling -->
+            <template if:true={error}>
+                <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error">
+                    <span class="slds-assistive-text">error</span>
+                    <h2>{error}</h2>
+                </div>
+            </template>
+
+            <!-- Filters -->
+            <div class="slds-grid slds-gutters slds-p-bottom_medium">
+                <div class="slds-col slds-size_1-of-4">
+                    <lightning-combobox
+                        label="Component Type"
+                        value={selectedComponentType}
+                        options={componentTypeOptions}
+                        onchange={handleComponentTypeChange}>
+                    </lightning-combobox>
+                </div>
+                <div class="slds-col slds-size_1-of-4">
+                    <lightning-input
+                        type="text"
+                        label="Component Name"
+                        value={selectedComponentName}
+                        onchange={handleComponentNameChange}>
+                    </lightning-input>
+                </div>
+                <div class="slds-col slds-size_1-of-4">
+                    <lightning-input
+                        type="date"
+                        label="Start Date"
+                        value={startDate}
+                        onchange={handleStartDateChange}>
+                    </lightning-input>
+                </div>
+                <div class="slds-col slds-size_1-of-4">
+                    <lightning-input
+                        type="date"
+                        label="End Date"
+                        value={endDate}
+                        onchange={handleEndDateChange}>
+                    </lightning-input>
+                </div>
+            </div>
+
+            <!-- Tracking Data Table -->
+            <template if:true={hasData}>
+                <lightning-datatable
+                    key-field="Id"
+                    data={trackingData}
+                    columns={columns}
+                    hide-checkbox-column>
+                </lightning-datatable>
+            </template>
+
+            <!-- Statistics Section -->
+            <div class="slds-grid slds-gutters slds-p-top_medium">
+                <!-- Average Time Spent -->
+                <div class="slds-col slds-size_1-of-3">
+                    <div class="slds-card">
+                        <div class="slds-card__header slds-grid">
+                            <header class="slds-media slds-media_center">
+                                <div class="slds-media__body">
+                                    <h2 class="slds-card__header-title">
+                                        <span>Average Time Spent</span>
+                                    </h2>
+                                </div>
+                            </header>
+                        </div>
+                        <div class="slds-card__body">
+                            <template for:each={averageTimeSpent} for:item="stat">
+                                <div key={stat.ComponentName__c} class="slds-p-around_small">
+                                    <div class="slds-text-title_caps">{stat.ComponentName__c}</div>
+                                    <div class="slds-text-heading_medium">{stat.avgTime} ms</div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Total Interactions -->
+                <div class="slds-col slds-size_1-of-3">
+                    <div class="slds-card">
+                        <div class="slds-card__header slds-grid">
+                            <header class="slds-media slds-media_center">
+                                <div class="slds-media__body">
+                                    <h2 class="slds-card__header-title">
+                                        <span>Total Interactions</span>
+                                    </h2>
+                                </div>
+                            </header>
+                        </div>
+                        <div class="slds-card__body">
+                            <template for:each={totalInteractions} for:item="stat">
+                                <div key={stat.ComponentName__c} class="slds-p-around_small">
+                                    <div class="slds-text-title_caps">{stat.ComponentName__c}</div>
+                                    <div class="slds-text-heading_medium">{stat.totalCount}</div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step-wise Time Distribution -->
+                <div class="slds-col slds-size_1-of-3">
+                    <div class="slds-card">
+                        <div class="slds-card__header slds-grid">
+                            <header class="slds-media slds-media_center">
+                                <div class="slds-media__body">
+                                    <h2 class="slds-card__header-title">
+                                        <span>Step-wise Time Distribution</span>
+                                    </h2>
+                                </div>
+                            </header>
+                        </div>
+                        <div class="slds-card__body">
+                            <template for:each={stepWiseTime} for:item="stat">
+                                <div key={stat.StepName__c} class="slds-p-around_small">
+                                    <div class="slds-text-title_caps">{stat.StepName__c}</div>
+                                    <div class="slds-text-heading_medium">{stat.avgTime} ms</div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </lightning-card>
+</template> 

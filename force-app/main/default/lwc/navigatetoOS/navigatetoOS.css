@@ -1,0 +1,25 @@
+.slds-card {
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.slds-text-body_regular {
+    color: #706e6b;
+    line-height: 1.4;
+}
+
+/* Hover effect for the button */
+lightning-button {
+    transition: all 0.2s ease;
+}
+
+lightning-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}

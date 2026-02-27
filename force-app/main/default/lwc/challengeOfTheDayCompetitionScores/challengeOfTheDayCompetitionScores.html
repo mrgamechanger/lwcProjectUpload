@@ -1,0 +1,21 @@
+<template>
+    <template if:false={showWarning}>
+        <lightning-card title="Challenge of the Day Competition - Scores">
+            <lightning-datatable
+                key-field="id"
+                data={results}
+                columns={columns}
+                enable-infinite-loading={enableInfiniteLoading}
+                        onloadmore={loadMoreData}
+                        hide-checkbox-column="true"
+                        is-loading={isLoading}
+                onrowaction={handleRowAction}
+            >
+            </lightning-datatable>
+        </lightning-card>
+        <c-challenge-of-the-day-competition-score-modal is-open={isModalOpen} participant-name={scoreParticipantName} scores={scoresPerChallenge} onclose={handleModalClose}></c-challenge-of-the-day-competition-score-modal>
+    </template>
+    <template if:true={showWarning}>
+        <div class="div-warning slds-p-left_large slds-p-top_large">There are no score data yet.</div>
+    </template>
+</template>

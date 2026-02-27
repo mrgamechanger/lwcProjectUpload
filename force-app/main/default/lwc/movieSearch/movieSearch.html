@@ -1,0 +1,242 @@
+<template>
+    <div class="slds-card slds-card_boundary main-container">
+        <!-- Hero Section -->
+        <div class="slds-card__header slds-grid slds-gutters slds-p-around_medium hero-section">
+            <div class="slds-col slds-size_1-of-1">
+                <h1 class="slds-text-heading_large slds-text-align_center slds-m-bottom_medium slds-text-color_default">Entertainment Search</h1>
+                <div class="slds-grid slds-gutters search-container">
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_3-of-4">
+                        <lightning-input 
+                            type="search"
+                            label="Search Content"
+                            placeholder="Search for movies, TV shows, or episodes..."
+                            value={searchTerm}
+                            onchange={handleSearchChange}
+                            variant="label-hidden"
+                            class="slds-box slds-box_shadow search-input">
+                        </lightning-input>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-4">
+                        <lightning-combobox
+                            label="Content Type"
+                            value={contentType}
+                            options={contentTypes}
+                            onchange={handleContentTypeChange}
+                            variant="label-hidden"
+                            class="slds-box slds-box_shadow filter-input">
+                        </lightning-combobox>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slds-card__body slds-p-around_medium">
+            <!-- Loading Spinner -->
+            <template if:true={isLoading}>
+                <div class="slds-is-relative slds-m-vertical_medium">
+                    <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+                </div>
+            </template>
+
+            <!-- Error Message -->
+            <template if:true={error}>
+                <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error" role="alert">
+                    <span class="slds-assistive-text">error</span>
+                    <h2>{error}</h2>
+                </div>
+            </template>
+
+            <!-- Results Grid -->
+            <template if:true={hasResults}>
+                <div class="slds-text-heading_medium slds-m-bottom_medium results-header">
+                    Found <span class="slds-text-color_brand">{totalResults}</span> results for "<span class="slds-text-color_brand">{searchTerm}</span>"
+                </div>
+                
+                <div class="slds-grid slds-wrap slds-gutters">
+                    <template for:each={movies} for:item="movie">
+                        <div key={movie.imdbID} class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-3">
+                            <article class="slds-card slds-card_boundary slds-m-bottom_medium slds-box_shadow movie-card">
+                                <div class="slds-card__body slds-card__body_inner">
+                                    <div class="slds-grid slds-gutters">
+                                        <div class="slds-col slds-size_1-of-3">
+                                            <div class="slds-box slds-box_shadow poster-container">
+                                                <img src={movie.Poster} alt={movie.Title} 
+                                                     class="slds-size_1-of-1 poster-image" 
+                                                     onerror={handleImageError}/>
+                                            </div>
+                                        </div>
+                                        <div class="slds-col slds-size_2-of-3">
+                                            <h3 class="slds-text-heading_small slds-m-bottom_x-small slds-text-color_default slds-line-clamp_1 movie-title">{movie.Title}</h3>
+                                            <div class="slds-grid slds-gutters slds-m-bottom_small">
+                                                <div class="slds-col slds-size_1-of-2">
+                                                    <p class="slds-text-body_small movie-info">
+                                                        <lightning-icon icon-name="utility:calendar" size="x-small" class="slds-m-right_x-small slds-text-color_default"></lightning-icon>
+                                                        {movie.Year}
+                                                    </p>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-2">
+                                                    <p class="slds-text-body_small movie-info">
+                                                        <lightning-icon icon-name="utility:star" size="x-small" class="slds-m-right_x-small slds-text-color_default"></lightning-icon>
+                                                        {movie.imdbRating}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="slds-m-bottom_small description-container">
+                                                <p class="slds-text-body_small slds-line-clamp_2 movie-plot">{movie.Plot}</p>
+                                                <lightning-button 
+                                                    label="Read More" 
+                                                    title="Read More" 
+                                                    onclick={handleViewDetails} 
+                                                    data-imdbid={movie.imdbID}
+                                                    variant="brand-outline"
+                                                    size="x-small"
+                                                    class="slds-m-top_x-small read-more-btn">
+                                                </lightning-button>
+                                            </div>
+                                            <div class="slds-m-bottom_small badges-container">
+                                                <lightning-badge label={movie.Type} class="slds-m-right_x-small slds-theme_success"></lightning-badge>
+                                                <template if:true={movie.totalSeasons}>
+                                                    <lightning-badge label={movie.totalSeasons} class="slds-m-right_x-small slds-theme_info"></lightning-badge>
+                                                </template>
+                                            </div>
+                                            <lightning-button 
+                                                label="View Details" 
+                                                title="View Details" 
+                                                onclick={handleViewDetails} 
+                                                data-imdbid={movie.imdbID}
+                                                variant="brand"
+                                                class="slds-m-top_small view-details-btn">
+                                            </lightning-button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </template>
+                </div>
+
+                <!-- Pagination -->
+                <div class="slds-grid slds-grid_align-center slds-m-top_medium">
+                    <div class="slds-box slds-box_shadow slds-p-around_small pagination-container">
+                        <lightning-button-group>
+                            <lightning-button 
+                                label="Previous" 
+                                onclick={handlePreviousPage} 
+                                disabled={isFirstPage}
+                                icon-name="utility:chevronleft"
+                                icon-position="left">
+                            </lightning-button>
+                            <lightning-button 
+                                label="Next" 
+                                onclick={handleNextPage} 
+                                disabled={isLastPage}
+                                icon-name="utility:chevronright"
+                                icon-position="right">
+                            </lightning-button>
+                        </lightning-button-group>
+                        <span class="slds-m-left_medium slds-text-body_small page-info">
+                            Page {currentPage} of {totalPages}
+                        </span>
+                    </div>
+                </div>
+            </template>
+
+            <!-- No Results Message -->
+            <template if:true={noResults}>
+                <div class="slds-text-align_center slds-m-top_medium slds-box slds-box_shadow slds-p-around_large no-results-container">
+                    <lightning-icon icon-name="utility:search" size="large" class="slds-m-bottom_medium slds-text-color_default"></lightning-icon>
+                    <p class="slds-text-heading_medium slds-text-color_default">No content found</p>
+                    <p class="slds-text-body_regular slds-text-color_default">Try a different search term</p>
+                </div>
+            </template>
+        </div>
+    </div>
+
+    <!-- Content Details Modal -->
+    <template if:true={showMovieDetails}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_large">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header slds-theme_shade modal-header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={handleCloseModal}>
+                        <lightning-icon icon-name="utility:close" alternative-text="Close" variant="inverse" size="small"></lightning-icon>
+                    </button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate slds-text-color_inverse">{selectedMovie.Title}</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium">
+                    <!-- Season and Episode Selectors for TV Series -->
+                    <template if:true={showSeasonSelector}>
+                        <div class="slds-grid slds-gutters slds-m-bottom_medium">
+                            <div class="slds-col slds-size_1-of-1">
+                                <lightning-combobox
+                                    label="Select Season"
+                                    value={selectedSeason}
+                                    options={seasons}
+                                    onchange={handleSeasonChange}
+                                    placeholder="Select a season"
+                                    class="slds-box slds-box_shadow selector-input">
+                                </lightning-combobox>
+                            </div>
+                        </div>
+                        
+                        <template if:true={showEpisodeSelector}>
+                            <div class="slds-grid slds-gutters slds-m-bottom_medium">
+                                <div class="slds-col slds-size_1-of-1">
+                                    <lightning-combobox
+                                        label="Select Episode"
+                                        value={selectedEpisode}
+                                        options={episodes}
+                                        onchange={handleEpisodeChange}
+                                        placeholder="Select an episode"
+                                        class="slds-box slds-box_shadow selector-input">
+                                    </lightning-combobox>
+                                </div>
+                            </div>
+                        </template>
+                    </template>
+                    
+                    <div class="slds-grid slds-gutters">
+                        <div class="slds-col slds-size_1-of-3">
+                            <div class="slds-box slds-box_shadow poster-container">
+                                <img src={selectedMovie.Poster} alt={selectedMovie.Title} class="slds-size_1-of-1 poster-image"/>
+                            </div>
+                        </div>
+                        <div class="slds-col slds-size_2-of-3">
+                            <dl class="slds-dl_horizontal slds-wrap slds-box slds-box_shadow slds-p-around_medium details-container">
+                                <dt class="slds-size_1-of-3 slds-p-bottom_small slds-text-heading_small detail-label">Year:</dt>
+                                <dd class="slds-size_2-of-3 slds-p-bottom_small detail-value">{selectedMovie.Year}</dd>
+                                
+                                <dt class="slds-size_1-of-3 slds-p-bottom_small slds-text-heading_small detail-label">Type:</dt>
+                                <dd class="slds-size_2-of-3 slds-p-bottom_small detail-value">
+                                    <lightning-badge label={selectedMovie.Type} class="slds-theme_success"></lightning-badge>
+                                </dd>
+                                
+                                <dt class="slds-size_1-of-3 slds-p-bottom_small slds-text-heading_small detail-label">Rating:</dt>
+                                <dd class="slds-size_2-of-3 slds-p-bottom_small detail-value">
+                                    <lightning-badge label={selectedMovie.imdbRating} class="slds-theme_warning"></lightning-badge>
+                                </dd>
+                                
+                                <dt class="slds-size_1-of-3 slds-p-bottom_small slds-text-heading_small detail-label">Director:</dt>
+                                <dd class="slds-size_2-of-3 slds-p-bottom_small detail-value">{selectedMovie.Director}</dd>
+                                
+                                <dt class="slds-size_1-of-3 slds-p-bottom_small slds-text-heading_small detail-label">Cast:</dt>
+                                <dd class="slds-size_2-of-3 slds-p-bottom_small detail-value">{selectedMovie.Actors}</dd>
+                                
+                                <template if:true={selectedMovie.EpisodeTitle}>
+                                    <dt class="slds-size_1-of-3 slds-p-bottom_small slds-text-heading_small detail-label">Episode:</dt>
+                                    <dd class="slds-size_2-of-3 slds-p-bottom_small detail-value">{selectedMovie.EpisodeTitle}</dd>
+                                    
+                                    <dt class="slds-size_1-of-3 slds-p-bottom_small slds-text-heading_small detail-label">Released:</dt>
+                                    <dd class="slds-size_2-of-3 slds-p-bottom_small detail-value">{selectedMovie.Released}</dd>
+                                </template>
+                                
+                                <dt class="slds-size_1-of-3 slds-p-bottom_small slds-text-heading_small detail-label">Plot:</dt>
+                                <dd class="slds-size_2-of-3 slds-p-bottom_small detail-value slds-text-body_regular plot-detail">{selectedMovie.Plot}</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

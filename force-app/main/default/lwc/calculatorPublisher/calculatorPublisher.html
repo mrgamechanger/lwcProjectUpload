@@ -1,0 +1,30 @@
+<template>
+    <lightning-card  variant="Narrow"  title="Calculator Publisher" icon-name="standard:account">
+       
+    
+    <div class="slds-p-around_small">
+        
+        <div class="input-container">
+            <lightning-input
+                label="Number 1"
+                type="number"
+                value={number1}
+                onchange={handleNumber1Change}
+            ></lightning-input>
+            <lightning-input
+                label="Number 2"
+                type="number"
+                value={number2}
+                onchange={handleNumber2Change}
+            ></lightning-input>
+        </div>
+
+        <div  class="slds-p-around_small">
+            <lightning-button class="slds-p-around_small" label="Add" onclick={handleAdd}></lightning-button>
+            <lightning-button class="slds-p-around_small" label="Subtract" onclick={handleSubtract}></lightning-button>
+            <lightning-button class="slds-p-around_small" label="Multiply" onclick={handleMultiply}></lightning-button>
+            <lightning-button class="slds-p-around_small" label="Divide" onclick={handleDivide}></lightning-button>
+        </div>
+    </div>
+</lightning-card>
+</template>

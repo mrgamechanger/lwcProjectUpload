@@ -1,0 +1,16 @@
+<template>
+    <lightning-card  variant="Narrow"  title="childoperations" icon-name="standard:account">
+        
+   <div class="slds-p-around_small">
+    <lightning-input type="number" label="Number 1" onchange={handleNumber1Change}></lightning-input>
+    <lightning-input type="number" label="Number 2" onchange={handleNumber2Change}></lightning-input>
+   </div>
+   
+   <div class="slds-p-around_small">
+    <lightning-button label="Add" onclick={handleAddition}></lightning-button>
+    <lightning-button label="Subtract" onclick={handleSubtraction}></lightning-button>
+    <lightning-button label="Multiply" onclick={handleMultiplication}></lightning-button>
+    <lightning-button label="Divide" onclick={handleDivision}></lightning-button>
+   </div>
+</lightning-card>
+</template>

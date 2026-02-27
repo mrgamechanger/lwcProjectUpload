@@ -1,0 +1,158 @@
+<template>
+    <section class="slds-card slds-p-around_medium">
+        <div class="slds-text-heading_medium slds-m-bottom_medium">Flight Search</div>
+
+        <div class="slds-grid slds-wrap slds-gutters">
+            <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3">
+                <lightning-input
+                    type="text"
+                    name="departureId"
+                    label="Departure (IATA)"
+                    maxlength="3"
+                    message-when-bad-input="Enter a 3-letter IATA code"
+                    value={departureId}
+                    onchange={handleChange}
+                    required>
+                </lightning-input>
+            </div>
+
+            <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3">
+                <lightning-input
+                    type="text"
+                    name="arrivalId"
+                    label="Arrival (IATA)"
+                    maxlength="3"
+                    message-when-bad-input="Enter a 3-letter IATA code"
+                    value={arrivalId}
+                    onchange={handleChange}
+                    required>
+                </lightning-input>
+            </div>
+
+            <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3">
+                <lightning-input
+                    type="date"
+                    name="outboundDate"
+                    label="Outbound Date"
+                    value={outboundDate}
+                    onchange={handleChange}
+                    required>
+                </lightning-input>
+            </div>
+
+            <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3">
+                <lightning-input
+                    type="date"
+                    name="returnDate"
+                    label="Return Date"
+                    value={returnDate}
+                    onchange={handleChange}>
+                </lightning-input>
+            </div>
+
+            <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3">
+                <lightning-combobox
+                    name="travelClass"
+                    label="Travel Class"
+                    value={travelClass}
+                    options={travelClassOptions}
+                    onchange={handleChange}>
+                </lightning-combobox>
+            </div>
+
+            <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3">
+                <lightning-input
+                    type="number"
+                    name="adults"
+                    label="Adults"
+                    min="1"
+                    max="9"
+                    value={adults}
+                    onchange={handleChange}
+                    required>
+                </lightning-input>
+            </div>
+        </div>
+
+        <div class="slds-m-top_medium">
+            <lightning-button
+                variant="brand"
+                label="Search Flights"
+                onclick={handleSubmit}
+                disabled={isSubmitDisabled}>
+            </lightning-button>
+        </div>
+
+        <template if:true={isLoading}>
+            <div class="spinner-overlay">
+                <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+            </div>
+        </template>
+
+        
+
+        <template if:true={flighttodisplay}>
+            <div class="slds-m-top_medium ">
+                <template for:each={flighttodisplay} for:item="f">
+                    <article key={f.id} class="slds-card flight-card slds-m-around_small">
+                        <div class="slds-card__header slds-grid slds-grid_align-spread slds-p-horizontal_small slds-p-vertical_x-small">
+                            <div class="slds-media slds-media_center slds-has-flexi-truncate">
+                                <div class="slds-media__figure">
+                                    <img src={f.airlineLogo} alt="Airline logo" style="width:70px;height:24px"/>
+                                </div>
+                                <div class="slds-media__body slds-p-left_small">
+                                    <h3 class="slds-text-heading_small">{f.flightNumber} — {f.departureAirportCode} → {f.arrivalAirportCode}</h3>
+                                    <p class="slds-text-body_small">{f.departureAirportName} to {f.arrivalAirportName}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-card__body slds-p-around_small">
+                            <div class="slds-grid slds-grid_align-spread slds-text-body_regular">
+                                <div>
+                                    <div class="flight-label">Departure</div>
+                                    <div class="flight-value">{f.departureTime}</div>
+                                </div>
+                                <div>
+                                    <div class="flight-label">Arrival</div>
+                                    <div class="flight-value">{f.arrivalTime}</div>
+                                </div>
+                                <div>
+                                    <div class="flight-label">Duration</div>
+                                    <div class="flight-value">{f.duration}</div>
+                                </div>
+                                <div>
+                                    <div class="flight-label">Price</div>
+                                    <div class="flight-price">{f.formattedPrice}</div>
+                                </div>
+                            </div>
+
+                            <div class="slds-m-top_small slds-text-body_small">
+                                <span>Aircraft: {f.aircraft}</span>
+                                <span class="slds-p-left_small">Seat: {f.seat}</span>
+                                <span class="slds-p-left_small">Legroom: {f.legroom}</span>
+                                <span class="slds-p-left_small">Stops: {f.stops}</span>
+                            </div>
+
+                            <template if:true={f.extensions}>
+                                <template if:true={f.extensions}>
+                                    <div class="slds-m-top_small slds-text-body_small flight-notes">
+                                        <strong>Notes:</strong>
+                                        <ul>
+                                            <template for:each={f.extensions} for:item="ext">
+                                                <li key={ext}>{ext}</li>
+                                            </template>
+                                        </ul>
+                                    </div>
+                                </template>
+                            </template>
+
+                            <template if:true={f.carbonEmissions}>
+                                <div class="slds-m-top_small slds-text-body_small">CO2e: {f.carbonEmissions.CO2e} (typical: {f.carbonEmissions.typical_for_this_route})</div>
+                            </template>
+                        </div>
+                    </article>
+                </template>
+            </div>
+        </template>
+    </section>
+</template>

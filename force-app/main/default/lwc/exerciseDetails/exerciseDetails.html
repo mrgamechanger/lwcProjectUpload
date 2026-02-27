@@ -1,0 +1,114 @@
+<template>
+    <div class="exercise-container"  >
+        <i class="fab fa-salesforce fa-5x"></i>
+        <div class="search-section">
+            <h1 class="main-title">
+                <i class="fa-solid fa-dumbbell"></i>
+                Exercise Finder
+                <i class="fa-solid fa-rss"></i>
+
+            </h1>
+            <div class="search-form">
+                <div class="form-group">
+                   <i class="fa-solid fa-universal-access fa-fade fa-2x"></i>
+                    <lightning-combobox 
+                        label="Body Part" 
+                        name="bodyPart" 
+                        value={bodyPart} 
+                        options={bodyPartOptions} 
+                        onchange={handleInputChange}
+                        class="custom-combobox">
+                    </lightning-combobox>
+                </div>
+               
+                <div class="form-group">
+                    <i class="fa-solid fa-magnifying-glass-plus fa-2x" style="color: #3c3a34;"></i>
+                    <lightning-input 
+                        type="number" 
+                        label="Number of Exercises" 
+                        name="noofexercises" 
+                        value={noofexercises} 
+                        onchange={handleInputChange}
+                        class="custom-input">
+                    </lightning-input>
+                </div>
+                <div class="button-group">
+                    <lightning-button 
+                        variant="brand" 
+                        label="Search Exercises" 
+                        onclick={handleSearch}
+                        class="search-button">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </lightning-button>
+                    <lightning-button 
+                        class="reset-button slds-m-left_x-small"
+                        variant="neutral" 
+                        label="Reset" 
+                        onclick={handleReset}>
+                        <i class="fa-solid fa-pause"></i>
+                    </lightning-button>
+                </div>
+            </div>
+        </div>
+
+        <template if:true={isLoading}>
+            <div class="loading-container">
+                <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+                <p class="loading-text">Finding the perfect exercises for you...</p>
+            </div>
+        </template>
+
+        <template if:true={errorMessage}>
+            <div class="error-container">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                <p class="error-text">{errorMessage}</p>
+            </div>
+        </template>
+
+        <template if:true={exerciseDetails.length}>
+            <div class="exercise-grid">
+                <template for:each={exerciseDetails} for:item="exercise">
+                    <div key={exercise.id} class="exercise-card">
+                        <div class="exercise-image-container">
+                            <img src={exercise.gifUrl} alt={exercise.name} class="exercise-image" />
+                            <div class="exercise-overlay">
+                                <span class="exercise-target">{exercise.target}</span>
+                            </div>
+                        </div>
+                        <div class="exercise-content">
+                            <h2 class="exercise-name">{exercise.name}</h2>
+                            <div class="exercise-meta">
+                                <span class="meta-item">
+                                    <i class="fa-solid fa-dumbbell"></i>
+                                    {exercise.equipment}
+                                </span>
+                                <span class="meta-item">
+                                    <i class="fa-solid fa-bullseye"></i>
+                                    {exercise.target}
+                                </span>
+                            </div>
+                            <div class="exercise-sets">
+                                <template if:true={isCardio}>
+                                    <i class="fa-solid fa-clock"></i>
+                                    3 sets of 30-25-20 seconds
+                                </template>
+                                <template if:false={isCardio}>
+                                    <i class="fa-solid fa-clock"></i>
+                                    3 sets of 10-12 reps
+                                </template>
+                            </div>
+                            <div class="exercise-instructions">
+                                <h3><i class="fa-solid fa-list-ol"></i> Instructions</h3>
+                                <ul>
+                                    <template for:each={exercise.instructions} for:item="instruction">
+                                        <li key={instruction}>{instruction}</li>
+                                    </template>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </template>
+    </div>
+</template>

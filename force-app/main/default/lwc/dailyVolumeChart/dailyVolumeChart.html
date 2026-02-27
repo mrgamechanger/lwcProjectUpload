@@ -1,0 +1,51 @@
+<template>
+    <lightning-card title="Daily Volume Chart" icon-name="standard:chart">
+        <div class="slds-p-around_medium">
+            <!-- Company Information -->
+            <template if:true={hasData}>
+                <div class="slds-grid slds-gutters slds-m-bottom_medium">
+                    <div class="slds-col slds-size_1-of-2">
+                        <div class="slds-text-title">Company</div>
+                        <div class="slds-text-heading_small">
+                            {companyName} ({companyTicker})
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_1-of-2">
+                        <div class="slds-text-title">Period</div>
+                        <div class="slds-text-body_regular">{periodRange}</div>
+                    </div>
+                </div>
+
+                <!-- Chart Container -->
+                <div class="chart-container slds-m-top_medium">
+                    <div class="chart-wrapper">
+                        <svg class="chart-svg" height={chartHeight}>
+                            <!-- Chart will be drawn here -->
+                        </svg>
+                        <div class="tooltip slds-popover slds-popover_tooltip" role="tooltip" style="display: none;">
+                            <div class="slds-popover__body"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chart Legend -->
+                <div class="slds-m-top_small slds-text-align_center">
+                    <div class="slds-text-body_small slds-text-color_weak">
+                        Daily Trading Volume ({currency})
+                    </div>
+                </div>
+            </template>
+
+            <!-- No Data Message -->
+            <template if:false={hasData}>
+                <div class="slds-text-align_center slds-p-around_large">
+                    <lightning-icon icon-name="utility:info" size="small" class="slds-m-bottom_small"></lightning-icon>
+                    <div class="slds-text-body_regular slds-text-color_weak">
+                        No data available. Please provide valid JSON data.
+                    </div>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>
+

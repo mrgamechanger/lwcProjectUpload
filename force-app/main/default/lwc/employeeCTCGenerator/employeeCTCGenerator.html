@@ -1,0 +1,29 @@
+<template>
+    <lightning-card title="Employee CTC Generator" icon-name="standard:employee">
+        <div class="slds-p-around_medium">
+            <lightning-input 
+                type="text" 
+                label="Employee Name" 
+                name="name" 
+                onchange={handleInputChange}>
+            </lightning-input>
+            <lightning-input 
+                type="text" 
+                label="Employee ID" 
+                name="id" 
+                onchange={handleInputChange}>
+            </lightning-input>
+            <lightning-input 
+                type="number" 
+                label="Basic Salary" 
+                name="basicSalary" 
+                onchange={handleInputChange}>
+            </lightning-input>
+            <lightning-button 
+                label="Generate PDF" 
+                variant="brand" 
+                onclick={generatePDF}>
+            </lightning-button>
+        </div>
+    </lightning-card>
+</template>

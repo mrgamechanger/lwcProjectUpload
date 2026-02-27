@@ -1,0 +1,80 @@
+.review-list-container {
+    max-height: 400px; /* Adjust as needed */
+    overflow-y: auto;
+    padding: 1rem;
+    box-sizing: border-box;
+    background-color: #ddd;
+}
+
+.review-item {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+}
+
+.reviewer-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.reviewer-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    margin-right: 1rem;
+}
+
+.reviewer-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.reviewer-name {
+    font-weight: bold;
+}
+
+.review-date {
+    color: #706e6b;
+    font-size: 0.875rem;
+}
+
+.review-rating {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.star-filled {
+    --slds-c-icon-color-foreground: #ffd700;
+}
+
+.star-empty {
+    --slds-c-icon-color-foreground: #ccc;
+}
+
+.review-comment {
+    line-height: 1;
+    text-align: left;
+}
+
+.loading-indicator {
+    text-align: center;
+    padding: 1rem;
+}
+
+.error-message {
+    color: red;
+    text-align: center;
+    padding: 1rem;
+}
+
+/* Existing CSS */
+
+.star-filled {
+    --slds-c-icon-color-foreground: #ffd700; /* Gold color for filled stars */
+}
+
+.star-empty {
+    --slds-c-icon-color-foreground: #ccc; /* Grey color for empty stars */
+}

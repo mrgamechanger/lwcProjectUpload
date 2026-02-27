@@ -1,0 +1,13 @@
+<template>
+    <lightning-card  variant="Narrow"  title="Hello" icon-name="standard:account">
+        <lightning-input type="text" variant="standard"    name="name" label="Enter contact name" onchange={handleinput} placeholder="type here..."></lightning-input>
+        <lightning-datatable
+            key-field="id"
+            data={contactdata}
+            show-row-number-column
+            hide-checkbox-column
+            columns={columnsList}
+            >
+        </lightning-datatable>
+    </lightning-card>
+</template>

@@ -1,0 +1,416 @@
+<template>
+    <div class="slds-scope">
+        <!-- Header Section -->
+        <div class="slds-box slds-theme_shade slds-m-bottom_medium">
+            <div class="slds-grid slds-grid_vertical-align-center">
+                <div class="slds-col slds-size_1-of-12">
+                    <lightning-icon icon-name="custom:custom63" size="large" class="slds-m-right_medium"></lightning-icon>
+                </div>
+                <div class="slds-col slds-size_11-of-12">
+                    <h1 class="slds-text-heading_large">Cricket Live</h1>
+                    <p class="slds-text-body_small slds-m-top_x-small">Real-time cricket scores and updates</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div class="slds-tabs_default">
+            <ul class="slds-tabs_default__nav" role="tablist">
+                <li class={homeTabClass} role="presentation">
+                    <a class="slds-tabs_default__link" role="tab" tabindex="0" aria-selected="true" aria-controls="tab-default-1" id="tab-default-1__item" onclick={handleHome}>
+                        <lightning-icon icon-name="utility:home" size="small" class="slds-m-right_x-small"></lightning-icon>
+                        Home
+                    </a>
+                </li>
+                <li class={currentMatchesTabClass} role="presentation">
+                    <a class="slds-tabs_default__link" role="tab" tabindex="0" aria-selected="false" aria-controls="tab-default-2" id="tab-default-2__item" onclick={fetchCurrentMatches}>
+                        <lightning-icon icon-name="utility:clock" size="small" class="slds-m-right_x-small"></lightning-icon>
+                        Live Matches
+                    </a>
+                </li>
+                <li class={pointsTableTabClass} role="presentation">
+                    <a class="slds-tabs_default__link" role="tab" tabindex="0" aria-selected="false" aria-controls="tab-default-3" id="tab-default-3__item" onclick={fetchPointsTable}>
+                        <lightning-icon icon-name="utility:table" size="small" class="slds-m-right_x-small"></lightning-icon>
+                        Points Table
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="slds-p-around_medium">
+            <!-- Loading Spinner -->
+            <template if:true={showSpinner}>
+                <div class="slds-is-relative slds-p-around_medium">
+                    <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+                </div>
+            </template>
+
+            <!-- Series Filter (only for CricScore view) -->
+            <template if:true={isCricScore}>
+                <div class="slds-grid slds-gutters slds-m-bottom_medium">
+                    <div class="slds-col slds-size_1-of-3">
+                        <lightning-combobox
+                            name="seriesFilter"
+                            label="Filter by Series"
+                            value={selectedSeries}
+                            placeholder="Select Series"
+                            options={seriesOptions}
+                            onchange={handleSeriesChange}>
+                        </lightning-combobox>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <lightning-button 
+                            variant="brand" 
+                            label="Today's Matches" 
+                            icon-name="utility:today"
+                            icon-position="left"
+                            onclick={handleTodayMatch}>
+                        </lightning-button>
+                    </div>
+                </div>
+            </template>
+
+            <!-- CricScore View -->
+            <template if:true={isCricScore}>
+                <div class="slds-grid slds-wrap slds-gutters">
+                    <template for:each={filteredMatches} for:item="match">
+                        <div key={match.id} class="slds-col slds-size_1-of-2 slds-p-bottom_medium">
+                            <article class="slds-card slds-card_boundary match-card" data-match-id={match.id} onclick={handleMatchClick}>
+                                <div class="slds-card__header slds-grid">
+                                    <header>
+                                        <h2 class="slds-card__header-title">
+                                            <span class="slds-text-heading_small">{match.series}</span>
+                                        </h2>
+                                        <p class="slds-text-body_small slds-m-top_x-small">{match.matchType}</p>
+                                    </header>
+                                </div>
+                                <div class="slds-card__body slds-card__body_inner">
+                                    <div class="slds-grid slds-gutters slds-align_absolute-center">
+                                        <div class="slds-col slds-size_1-of-2 slds-text-align_center">
+                                            <img src={match.team1Image} alt={match.team1} class="slds-avatar slds-avatar_large slds-m-bottom_small">
+                                            <p class="slds-text-heading_medium">{match.team1}</p>
+                                            <p class="slds-text-heading_large slds-text-color_success">{match.team1Score}</p>
+                                        </div>
+                                        <div class="slds-col slds-size_1-of-2 slds-text-align_center">
+                                            <img src={match.team2Image} alt={match.team2} class="slds-avatar slds-avatar_large slds-m-bottom_small">
+                                            <p class="slds-text-heading_medium">{match.team2}</p>
+                                            <p class="slds-text-heading_large slds-text-color_success">{match.team2Score}</p>
+                                        </div>
+                                    </div>
+                                    <div class="slds-grid slds-gutters slds-m-top_medium">
+                                        <div class="slds-col slds-size_1-of-2">
+                                            <p class="slds-text-body_small">
+                                                <lightning-icon icon-name="utility:date_input" size="xx-small" class="slds-m-right_x-small"></lightning-icon>
+                                                {match.dateTimeGMT}
+                                            </p>
+                                        </div>
+                                        <div class="slds-col slds-size_1-of-2">
+                                            <p class="slds-text-body_small">
+                                                <lightning-icon icon-name="utility:info" size="xx-small" class="slds-m-right_x-small"></lightning-icon>
+                                                {match.status}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="slds-text-align_center slds-m-top_small">
+                                        <span class="match-status match-status-today" if:true={match.isToday}>
+                                            <strong>Today</strong>
+                                        </span>
+                                        <span class="match-status match-status-upcoming" if:true={match.isUpcoming}>
+                                            <strong>Upcoming</strong>
+                                        </span>
+                                        <span class="match-status match-status-completed" if:true={match.isCompleted}>
+                                            <strong>Completed</strong>
+                                        </span>
+                                        <span class="slds-badge slds-theme_inverse slds-m-left_small">
+                                            <lightning-icon icon-name="utility:preview" size="xx-small" class="slds-m-right_xx-small"></lightning-icon>
+                                            Click to view match details
+                                        </span>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </template>
+                </div>
+            </template>
+
+            <!-- Current Matches View -->
+            <template if:true={isCurrentMatches}>
+                <div class="slds-grid slds-wrap slds-gutters">
+                    <template for:each={filteredMatches} for:item="match">
+                        <div key={match.id} class="slds-col slds-size_1-of-2 slds-p-bottom_medium">
+                            <article class="slds-card slds-card_boundary match-card" data-match-id={match.id} onclick={handleMatchClick}>
+                                <div class="slds-card__header slds-grid">
+                                    <header>
+                                        <h2 class="slds-card__header-title">
+                                            <span class="slds-text-heading_small">{match.name}</span>
+                                        </h2>
+                                        <p class="slds-text-body_small slds-m-top_x-small">{match.matchType}</p>
+                                    </header>
+                                </div>
+                                <div class="slds-card__body slds-card__body_inner">
+                                    <div class="slds-grid slds-gutters">
+                                        <div class="slds-col slds-size_1-of-1">
+                                            <p class="slds-text-body_small">
+                                                <lightning-icon icon-name="utility:location" size="xx-small" class="slds-m-right_x-small"></lightning-icon>
+                                                {match.venue}
+                                            </p>
+                                            <p class="slds-text-body_small slds-m-top_x-small">
+                                                <lightning-icon icon-name="utility:date_input" size="xx-small" class="slds-m-right_x-small"></lightning-icon>
+                                                {match.dateTimeGMT}
+                                            </p>
+                                            <p class="slds-text-body_small slds-m-top_x-small">
+                                                <lightning-icon icon-name="utility:info" size="xx-small" class="slds-m-right_x-small"></lightning-icon>
+                                                {match.status}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="slds-grid slds-wrap slds-gutters slds-m-top_medium">
+                                        <template for:each={match.score} for:item="score">
+                                            <div key={score.inning} class="slds-col slds-size_1-of-2">
+                                                <div class="slds-box slds-theme_shade">
+                                                    <p class="slds-text-heading_small">{score.inning}</p>
+                                                    <p class="slds-text-heading_medium slds-m-top_x-small">
+                                                        {score.runs}/{score.wickets}
+                                                    </p>
+                                                    <p class="slds-text-body_small slds-m-top_x-small">
+                                                        Overs: {score.overs}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </template>
+                                    </div>
+                                    <div class="slds-text-align_center slds-m-top_small">
+                                        <span class="match-status match-status-today" if:true={match.isToday}>
+                                            <strong>Today</strong>
+                                        </span>
+                                        <span class="match-status match-status-upcoming" if:true={match.isUpcoming}>
+                                            <strong>Upcoming</strong>
+                                        </span>
+                                        <span class="match-status match-status-completed" if:true={match.isCompleted}>
+                                            <strong>Completed</strong>
+                                        </span>
+                                        <span class="slds-badge slds-theme_inverse slds-m-left_small">
+                                            <lightning-icon icon-name="utility:preview" size="xx-small" class="slds-m-right_xx-small"></lightning-icon>
+                                            Click to view match details
+                                        </span>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </template>
+                </div>
+            </template>
+
+            <!-- Points Table View -->
+            <template if:true={isPointsTable}>
+                <div class="slds-p-around_medium">
+                    <template if:true={pointsTableData}>
+                        <div class="slds-p-bottom_small">
+                            <span class="slds-badge slds-theme_success">
+                                <lightning-icon icon-name="utility:info" size="xx-small" class="slds-m-right_xx-small"></lightning-icon>
+                                Top 4 Teams - Playoffs Qualification Zone
+                            </span>
+                        </div>
+                        <div class="slds-table_container">
+                            <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped">
+                                <thead>
+                                    <tr class="slds-line-height_reset">
+                                        <th scope="col" class="slds-text-title_caps">Pos</th>
+                                        <th scope="col" class="slds-text-title_caps">Team</th>
+                                        <th scope="col" class="slds-text-title_caps">M</th>
+                                        <th scope="col" class="slds-text-title_caps">W</th>
+                                        <th scope="col" class="slds-text-title_caps">L</th>
+                                        <th scope="col" class="slds-text-title_caps">T</th>
+                                        <th scope="col" class="slds-text-title_caps">NR</th>
+                                        <th scope="col" class="slds-text-title_caps">Pts</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <template for:each={pointsTableData} for:item="team">
+                                        <tr key={team.shortname} class={team.rowClass}>
+                                            <td>
+                                                <div class="slds-grid slds-grid_vertical-align-center">
+                                                    <span class={team.positionClass}>
+                                                        {team.position}
+                                                    </span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="slds-grid slds-grid_vertical-align-center">
+                                                    <img src={team.img} alt={team.shortname} 
+                                                         class="slds-avatar slds-avatar_small slds-m-right_x-small"/>
+                                                    <span>{team.teamname}</span>
+                                                </div>
+                                            </td>
+                                            <td>{team.matches}</td>
+                                            <td>{team.wins}</td>
+                                            <td>{team.loss}</td>
+                                            <td>{team.ties}</td>
+                                            <td>{team.nr}</td>
+                                            <td>
+                                                <strong>{team.points}</strong>
+                                            </td>
+                                        </tr>
+                                    </template>
+                                </tbody>
+                            </table>
+                        </div>
+                    </template>
+                </div>
+            </template>
+
+            <!-- No Matches Available -->
+            <template if:false={filteredMatches}>
+                <div class="slds-text-align_center slds-p-around_medium">
+                    <lightning-icon icon-name="utility:info" size="large" class="slds-m-bottom_small"></lightning-icon>
+                    <p class="slds-text-heading_medium">No matches available</p>
+                </div>
+            </template>
+        </div>
+
+        <!-- Match Details Modal -->
+        <template if:true={showMatchDetails}>
+            <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_large" aria-labelledby="modal-heading-01" aria-modal="true">
+                <div class="slds-modal__container">
+                    <div class="slds-modal__content slds-p-around_medium">
+                        <!-- Loading Spinner -->
+                        <template if:true={showSpinner}>
+                            <div class="slds-is-relative slds-p-around_medium">
+                                <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+                            </div>
+                        </template>
+
+                        <!-- Match Details -->
+                        <template if:true={matchDetails}>
+                            <div class="slds-card slds-card_boundary">
+                                <!-- Header -->
+                                <div class="slds-card__header slds-grid">
+                                    <header>
+                                        <div class="slds-media slds-media_center">
+                                            <div class="slds-media__figure">
+                                                <lightning-icon icon-name="standard:contest" size="medium" class="slds-m-right_medium"></lightning-icon>
+                                            </div>
+                                            <div class="slds-media__body">
+                                                <h2 class="slds-card__header-title">
+                                                    <span class="slds-text-heading_large">{matchDetails.name}</span>
+                                                </h2>
+                                                <p class="slds-text-body_small slds-m-top_x-small">
+                                                    <lightning-icon icon-name="utility:date_input" size="xx-small" class="slds-m-right_x-small"></lightning-icon>
+                                                    {matchDetails.date}
+                                                    <span class={matchStatusClass} style="margin-left: 10px;">
+                                                        <strong>{matchStatusLabel}</strong>
+                                                    </span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </header>
+                                </div>
+
+                                <!-- Match Status -->
+                                <div class="slds-card__body slds-card__body_inner">
+                                    <div class="slds-box slds-theme_shade slds-m-bottom_medium">
+                                        <div class="slds-grid slds-gutters slds-align_absolute-center">
+                                            <div class="slds-col slds-size_1-of-2 slds-text-align_center">
+                                                <img src={matchDetails.team1Image} alt={team1Name} class="slds-avatar slds-avatar_large slds-m-bottom_small">
+                                                <h3 class="slds-text-heading_medium">{team1Name}</h3>
+                                                <p class="slds-text-heading_large slds-m-top_small">
+                                                    {team1Score}
+                                                </p>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-2 slds-text-align_center">
+                                                <img src={matchDetails.team2Image} alt={team2Name} class="slds-avatar slds-avatar_large slds-m-bottom_small">
+                                                <h3 class="slds-text-heading_medium">{team2Name}</h3>
+                                                <p class="slds-text-heading_large slds-m-top_small">
+                                                    {team2Score}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="slds-text-align_center slds-m-top_medium">
+                                            <p class="slds-text-heading_medium">{matchDetails.status}</p>
+                                        </div>
+                                    </div>
+
+                                    <!-- Match Details Grid -->
+                                    <div class="slds-grid slds-wrap slds-gutters">
+                                        <!-- Venue -->
+                                        <div class="slds-col slds-size_1-of-2 slds-p-bottom_medium">
+                                            <div class="slds-box slds-theme_shade">
+                                                <div class="slds-media">
+                                                    <div class="slds-media__figure">
+                                                        <lightning-icon icon-name="utility:location" size="small" class="slds-m-right_small"></lightning-icon>
+                                                    </div>
+                                                    <div class="slds-media__body">
+                                                        <h3 class="slds-text-heading_small">Venue</h3>
+                                                        <p class="slds-text-body_regular">{matchDetails.venue}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Match Type -->
+                                        <div class="slds-col slds-size_1-of-2 slds-p-bottom_medium">
+                                            <div class="slds-box slds-theme_shade">
+                                                <div class="slds-media">
+                                                    <div class="slds-media__figure">
+                                                        <lightning-icon icon-name="utility:info" size="small" class="slds-m-right_small"></lightning-icon>
+                                                    </div>
+                                                    <div class="slds-media__body">
+                                                        <h3 class="slds-text-heading_small">Match Type</h3>
+                                                        <p class="slds-text-body_regular">{matchDetails.matchType}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Toss Information -->
+                                        <div class="slds-col slds-size_1-of-2 slds-p-bottom_medium">
+                                            <div class="slds-box slds-theme_shade">
+                                                <div class="slds-media">
+                                                    <div class="slds-media__figure">
+                                                        <lightning-icon icon-name="utility:refresh" size="small" class="slds-m-right_small"></lightning-icon>
+                                                    </div>
+                                                    <div class="slds-media__body">
+                                                        <h3 class="slds-text-heading_small">Toss</h3>
+                                                        <p class="slds-text-body_regular">
+                                                            {matchDetails.tossWinner} won the toss and elected to {matchDetails.tossChoice}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Match Winner -->
+                                        <div class="slds-col slds-size_1-of-2 slds-p-bottom_medium">
+                                            <div class="slds-box slds-theme_shade">
+                                                <div class="slds-media">
+                                                    <div class="slds-media__figure">
+                                                        <lightning-icon icon-name="utility:trophy" size="small" class="slds-m-right_small"></lightning-icon>
+                                                    </div>
+                                                    <div class="slds-media__body">
+                                                        <h3 class="slds-text-heading_small">Result</h3>
+                                                        <p class="slds-text-body_regular">{matchDetails.matchWinner}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Footer -->
+                                <footer class="slds-card__footer">
+                                    <lightning-button 
+                                        label="Close" 
+                                        variant="brand" 
+                                        onclick={handleCloseMatchDetails}>
+                                    </lightning-button>
+                                </footer>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+    </div>
+</template>

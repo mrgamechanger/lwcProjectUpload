@@ -1,0 +1,12 @@
+th, td {
+    border: token(borderWidthThin) solid black;
+    text-align: center;
+    min-width: min-content !important;
+}
+
+.div-warning {
+    height:100px; 
+    color:red; 
+    font-size:larger; 
+    background-color:white;
+}

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>ChatApp_Integ_Execute</label>
+    <description>Permission set for chatbot external integration capabilities (OpenAI)</description>
+    
+    <!-- Apex Class Permissions -->
+    <classAccess>
+        <apexClass>ChatAiService</apexClass>
+        <enabled>true</enabled>
+    </classAccess>
+    
+    <!-- Named Credential Permissions -->
+    <namedCredentials>
+        <name>OpenAI</name>
+        <enabled>true</enabled>
+    </namedCredentials>
+    
+    <!-- User Permissions -->
+    <userPermissions>
+        <name>InvokeApex</name>
+        <enabled>true</enabled>
+    </userPermissions>
+    <userPermissions>
+        <name>MakeRemoteCalls</name>
+        <enabled>true</enabled>
+    </userPermissions>
+</PermissionSet>

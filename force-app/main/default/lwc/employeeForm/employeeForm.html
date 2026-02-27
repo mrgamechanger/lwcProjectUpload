@@ -1,0 +1,64 @@
+<template>
+    <lightning-card title="Employee Form" icon-name="custom:custom63">
+        <div class="slds-p-around_medium">
+            <!-- Name -->
+            <lightning-input
+                label="Name"
+                name="name"
+                type="text"
+                value={employee.name}
+                onchange={handleInputChange}
+                required>
+            </lightning-input>
+
+            <!-- Email -->
+            <lightning-input
+                label="Email"
+                name="email"
+                type="email"
+                value={employee.email}
+                onchange={handleInputChange}
+                required>
+            </lightning-input>
+
+            <!-- Age -->
+            <lightning-input
+                label="Age"
+                name="age"
+                type="number"
+                value={employee.age}
+                onchange={handleInputChange}
+                required>
+            </lightning-input>
+
+            <!-- CTC -->
+            <lightning-input
+                label="CTC"
+                name="ctc"
+                type="number"
+                value={employee.ctc}
+                onchange={handleInputChange}
+                required>
+            </lightning-input>
+
+            <!-- Save Button -->
+            <lightning-button 
+                label="Save" 
+                onclick={handleSave} 
+                disabled={isSaveDisabled} 
+                class="slds-m-top_medium">
+            </lightning-button>
+        </div>
+    </lightning-card>
+
+    <!-- Employee Datatable -->
+    <lightning-card title="Employee List" icon-name="standard:employee">
+        <div class="slds-p-around_medium">
+            <lightning-datatable
+                key-field="email"
+                data={employeeList}
+                columns={columns}>
+            </lightning-datatable>
+        </div>
+    </lightning-card>
+</template>

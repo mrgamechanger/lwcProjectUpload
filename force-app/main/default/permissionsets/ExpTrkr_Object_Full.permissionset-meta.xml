@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>Expense Tracker - Full Access</label>
+
+    <!-- Object Permissions -->
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>false</modifyAllRecords>
+        <object>Expense_Tracker__c</object>
+        <viewAllRecords>false</viewAllRecords>
+    </objectPermissions>
+
+    <!-- Field Permissions -->
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Expense_Tracker__c.Category__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Expense_Tracker__c.Price__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Expense_Tracker__c.Date__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Expense_Tracker__c.Payment_Method__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+
+    <!-- Tab Visibility -->
+    <tabSettings>
+        <tab>Expense_Tracker__c</tab>
+        <visibility>Visible</visibility>
+    </tabSettings>
+
+    <!-- App Visibility can be managed post-deploy in the org navigation/app manager -->
+</PermissionSet>

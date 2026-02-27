@@ -1,0 +1,103 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    background-color: var(--background-color);
+    color: var(--secondary-color);
+    font-family: "Noto Sans", sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+  }
+  
+  .custom-card {
+    margin: 30px auto;
+    width: 350px;
+    box-shadow: var(--box-shadow);
+    border-radius: 5px;
+  }
+  
+  .custom-input {
+    margin: 10px 0;
+    width: 100%;
+  }
+  
+  .custom-button {
+    margin: 10px 0;
+    width: 100%;
+  }
+  
+  .button-group {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .button-group lightning-button {
+    flex: 1;
+  }
+  
+  .button-group lightning-button:first-of-type {
+    margin-right: 10px;
+  }
+  
+  .custom-input lightning-input input {
+    border: 1px solid var(--border-secondary-color);
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    width: 100%;
+  }
+  
+  .custom-input lightning-input label {
+    font-size: 1rem;
+    margin-bottom: 5px;
+  }
+  
+  .custom-button lightning-button {
+    cursor: pointer;
+    background-color: var(--main-color);
+    color: var(--background-secondary-color);
+    border: 0;
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+  }
+  
+  .custom-button lightning-button:hover {
+    background-color: var(--ternary-color);
+  }
+  
+  .slds-modal__container {
+    background-color: var(--background-secondary-color);
+    box-shadow: var(--box-shadow);
+    border-radius: 5px;
+  }
+  
+  .slds-modal__header, .slds-modal__footer {
+    background-color: var(--background-secondary-color);
+    border-bottom: 1px solid var(--border-secondary-color);
+  }
+  
+  .slds-modal__title {
+    font-size: 1.25rem;
+    color: var(--secondary-color);
+  }
+  
+  .slds-modal__content {
+    padding: 20px;
+  }
+  
+  .slds-modal__footer {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+  }
+  
+  .slds-modal__footer lightning-button {
+    margin-left: 10px;
+  }

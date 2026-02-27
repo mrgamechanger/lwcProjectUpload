@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OmniUiCard xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AccountDetailsCard</fullName>
+    <name>AccountDetailsCard</name>
+    <description>Displays Account Name, Phone, and Industry with a refresh button</description>
+    <isActive>true</isActive>
+    <omniUiCardType>Parent</omniUiCardType>
+    <authorName>OmniStudio</authorName>
+    <versionNumber>1</versionNumber>
+    <dataSourceConfig>{"type":"Query","value":{"query":"SELECT Id, Name, Phone, Industry FROM Account WHERE Id = '{recordId}' LIMIT 1"}}</dataSourceConfig>
+    <sampleDataSourceResponse>{"Id":"001000000000001AAA","Name":"Sample Account","Phone":"(555) 123-4567","Industry":"Technology"}</sampleDataSourceResponse>
+    <propertySetConfig>{"states":[{"props":{"label":"Account Details"},"children":[{"descriptor":"Text","props":{"label":"Account Name","value":"{Name}","editable":false}},{"descriptor":"Text","props":{"label":"Phone","value":"{Phone}","editable":false}},{"descriptor":"Text","props":{"label":"Industry","value":"{Industry}","editable":false}},{"descriptor":"Action","props":{"label":"Refresh","actionType":"Update Datasource"}}]}]}</propertySetConfig>
+</OmniUiCard>

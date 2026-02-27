@@ -1,0 +1,21 @@
+<template>
+    <lightning-card variant="Narrow" title="Travel Agent" icon-name="custom:custom63">
+        <div class="selection-container" role="radiogroup" aria-label="Select a service">
+            <template for:each={options} for:item="opt">
+                <label key={opt.value} class={opt.cls} data-value={opt.value} onclick={handleSelect} onkeydown={handleKeyDown}>
+                    <input
+                        type="radio"
+                        name="service"
+                        value={opt.value}
+                        checked={opt.checked}
+                        aria-checked={opt.ariaSelected}
+                        onchange={handleChange}
+                    />
+                    <lightning-icon icon-name={opt.icon} alternative-text={opt.label} size="small"></lightning-icon>
+                    <span class="label">{opt.label}</span>
+                </label>
+            </template>
+        </div>
+     
+    </lightning-card>
+</template>

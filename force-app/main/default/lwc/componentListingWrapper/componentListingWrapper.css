@@ -1,0 +1,10 @@
+@import 'c/cssLibrary';
+.component-listing-wrapper {
+  padding: var(--sfe-space-8);
+}
+
+@media (max-width: 960px) {
+  .component-listing-wrapper {
+    padding: var(--sfe-space-4);
+  }
+}

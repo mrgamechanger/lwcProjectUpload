@@ -1,0 +1,24 @@
+.calculator-container {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+}
+
+.button-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.result {
+    margin-top: 20px;
+    font-size: 1.2rem;
+    color: #333;
+}

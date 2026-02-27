@@ -1,0 +1,42 @@
+<template>
+    <lightning-card title="Cricket Match Details" icon-name="custom:custom63">
+        <div class="slds-m-around_medium">
+            <lightning-button label="CricScore" onclick={fetchMatches} class="slds-m-right_small"></lightning-button>
+            <lightning-button label="Current Matches" onclick={fetchCurrentMatches} class="slds-m-right_small"></lightning-button>
+            <lightning-button label="Today Matches" onclick={handleTodayMatch} class="slds-m-right_small"></lightning-button>
+            <lightning-button label="Home" onclick={handleHome}></lightning-button>
+
+            <template if:true={showSpinner}>
+                <lightning-spinner alternative-text="Loading..."></lightning-spinner>
+            </template>
+
+            <template if:true={filteredMatches}>
+                <template if:true={isCricScore}>
+                    <lightning-combobox label="Filter by Series" value={selectedSeries} options={seriesOptions} onchange={handleSeriesChange} class="slds-m-bottom_medium"></lightning-combobox>
+                </template>
+                <lightning-layout multiple-rows>
+                    <template for:each={filteredMatches} for:item="match">
+                        <lightning-layout-item key={match.id} size="12" small-device-size="6" class="slds-box slds-theme_default slds-m-bottom_small">
+                            <p><strong>Match:</strong> {match.team1} vs {match.team2}</p>
+                            <template if:true={isCricScore}>
+                                <p><strong>Series:</strong> {match.series}</p>
+                                <p><strong>Status:</strong> {match.status}</p>
+                                <p><strong>Match Type:</strong> {match.matchType}</p>
+                                <p><strong>Date:</strong> {match.dateTimeGMT}</p>
+                            </template>
+                            <template if:true={isCurrentMatches}>
+                                <p><strong>Venue:</strong> {match.venue}</p>
+                                <p><strong>Status:</strong> {match.status}</p>
+                                <p><strong>Match Started:</strong> {match.matchStarted}</p>
+                            </template>
+                        </lightning-layout-item>
+                    </template>
+                </lightning-layout>
+            </template>
+
+            <template if:false={filteredMatches}>
+                <p>No matches found.</p>
+            </template>
+        </div>
+    </lightning-card>
+</template>

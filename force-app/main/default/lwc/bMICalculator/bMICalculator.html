@@ -1,0 +1,21 @@
+<template>
+    <lightning-card title="BMI Calculator" icon-name="custom:custom63">
+        <div class="slds-p-around_medium">
+            <form>
+                <lightning-input label="Age" type="number" name="age" value={age} onchange={handler}></lightning-input>
+                <lightning-radio-group label="Gender" options={options} value={Gen} onchange={handleRadioChange}></lightning-radio-group>
+                <lightning-input label="Height (cm)" type="number" name="height" value={height} onchange={handler}></lightning-input>
+                <lightning-input label="Weight (kg)" type="number" name="weight" value={weight} onchange={handler}></lightning-input>
+                <lightning-button label="Calculate BMI" onclick={calculateBMI}></lightning-button>
+                <lightning-button label="Reset" onclick={resetForm}></lightning-button>
+            </form>
+
+            <template if:true={displayOutput}>
+                <div class="slds-m-top_medium">
+                    <p>Your BMI: {bmi} - {result}</p>
+                    <canvas class="bmi-chart" width="400" height="400"></canvas>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>

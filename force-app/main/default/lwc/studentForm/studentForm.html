@@ -1,0 +1,23 @@
+<template>
+    <lightning-card  variant="Narrow"  title="student information" icon-name="standard:account">
+        <div class="slds-around_medium">
+           <lightning-input type="text" variant="standard" name="name" label=" student Name" onchange={studentdetailevent} ></lightning-input>
+           <lightning-input type="text" variant="standard" name="age" label=" student age"  onchange={studentdetailevent}  ></lightning-input>
+           <lightning-input type="text" variant="standard" name="email" label=" student email"  onchange={studentdetailevent} ></lightning-input>
+           <lightning-input type="text" variant="standard" name="Phone" label=" student phone"  onchange={studentdetailevent} ></lightning-input>
+        </div>
+        <div class="slds-around_medium">
+            <lightning-button variant="brand" label="submit" onclick={handleSubmit}></lightning-button>
+            <lightning-button variant="brand" label="reset" onclick={handlereset}></lightning-button>
+         </div>
+
+         <div class="slds-p-around_medium">
+            <lightning-datatable
+                key-field="id"
+                data={dataList}
+                columns={columnsList}
+               >
+            </lightning-datatable>
+         </div>
+    </lightning-card>
+</template>

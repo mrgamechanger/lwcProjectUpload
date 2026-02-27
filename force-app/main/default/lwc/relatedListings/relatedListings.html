@@ -1,0 +1,28 @@
+<template>
+  <section class="related-listings">
+    <h2>Related Listings</h2>
+    <div class="related-listings-grid">
+      <template lwc:if={relatedListings}>
+        <template for:each={relatedListings} for:item="wrapper">
+          <div key={wrapper.listing.Id} class="related-listing-item">
+            <div class="listing-image-placeholder">
+              <template if:true={wrapper.imageUrl}>
+                <img src={wrapper.imageUrl} alt={wrapper.listing.Title__c} />
+              </template>
+              <template if:false={wrapper.imageUrl}>
+                <!-- Placeholder if no content version is available -->
+                <p>No Image Available</p>
+              </template>
+            </div>
+            <div class="listing-info">
+              <p class="listing-category">{wrapper.listing.Category__c}</p>
+              <h3 class="listing-title">{wrapper.listing.Title__c}</h3>
+              <p class="listing-description">{wrapper.listing.Tagline__c}</p>
+            </div>
+            <a href="javascript:void(0);" key={wrapper.listing.Id} class="view-all-link" onclick={handleView}>View</a>
+          </div>
+        </template>
+      </template>
+    </div>
+  </section>
+</template>

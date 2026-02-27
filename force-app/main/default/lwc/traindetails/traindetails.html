@@ -1,0 +1,48 @@
+<template>
+    <lightning-card title="Fetch Train Running Status">
+        <div class="container">
+            <div class="score-panel">
+                <form>
+                    <div class="slds-p-around_small">
+                        <lightning-input type="text" placeholder="example-12138,12904" name="trainNo" label="Enter Train Number" onchange={handleInputChange}></lightning-input>
+                    </div>
+                    <div class="slds-p-around_small">
+                        <lightning-button label="Get Train Details" variant="brand" onclick={handleTrainInfo}></lightning-button>
+                        <lightning-button label="Reset" variant="destructive" class="slds-p-around_small " onclick={reset}></lightning-button>
+                    </div>
+                    
+                </form>
+            </div>
+
+            <template lwc:if={showSpinner}>
+                <lightning-spinner alternative-text="Loading" class="timer"></lightning-spinner>
+            </template>
+            <template lwc:if={display}>
+                <div class="info-container">
+                    <p class="slds-p-around_small " >
+                        <strong class="slds-p-around_small">Train Name:</strong> {trainName} <br />
+                        <strong class="slds-p-around_small ">Current Location:</strong> {currentlocation} <br />
+                        <strong class="slds-p-around_small ">Total Journey Distance:</strong> {totalDistance} km<br />
+                        <strong class="slds-p-around_small ">Check the train route below:</strong>
+                    </p>
+                </div>
+                <lightning-card title="Train route Status">
+                    <div class="grid-container">
+                        <template for:each={trainData} for:item="station">
+                            <div class="card" key={station.id}>
+                                <p>
+                                    <strong>Station Name:</strong> {station.station_name}<br />
+                                    <strong>Distance:</strong> {station.distance} from origin<br />
+                                    <strong>Halt:</strong> {station.halt}<br />
+                                    <strong>Delay:</strong> {station.delay}<br />
+                                    <strong>Platform:</strong> {station.platform}<br />
+                                    <strong>Timing:</strong> {station.timing}<br />
+                                </p>
+                            </div>
+                        </template>
+                    </div>
+                </lightning-card>
+            </template>
+        </div>
+    </lightning-card>
+</template>

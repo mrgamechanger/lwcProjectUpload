@@ -1,0 +1,130 @@
+.breadcrumb {
+    padding: 20px;
+    font-size: 14px;
+}
+.breadcrumb a {
+    color: #000;
+    text-decoration: none;
+}
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
+.breadcrumb span {
+    margin: 0 5px;
+}
+
+.main-content {
+    padding: 20px;
+}
+.main-content h1 {
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+.form-group input, 
+.form-group select, 
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.form-group textarea {
+    height: 100px;
+}
+
+.upload-section {
+    display: flex;
+    align-items: center;
+    border: 1px dashed #ccc;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+.upload-section i {
+    font-size: 24px;
+    margin-right: 10px;
+}
+.upload-section span {
+    color: #007bff;
+    cursor: pointer;
+}
+.upload-section span:hover {
+    text-decoration: underline;
+}
+.upload-note {
+    font-size: 12px;
+    color: #666;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0;
+}
+.buttons button {
+    padding: 15px 30px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.buttons .publish {
+    background-color: #000080;
+    color: #fff;
+}
+.buttons .draft {
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #000;
+}
+
+.footer {
+    background-color: #f8f8f8;
+    padding: 20px;
+    text-align: center;
+    font-size: 14px;
+    border-top: 1px solid #ccc;
+}
+.footer a {
+    color: #000;
+    text-decoration: none;
+    margin: 0 10px;
+}
+.footer a:hover {
+    text-decoration: underline;
+}
+.footer .social-links {
+    margin-top: 10px;
+    color: #060606;
+}
+.footer .social-links a {
+    margin: 0 5px;
+    color: #1c1d1e;
+}
+.footer {
+    background-color: #f3f3f3; /* Light gray background */
+    padding: 10px; /* Padding around the footer */
+    position: relative; /* Allow proper positioning */
+    width: 100%; /* Full width */
+}
+
+.footer a {
+    color: #0070d2; /* Link color */
+    text-decoration: none; /* Remove underline from links */
+}
+
+.footer a:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+
+.social-links {
+    margin-top: 5px; /* Add some space above the social links */
+}

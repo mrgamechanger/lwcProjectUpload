@@ -1,0 +1,18 @@
+<template>
+  <section class="author-section">
+      <div class="author-card">
+          <div class="author-info-column">
+              <img src={authorData.Profile_Picture__c} alt="Author" class="author-avatar" />
+              <div class="author-info">
+                  <h3>{authorData.Name}</h3>
+                  <p>{authorData.Title__c}</p>
+              </div>
+          </div>
+          <div class="author-buttons-column">
+              <lightning-button variant="brand" label="Find Author on LinkedIn" onclick={handleLinkedInProfile} class="author-button linkedin-profile-button"></lightning-button>
+              <lightning-button variant="neutral" label="Other Listings by the Author" onclick={openRelatedListings} class="author-button"></lightning-button>
+          </div>
+      </div>
+      <c-related-listings-pop-up category={category} is-modal-open={isModalOpen} onrelatedlistingspopupclosed={closeRelatedListings}></c-related-listings-pop-up>
+  </section>
+</template>

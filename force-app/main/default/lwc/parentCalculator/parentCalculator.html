@@ -1,0 +1,18 @@
+<!-- parentCalculator.html -->
+<template>
+    <lightning-input label="Total Amount" type="number" value={totalAmount} onchange={handleTotalChange}></lightning-input>
+    <lightning-input label="Percentage (%)" type="number" value={percentageValue} onchange={handlePercentageChange}></lightning-input>
+    <lightning-input label="Discount (%)" type="number" value={discountValue} onchange={handleDiscountChange}></lightning-input>
+    
+    <lightning-button label="Calculate Percentage" onclick={handleCalculatePercentage}></lightning-button>
+    <lightning-button label="Calculate Discount" onclick={handleCalculateDiscount}></lightning-button>
+    
+    <!-- Child Component -->
+    <c-child-calculator></c-child-calculator>
+
+    <!-- Display Results -->
+    <div class="results">
+        <p>Percentage of {totalAmount} with {percentageValue}%: {percentageResult}</p>
+        <p>Discounted amount from {totalAmount} with {discountValue}% discount: {discountResult}</p>
+    </div>
+</template>

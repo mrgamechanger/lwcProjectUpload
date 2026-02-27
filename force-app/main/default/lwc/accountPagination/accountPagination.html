@@ -1,0 +1,32 @@
+<template>
+    <lightning-card title="Account Pagination with Filter">
+        <div class="slds-m-bottom_medium">
+            <lightning-input
+                type="text"
+                class="slds-m-around_medium"
+                placeholder="Search by Account Name"
+                label="Filter by Account Name"
+                onchange={handleSearch}>
+            </lightning-input>
+        </div>
+        <lightning-datatable
+            key-field="Id"
+            data={recordsToDisplay}
+            columns={columns}
+            class="slds-m-bottom_medium">
+        </lightning-datatable>
+        <div class="slds-grid slds-wrap slds-m-top_small">
+            <lightning-button
+                label="Previous"
+                onclick={handlePrevious}
+                disabled={isPreviousDisabled}>
+            </lightning-button>
+            <lightning-button
+                label="Next"
+                onclick={handleNext}
+                disabled={isNextDisabled}
+                class="slds-m-left_x-small">
+            </lightning-button>
+        </div>
+    </lightning-card>
+</template>

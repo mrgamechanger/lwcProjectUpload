@@ -1,0 +1,47 @@
+<template>
+    <lightning-card variant="Narrow" title="Currency Convert" >
+        <form onsubmit={handleSubmit}>
+            <div class="slds-var-p-around_small">
+            <lightning-combobox name="fromcurr" label="From Currency"
+                value={fromCurrency}
+                placeholder="Select Currency"
+                options={currencyOptions}
+                 class="slds-var-p-around_small"
+                onchange={handleInputChange}>
+            </lightning-combobox>
+    
+            <lightning-combobox name="tocurr" label="To Currency"
+                value={toCurrency}
+                placeholder="Select Currency"
+                options={currencyOptions}
+                 class="slds-var-p-around_small"
+                onchange={handleInputChange}>
+            </lightning-combobox>
+    
+            <lightning-input name="amount" label="Amount"
+                value={enteredAmount}
+                placeholder="Enter Amount"
+                class="slds-var-p-around_small"
+                onchange={handleInputChange}>
+            </lightning-input>
+            <div class="slds-var-p-around_small">
+                <!-- Submit and Reset -->
+                <lightning-button type="submit"   disabled={isButtonDisabled} label="Convert" onclick={handleSubmit}></lightning-button>
+                <lightning-button  class="slds-var-p-around_small" label="Reset" onclick={handleReset}></lightning-button>
+              </div>
+            
+        </div>
+        </form>
+    
+        <template if:true={showOutput}>
+            <div class="output">
+                <h2 class="slds-var-p-around_small">Conversion Result</h2>
+                <p class="slds-var-p-around_small">{enteredAmount} {fromCurrency} = {rate} {symbol}</p>
+            </div>
+        </template>
+    
+        <template if:true={showSpinner}>
+            <lightning-spinner alternative-text="Loading"></lightning-spinner>
+        </template>
+    </lightning-card>
+</template>

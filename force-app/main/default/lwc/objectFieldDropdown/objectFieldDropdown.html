@@ -1,0 +1,64 @@
+<!-- objectFieldDropdown.html -->
+<template>
+    <lightning-card variant="Narrow" title="Object and Field Selector" icon-name="standard:account">
+        <lightning-combobox
+            name="objectDropdown"
+            label="Select Object"
+            placeholder="Choose an Object"
+            options={objectOptions}
+            onchange={handleObjectChange}>
+        </lightning-combobox>
+
+        <template if:true={selectedObject}>
+            <lightning-dual-listbox
+                name="fieldSelect"
+                label="Select Fields"
+                source-label="Available"
+                selected-label="Selected"
+                options={fieldOptions}
+                onchange={handleFieldSelectChange}
+                required>
+            </lightning-dual-listbox>
+
+            <lightning-input 
+                label="Where Clause" 
+                placeholder="Enter where clause (e.g., Name = 'Acme')"
+                onchange={handleWhereClauseChange}>
+            </lightning-input>
+
+            <template for:each={fieldInputOptions} for:item="field">
+                <lightning-input 
+                    key={field.value}
+                    label={field.label}
+                    data-field-name={field.value}
+                    onchange={handleFieldValueChange}>
+                </lightning-input>
+            </template>
+
+            <lightning-button
+                variant="brand"
+                label="Generate Data"
+                onclick={handleGenerateData}
+                class="slds-m-top_small">
+            </lightning-button>
+
+            <lightning-button
+                variant="neutral"
+                label="Query Records"
+                onclick={handleQueryRecords}
+                class="slds-m-top_small">
+            </lightning-button>
+        </template>
+
+        <!-- Display queried records in a data table -->
+        <template if:true={queriedRecords}>
+            <lightning-datatable
+                key-field="Id"
+                data={queriedRecords}
+                columns={columns}
+                hide-checkbox-column="true"
+                class="slds-m-top_medium">
+            </lightning-datatable>
+        </template>
+    </lightning-card>
+</template>

@@ -1,0 +1,9 @@
+<template>
+    <div class="scrollContainer" onscroll={scrollCheck}>
+    <lightning-datatable
+      key-field="id"
+      data={recordsToDisplay}
+      columns={columns}>
+    </lightning-datatable>
+  </div>
+</template>

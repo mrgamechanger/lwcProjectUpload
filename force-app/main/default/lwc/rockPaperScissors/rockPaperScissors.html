@@ -1,0 +1,43 @@
+<template>
+    <div class="slds-card slds-p-around_large slds-text-align_center">
+        <h1 class="slds-text-heading_large slds-m-bottom_large">Rock Paper Scissors</h1>
+
+        <div class="slds-grid slds-wrap slds-grid_align-center slds-m-bottom_large">
+            <div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+                <lightning-button-icon icon-name="utility:user" alternative-text="Rock" title="Rock"
+                    onclick={handlePlayerChoice} value="rock" variant="brand"
+                    class="slds-m-around_small custom-button"></lightning-button-icon>
+
+                <lightning-button-icon icon-name="utility:note" alternative-text="Paper" title="Paper"
+                    onclick={handlePlayerChoice} value="paper" variant="brand"
+                    class="slds-m-around_small custom-button"></lightning-button-icon>
+
+                <lightning-button-icon icon-name="utility:cut" alternative-text="Scissors" title="Scissors"
+                    onclick={handlePlayerChoice} value="scissors" variant="brand"
+                    class="slds-m-around_small custom-button"></lightning-button-icon>
+            </div>
+        </div>
+
+        <div class="slds-grid slds-wrap slds-grid_align-spread slds-m-bottom_large">
+            <div class="slds-col slds-size_1-of-3">
+                <p class="slds-text-heading_medium">Player: <strong>{playerChoice}</strong></p>
+            </div>
+            <div class="slds-col slds-size_1-of-3">
+                <p class="slds-text-heading_medium">Computer: <strong>{computerChoice}</strong></p>
+            </div>
+        </div>
+
+        <div class="slds-m-bottom_large">
+            <p class="slds-text-heading_large slds-text-color_success">{result}</p>
+        </div>
+
+        <div class="slds-grid slds-wrap slds-grid_align-spread">
+            <div class="slds-col slds-size_1-of-3">
+                <p class="slds-text-heading_medium">Player Score: <strong>{playerScore}</strong></p>
+            </div>
+            <div class="slds-col slds-size_1-of-3">
+                <p class="slds-text-heading_medium">Computer Score: <strong>{computerScore}</strong></p>
+            </div>
+        </div>
+    </div>
+</template>

@@ -1,0 +1,120 @@
+<template>
+    <div class="slds-p-around_medium">
+        <lightning-card title="TODO Application" icon-name="standard:task">
+            <div class="slds-p-horizontal_small">
+                <lightning-input
+                    label="Task Name"
+                    value={newTaskName}
+                    onchange={handleTaskNameChange}>
+                </lightning-input>
+                <lightning-input
+                    type="number"
+                    label="Duration (minutes)"
+                    value={newTaskDuration.minutes}
+                    onchange={handleTaskDurationChange}
+                    class="slds-m-top_small">
+                </lightning-input>
+                <lightning-combobox
+                    label="Category"
+                    value={newCategory}
+                    options={categoryOptions}
+                    onchange={handleCategoryChange}
+                    class="slds-m-top_small">
+                </lightning-combobox>
+                <lightning-radio-group
+                    label="Priority"
+                    options={priorityOptions}
+                    value={newPriority}
+                    onchange={handlePriorityChange}
+                    type="button"
+                    class="slds-p-around_medium">
+                </lightning-radio-group>
+                <lightning-button
+                    label="Add Task"
+                    onclick={handleAddTask}
+                    variant="brand"
+                    class="slds-p-around_medium">
+                </lightning-button>
+            </div>
+            <div class="slds-m-top_medium slds-p-horizontal_small">
+                <template if:true={tasks.length}>
+                    <div class="slds-grid slds-gutters">
+                        <div class="slds-col slds-size_1-of-2">
+                            <h2 class="slds-text-heading_medium slds-m-bottom_small">
+                                Pending Tasks (Total: {pendingTotalDuration})
+                            </h2>
+                            <ul class="slds-has-dividers_around-space">
+                                <template for:each={pendingTasks} for:item="task">
+                                    <li key={task.id} class="slds-item slds-p-around_medium">
+                                        <div class="slds-grid slds-grid_align-spread">
+                                            <div class="slds-col">
+                                                <p><strong>{task.name}</strong> ({task.duration} minutes)</p>
+                                                <p>Category: {task.category}</p>
+                                                <p>Priority: {task.priority}</p>
+                                            </div>
+                                            <div class="slds-col slds-shrink-none">
+                                                <lightning-button-icon
+                                                    icon-name="utility:check"
+                                                    alternative-text="Complete"
+                                                    title="Complete"
+                                                    onclick={handleCompleteTask}
+                                                    data-id={task.id}
+                                                    class="slds-m-right_x-small">
+                                                </lightning-button-icon>
+                                                <lightning-button-icon
+                                                    icon-name="utility:delete"
+                                                    alternative-text="Delete"
+                                                    title="Delete"
+                                                    onclick={handleDeleteTask}
+                                                    data-id={task.id}>
+                                                </lightning-button-icon>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </template>
+                            </ul>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <h2 class="slds-text-heading_medium slds-m-bottom_small">
+                                Completed Tasks (Total: {completedTotalDuration})
+                            </h2>
+                            <ul class="slds-has-dividers_around-space">
+                                <template for:each={completedTasks} for:item="task">
+                                    <li key={task.id} class="slds-item slds-p-around_medium">
+                                        <div class="slds-grid slds-grid_align-spread">
+                                            <div class="slds-col">
+                                                <p><strong>{task.name}</strong></p>
+                                                <p>Category: {task.category}</p>
+                                                <p>Priority: {task.priority}</p>
+                                            </div>
+                                            <div class="slds-col slds-shrink-none">
+                                                <lightning-button-icon
+                                                    icon-name="utility:undo"
+                                                    alternative-text="Undo"
+                                                    title="Undo"
+                                                    onclick={handleUndoTask}
+                                                    data-id={task.id}
+                                                    class="slds-m-right_x-small">
+                                                </lightning-button-icon>
+                                                <lightning-button-icon
+                                                    icon-name="utility:delete"
+                                                    alternative-text="Delete"
+                                                    title="Delete"
+                                                    onclick={handleDeleteTask}
+                                                    data-id={task.id}>
+                                                </lightning-button-icon>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </template>
+                            </ul>
+                        </div>
+                    </div>
+                </template>
+                <template if:false={tasks.length}>
+                    <p class="slds-text-align_center">No tasks added yet.</p>
+                </template>
+            </div>
+        </lightning-card>
+    </div>
+</template>

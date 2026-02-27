@@ -1,0 +1,18 @@
+<template>
+    <lightning-card variant="Narrow" title="Accounts" icon-name="standard:account">
+        <lightning-datatable
+            key-field="Id"
+            data={accountlist}
+            columns={accountColumns}
+            onrowaction={handleRowAction}
+        ></lightning-datatable>
+    </lightning-card>
+
+    <lightning-card variant="Narrow" title="Contacts" icon-name="standard:contact">
+        <lightning-datatable
+            key-field="Id"
+            data={contactlist}
+            columns={contactColumns}
+        ></lightning-datatable>
+    </lightning-card>
+</template>

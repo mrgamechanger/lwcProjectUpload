@@ -1,0 +1,56 @@
+<template>
+    <lightning-card title="Account Data" class="slds-card slds-p-around_medium">
+        <div class="slds-p-around_medium filter-section">
+            <h2 class="slds-text-heading_medium">Filter Results</h2>
+            <div class="slds-grid slds-gutters slds-wrap slds-m-top_small">
+                <!-- Account Name -->
+                <div class="slds-col slds-size_1-of-3">
+                    <lightning-input 
+                        type="text" 
+                        label="Account Name" 
+                        name="filterName" 
+                        value={filterName} 
+                        onchange={handleFilterChange}
+                        aria-label="Filter by Account Name">
+                    </lightning-input>
+                </div>
+
+                <!-- Button Section -->
+                <div class="slds-col slds-size_1-of-3 slds-m-top_small">
+                    <lightning-button label="Reset Search" onclick={handleReset} class="slds-m-right_small" aria-label="Reset Search"></lightning-button>
+                    <lightning-button label="Search" variant="brand" onclick={handleSearch} aria-label="Search Accounts"></lightning-button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Spinner -->
+        <template if:true={isLoading}>
+            <div class="slds-align_absolute-center slds-m-top_medium">
+                <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+            </div>
+        </template>
+        
+        <!-- Data Table Section -->
+        <template if:true={displayData}>
+            <lightning-datatable
+                key-field="Id"
+                data={displayData}
+                columns={accountColumns}
+                hide-checkbox-column="true"
+                class="custom-datatable">
+            </lightning-datatable>
+        </template>
+        <template if:false={displayData}>
+            <div class="slds-text-body_regular slds-m-top_medium">
+                No data available to display.
+            </div>
+        </template>
+
+        <!-- Show More Button -->
+        <template if:true={showMoreVisible}>
+            <div class="slds-m-top_medium slds-align_absolute-center">
+                <lightning-button label="Show More" onclick={handleShowMore} aria-label="Show More Accounts"></lightning-button>
+            </div>
+        </template>
+    </lightning-card>
+</template>

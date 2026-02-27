@@ -1,0 +1,52 @@
+<template>
+  <div class="currency-app">
+    <div class="container">
+      <lightning-card class="custom-card" title="Currency Converter" icon-name="utility:currency">
+        <form>
+          <div class="format slds-var-p-around_small">
+            <!-- Input Amount -->
+            <lightning-input label="Enter Amount" name="amount" onchange={handler}></lightning-input>
+          </div>
+          <div class="format slds-var-p-around_small">
+            <!-- Convert Currency -->
+            <div class="slds-grid slds-gutters calculatorForm__currencySection">
+              <div class="slds-col">
+                <lightning-combobox
+                  name="fromcurr"
+                  label="From"
+                  variant="label-hidden"
+                  value={fromCurrency}
+                  placeholder="From Currency"
+                  options={currencyOptions}
+                  onchange={handler}>
+                </lightning-combobox>
+              </div>
+              <div class="slds-col">
+                <lightning-combobox
+                  name="tocurr"
+                  label="To"
+                  variant="label-hidden"
+                  value={toCurrency}
+                  placeholder="TO Currency"
+                  options={currencyOptions}
+                  onchange={handler}>
+                </lightning-combobox>
+              </div>
+            </div>
+          </div>
+          <div class="format slds-var-p-around_small">
+            <!-- Submit and Reset -->
+            <lightning-button class="custom-button" label="Convert" variant="brand" onclick={clickHandler}></lightning-button>
+            <lightning-button class="custom-button" label="Reset" onclick={clickReset}></lightning-button>
+          </div>
+          <template lwc:if={showOutput}>
+            <div class="format slds-var-p-around_small">
+              <!-- Display Result -->
+              <p class="result">Converted value: {Rate} <span class="result-to">{symbol}</span></p>
+            </div>
+          </template>
+        </form>
+      </lightning-card>
+    </div>
+  </div>
+</template>

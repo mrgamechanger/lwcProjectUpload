@@ -1,0 +1,13 @@
+<template>
+    <lightning-card title="Contact List">
+      <ul>
+        <template for:each={contacts.data} for:item="contact">
+          <li key={contact.Id}>{contact.Name} — {contact.Email}</li>
+        </template>
+      </ul>
+      <div >
+        <lightning-button label=”Previous” onclick={previousPage} ></lightning-button>
+        <lightning-button label=”Next” onclick={nextPage} ></lightning-button>
+      </div>
+    </lightning-card>
+  </template>

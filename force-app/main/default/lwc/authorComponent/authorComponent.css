@@ -1,0 +1,80 @@
+/* authorComponent.css */
+.author-section {
+  margin-bottom: 2rem;
+}
+
+.author-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f3f2f2;
+  padding: 1.5rem;
+  border-radius: 0.25rem;
+}
+
+.author-info-column {
+  display: flex;
+  align-items: center;
+}
+
+.author-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.author-info {
+  margin-left: 1rem;
+}
+
+.author-buttons-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.author-button {
+  width: 250px;
+  padding: 0.5rem 0.25rem;
+  box-sizing: border-box;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.linkedin-profile-button {
+  --slds-c-button-brand-color-background: #0077B5;
+  --slds-c-button-brand-color-border: #0077B5;
+}
+
+.linkedin-profile-button:hover {
+  --slds-c-button-brand-color-background-hover: #006699;
+  --slds-c-button-brand-color-border-hover: #006699;
+}
+
+/* Remove any potential source of the ">" icon */
+.author-card::after,
+.author-buttons-column::after {
+  content: none;
+}
+
+@media only screen and (max-width: 768px) {
+  .author-card {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+
+  .author-info-column {
+      margin-bottom: 1rem;
+      width: 100%;
+  }
+
+  .author-buttons-column {
+      width: 100%;
+  }
+
+  .author-button {
+      width: 100%;
+      margin-bottom: 0.5rem;
+  }
+}

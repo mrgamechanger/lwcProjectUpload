@@ -1,0 +1,54 @@
+<!--relatedListingsPopUp.html-->
+<template>
+    <div if:true={isModalOpen} class="slds-modal slds-fade-in-open">
+        <div class="slds-modal__container">
+            <header class="slds-modal__header">
+                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModal}>
+                    <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse" size="small"></lightning-icon>
+                    <span class="slds-assistive-text">Close</span>
+                </button>
+                <h2 class="slds-text-heading_medium slds-hyphenate">Related Listings</h2>
+            </header>
+            <div class="slds-modal__content slds-p-around_medium">
+                <template if:true={hasListings}>
+                    <div class="slider-container">
+                        <!-- Slider with slides -->
+                        <div class="slider">
+                            <template for:each={relatedListings} for:item="wrapper">
+                                <div key={wrapper.listing.Id} class="slide slds-box slds-box_x-small slds-m-around_x-small">
+                                    <div class="listing-image-placeholder slds-align_absolute-center">
+                                        <template if:true={wrapper.imageUrl}>
+                                            <img src={wrapper.imageUrl} alt={wrapper.listing.Title__c} class="listing-image" />
+                                        </template>
+                                        <template if:false={wrapper.imageUrl}>
+                                            <lightning-icon icon-name="standard:product" size="large"></lightning-icon>
+                                        </template>
+                                    </div>
+                                    <div class="listing-info slds-p-around_x-small">
+                                        <p class="slds-text-heading_small slds-truncate">{wrapper.listing.Title__c}</p>
+                                        <p class="slds-text-body_small slds-truncate">{wrapper.listing.Tagline__c}</p>
+                                    </div>
+                                </div>
+                                <div class="button-container slds-align_absolute-center" key={wrapper.listing.Id}>
+                                    <lightning-button  
+                                        class="custom-button slds-align_absolute-center"
+                                        variant="brand"
+                                        label="View Component"
+                                        title="View Component"
+                                        onclick={openListing} 
+                                        data-listing-id={wrapper.listing.Id}>
+                                    </lightning-button>
+                                </div>
+
+                            </template>
+                        </div>
+                    </div>
+                </template>
+                <template if:false={hasListings}>
+                    <p class="slds-text-align_center">No related listings available for this author.</p>
+                </template>
+            </div>
+        </div>
+    </div>
+    <div if:true={isModalOpen} class="slds-backdrop slds-backdrop_open"></div>
+</template>

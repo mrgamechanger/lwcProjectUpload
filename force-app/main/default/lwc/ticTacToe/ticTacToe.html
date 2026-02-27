@@ -1,0 +1,28 @@
+<template>
+    <div class="tic-tac-toe">
+        <!-- Iterating over the cells array to dynamically create game cells -->
+        <template for:each={cells} for:item="cell">
+            <div key={cell.id}>
+                <input
+                    type="radio"
+                    id={cell.id}
+                    name={cell.name}
+                    class={cell.classes}
+                    onclick={handleClick}
+                />
+                <label key={cell.labelKey} for={cell.id} class={cell.labelClasses}></label>
+            </div>
+        </template>
+
+        <!-- End game screen -->
+        <div class="end">
+            <h3></h3>
+            <a href="javascript:void(0);" onclick={resetGame}>Restart</a>
+        </div>
+
+        <!-- Reset button -->
+        <div class="reset-button">
+            <button onclick={handleReset}>Reset Game</button>
+        </div>
+    </div>
+</template>

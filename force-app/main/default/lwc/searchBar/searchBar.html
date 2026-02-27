@@ -1,0 +1,40 @@
+<template>
+    <div class="search-bar-container">
+        <div class="search-input-container">
+            <input type="text" class="slds-input search-input" placeholder={placeholder} value={searchKey}
+                oninput={handleKeyChange} data-source="searchInputField" />
+            <template if:true={isSearchLoading}>
+                <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+            </template>
+        </div>
+        <template if:true={hasRecords}>
+            <ul class="slds-listbox slds-listbox_vertical slds-dropdown slds-dropdown_fluid">
+                <template for:each={lstResult} for:item="record">
+                    <li key={record.Id} class="slds-listbox__item" role="presentation" data-keyword={record.Name} onclick={handleSuggestionClick}>
+                        <div id="option1" role="option" class="slds-listbox__option slds-listbox__option_plain">
+                            <span class="slds-media__body">
+                                <span class="slds-truncate" title={record.Name}>{record.Name}</span>
+                            </span>
+                        </div>
+                    </li>
+                </template>
+            </ul>
+        </template>
+        <template if:false={hasRecords}>
+            <div class="no-results">No results found</div>
+        </template>
+        <div class="selected-keywords">
+            <template if:true={hasSelectedKeywords}>
+                <template for:each={selectedKeywords} for:item="keyword">
+                    <span key={keyword} class="slds-pill" data-keyword={keyword}>
+                        <span class="slds-pill__label">{keyword}</span>
+                        <button class="slds-button slds-button_icon slds-pill__remove" title="Remove" data-keyword={keyword} onclick={handleRemoveKeyword}>
+                            <lightning-icon icon-name="utility:close" size="x-small"></lightning-icon>
+                            <span class="slds-assistive-text">Remove</span>
+                        </button>
+                    </span>
+                </template>
+            </template>
+        </div>
+    </div>
+</template>

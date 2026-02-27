@@ -1,0 +1,99 @@
+<template>
+    <lightning-card title="Search Expenses By Date" class="custom-card">
+        <div class="slds-m-around_medium">
+            <form>
+                <lightning-input 
+                    type="date" 
+                    label="Start Date of Expense" 
+                    class="custom-input"
+                    onchange={handleStartDate}>
+                </lightning-input>
+                <lightning-input 
+                    type="date" 
+                    label="End Date of Expense" 
+                    class="custom-input"
+                    onchange={handleEndDate}>
+                </lightning-input>
+                <div class="slds-m-top_medium ">
+                    <lightning-button 
+                        variant="brand" 
+                        label="Search Records" 
+                        onclick={handleSearchByDate}>
+                    </lightning-button>
+                    <lightning-button 
+                        class="slds-m-left_x-small"
+                        variant="neutral" 
+                        label="Reset" 
+                        onclick={handleReset}>
+                    </lightning-button>
+                </div>
+            </form>
+        </div>
+    </lightning-card>
+
+    <template if:true={isLoading}>
+        <lightning-spinner alternative-text="Loading" class="custom-spinner"></lightning-spinner>
+    </template>
+
+    <template if:true={errorMessage}>
+        <div class="slds-m-around_medium">
+            <div class="slds-text-color_error custom-error">
+                {errorMessage}
+            </div>
+        </div>
+    </template>
+
+    <template if:true={isDataAvailable}>
+        <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01"
+            class="slds-modal slds-fade-in-open slds-modal_small custom-modal">
+            <div class="slds-modal__container slds-has-flexi-truncate">
+                <div class="slds-modal__header">
+                    <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Expenses By Date</h1>
+                </div>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <div class="slds-m-top_medium">
+                        <table class="slds-table slds-table_bordered slds-table_fixed-layout slds-table_resizable-cols custom-table">
+                            <thead>
+                                <tr class="slds-line-height_reset">
+                                    <th class="slds-text-align_right" scope="col">Select</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <template for:each={getExpenseRecords} for:item="expense">
+                                    <tr key={expense.Id}>
+                                        <td class="slds-text-align_right">
+                                            <div class="slds-checkbox">
+                                                <input type="checkbox" name="options" value="checkbox-01"/>
+                                                <label class="slds-checkbox__label">
+                                                    <span class="slds-checkbox_faux"></span>
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td>{expense.Name}</td>
+                                        <td>{expense.Expense_Date__c}</td>
+                                        <td>{expense.Expense_Amount__c}</td>
+                                    </tr>
+                                </template>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="slds-m-top_medium">
+                        <h3>Total Expense Amount: {totalExpenseAmount}</h3>
+                    </div>
+                </div>
+                <div class="slds-modal__footer">
+                    <lightning-button 
+                        variant="neutral" 
+                        label="Close" 
+                        class="custom-button"
+                        onclick={handleClose}>
+                    </lightning-button>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open custom-backdrop"></div>
+    </template>
+</template>

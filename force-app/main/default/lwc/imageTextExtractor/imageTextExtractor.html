@@ -1,0 +1,46 @@
+<template>
+    <lightning-card title="Image Text Extractor" icon-name="standard:image">
+        <div class="slds-p-around_medium">
+            <div class="slds-form-element">
+                <label class="slds-form-element__label" for="imageInput">Upload Image</label>
+                <div class="slds-form-element__control">
+                    <lightning-input 
+                        type="file" 
+                        accept="image/*"
+                        label="Choose Image"
+                        name="imageInput"
+                        onchange={handleImageUpload}
+                        data-id="imageInput">
+                    </lightning-input>
+                </div>
+            </div>
+
+            <template if:true={previewUrl}>
+                <div class="slds-m-top_medium">
+                    <img src={previewUrl} alt="Preview" class="image-preview"/>
+                </div>
+            </template>
+
+            <template if:true={extractedText}>
+                <div class="slds-m-top_medium">
+                    <div class="slds-text-heading_small">Extracted Text:</div>
+                    <div class="slds-box slds-m-top_small extracted-text">
+                        {extractedText}
+                    </div>
+                </div>
+            </template>
+
+            <template if:true={error}>
+                <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error slds-m-top_medium" role="alert">
+                    {error}
+                </div>
+            </template>
+
+            <template if:true={isLoading}>
+                <div class="slds-m-top_medium">
+                    <lightning-spinner alternative-text="Processing" size="medium"></lightning-spinner>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template> 

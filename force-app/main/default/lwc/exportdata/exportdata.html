@@ -1,0 +1,11 @@
+<template>
+    
+    <lightning-datatable
+        key-field="id"
+        data={accounts}
+        columns={columnsList}>
+    </lightning-datatable>
+    <div>
+        <lightning-button  disabled={hasData}  label="Export data" title="Export data" icon-name="utility:download" onclick={handleClick}></lightning-button>
+    </div>
+</template>

@@ -1,0 +1,237 @@
+<template>
+    <div class="voice-chatbot-container">
+        <lightning-card class="main-card" variant="Narrow">
+            <!-- Header Section -->
+            <div class="header-section">
+                <div class="header-title">
+                    <lightning-icon icon-name="utility:voice" size="medium" class="header-icon"></lightning-icon>
+                    <h2 class="title">Voice Search Assistant</h2>
+                </div>
+                <p class="subtitle">Search Salesforce records using voice or text</p>
+            </div>
+
+            <!-- Search Controls -->
+            <div class="search-container">
+                <div class="search-input-group">
+                    <!-- Mic icon for voice search (inline SVG for reliable rendering) -->
+                    <div class="mic-button" role="button" tabindex="0" onclick={toggleVoice} onkeydown={handleMicKeydown} aria-label="Toggle voice">
+                        <svg class="mic-svg" class:listening={listening} viewBox="0 0 24 24" aria-hidden="false" focusable="false">
+                            <path d="M12 14a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v5a3 3 0 0 0 3 3z"></path>
+                            <path d="M19 11a1 1 0 0 0-2 0 5 5 0 0 1-10 0 1 1 0 0 0-2 0 7 7 0 0 0 6 6.92V21a1 1 0 0 0 2 0v-3.08A7 7 0 0 0 19 11z"></path>
+                        </svg>
+                    </div>
+                    <lightning-input 
+                        class="query-input" 
+                        type="text" 
+                        value={query} 
+                        onchange={handleQueryChange} 
+                        placeholder="Search accounts, contacts, cases, opportunities..."
+                    ></lightning-input>
+                    <lightning-button 
+                        label="Search" 
+                        variant="brand" 
+                        class="search-button"
+                        icon-name="utility:search"
+                        onclick={runCommand}
+                    ></lightning-button>
+                </div>
+
+                <!-- Status Message -->
+                <template if:true={listening}>
+                    <div class="status-badge listening-badge">
+                        <span class="pulse-indicator"></span>
+                        <span>Listening for voice command...</span>
+                    </div>
+                </template>
+            </div>
+
+            <!-- Error Message -->
+            <template if:true={error}>
+                <div class="alert alert-error">
+                    <lightning-icon icon-name="utility:warning" size="small"></lightning-icon>
+                    <span>{error}</span>
+                </div>
+            </template>
+
+            <!-- Results Section -->
+            <template if:true={hasResults}>
+                <div class="results-container">
+                    <!-- Accounts Results -->
+                    <template if:true={accountResults.length}>
+                        <div class="result-group">
+                            <div class="group-header">
+                                <div class="header-content">
+                                    <lightning-icon icon-name="standard:account" size="small" class="group-icon"></lightning-icon>
+                                    <h3>Accounts <span class="count-badge">{accountResults.length}</span></h3>
+                                </div>
+                                <div class="pagination-controls">
+                                    <lightning-button-icon 
+                                        icon-name="utility:chevronleft" 
+                                        onclick={prevAccountPage} 
+                                        disabled={disableAccountPrev}
+                                        alternative-text="Previous page"
+                                    ></lightning-button-icon>
+                                    <lightning-button-icon 
+                                        icon-name="utility:chevronright" 
+                                        onclick={nextAccountPage} 
+                                        disabled={disableAccountNext}
+                                        alternative-text="Next page"
+                                    ></lightning-button-icon>
+                                </div>
+                            </div>
+                            <ul class="results-list">
+                                <template for:each={accountResults} for:item="rec">
+                                    <li key={rec.Id} class="result-item">
+                                        <lightning-button 
+                                            variant="base" 
+                                            label={rec.Name} 
+                                            title="Click to open record" 
+                                            onclick={handleOpen} 
+                                            data-id={rec.Id} 
+                                            data-object="Account"
+                                            class="result-button"
+                                        ></lightning-button>
+                                    </li>
+                                </template>
+                            </ul>
+                        </div>
+                    </template>
+
+                    <!-- Contacts Results -->
+                    <template if:true={contactResults.length}>
+                        <div class="result-group">
+                            <div class="group-header">
+                                <div class="header-content">
+                                    <lightning-icon icon-name="standard:contact" size="small" class="group-icon"></lightning-icon>
+                                    <h3>Contacts <span class="count-badge">{contactResults.length}</span></h3>
+                                </div>
+                                <div class="pagination-controls">
+                                    <lightning-button-icon 
+                                        icon-name="utility:chevronleft" 
+                                        onclick={prevContactPage} 
+                                        disabled={disableContactPrev}
+                                        alternative-text="Previous page"
+                                    ></lightning-button-icon>
+                                    <lightning-button-icon 
+                                        icon-name="utility:chevronright" 
+                                        onclick={nextContactPage} 
+                                        disabled={disableContactNext}
+                                        alternative-text="Next page"
+                                    ></lightning-button-icon>
+                                </div>
+                            </div>
+                            <ul class="results-list">
+                                <template for:each={contactResults} for:item="rec">
+                                    <li key={rec.Id} class="result-item">
+                                        <lightning-button 
+                                            variant="base" 
+                                            label={rec.Name} 
+                                            title="Click to open record" 
+                                            onclick={handleOpen} 
+                                            data-id={rec.Id} 
+                                            data-object="Contact"
+                                            class="result-button"
+                                        ></lightning-button>
+                                    </li>
+                                </template>
+                            </ul>
+                        </div>
+                    </template>
+
+                    <!-- Cases Results -->
+                    <template if:true={caseResults.length}>
+                        <div class="result-group">
+                            <div class="group-header">
+                                <div class="header-content">
+                                    <lightning-icon icon-name="standard:case" size="small" class="group-icon"></lightning-icon>
+                                    <h3>Cases <span class="count-badge">{caseResults.length}</span></h3>
+                                </div>
+                                <div class="pagination-controls">
+                                    <lightning-button-icon 
+                                        icon-name="utility:chevronleft" 
+                                        onclick={prevCasePage} 
+                                        disabled={disableCasePrev}
+                                        alternative-text="Previous page"
+                                    ></lightning-button-icon>
+                                    <lightning-button-icon 
+                                        icon-name="utility:chevronright" 
+                                        onclick={nextCasePage} 
+                                        disabled={disableCaseNext}
+                                        alternative-text="Next page"
+                                    ></lightning-button-icon>
+                                </div>
+                            </div>
+                            <ul class="results-list">
+                                <template for:each={caseResults} for:item="rec">
+                                    <li key={rec.Id} class="result-item">
+                                        <lightning-button 
+                                            variant="base" 
+                                            label={rec.Subject} 
+                                            title="Click to open record" 
+                                            onclick={handleOpen} 
+                                            data-id={rec.Id} 
+                                            data-object="Case"
+                                            class="result-button"
+                                        ></lightning-button>
+                                    </li>
+                                </template>
+                            </ul>
+                        </div>
+                    </template>
+
+                    <!-- Opportunities Results -->
+                    <template if:true={opptyResults.length}>
+                        <div class="result-group">
+                            <div class="group-header">
+                                <div class="header-content">
+                                    <lightning-icon icon-name="standard:opportunity" size="small" class="group-icon"></lightning-icon>
+                                    <h3>Opportunities <span class="count-badge">{opptyResults.length}</span></h3>
+                                </div>
+                                <div class="pagination-controls">
+                                    <lightning-button-icon 
+                                        icon-name="utility:chevronleft" 
+                                        onclick={prevOpptyPage} 
+                                        disabled={disableOpptyPrev}
+                                        alternative-text="Previous page"
+                                    ></lightning-button-icon>
+                                    <lightning-button-icon 
+                                        icon-name="utility:chevronright" 
+                                        onclick={nextOpptyPage} 
+                                        disabled={disableOpptyNext}
+                                        alternative-text="Next page"
+                                    ></lightning-button-icon>
+                                </div>
+                            </div>
+                            <ul class="results-list">
+                                <template for:each={opptyResults} for:item="rec">
+                                    <li key={rec.Id} class="result-item">
+                                        <lightning-button 
+                                            variant="base" 
+                                            label={rec.Name} 
+                                            title="Click to open record" 
+                                            onclick={handleOpen} 
+                                            data-id={rec.Id} 
+                                            data-object="Opportunity"
+                                            class="result-button"
+                                        ></lightning-button>
+                                    </li>
+                                </template>
+                            </ul>
+                        </div>
+                    </template>
+                </div>
+            </template>
+
+            <!-- Empty State -->
+            <template if:false={hasResults}>
+                <template if:false={error}>
+                    <div class="empty-state">
+                        <lightning-icon icon-name="utility:search" size="large" class="empty-state-icon"></lightning-icon>
+                        <h3>No results yet</h3>
+                        <p>Try searching for accounts, contacts, cases, or opportunities using voice or text</p>
+                    </div>
+                </template>
+            </template>
+        </lightning-card>
+    </div>
+</template>

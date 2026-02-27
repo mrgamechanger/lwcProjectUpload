@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ChatApp_ChatWidget_Execute</fullName>
+    <label>ChatApp ChatWidget Execute</label>
+    
+    <!-- Apex Class Access -->
+    <classAccess>
+        <apexClass>ChatController</apexClass>
+        <enabled>true</enabled>
+    </classAccess>
+    <classAccess>
+        <apexClass>ChatAiService</apexClass>
+        <enabled>true</enabled>
+    </classAccess>
+    
+    <!-- External Credential Access -->
+    <externalCredentialAccess>
+        <externalCredential>ChatAI_EC</externalCredential>
+        <enabled>true</enabled>
+    </externalCredentialAccess>
+    
+    <!-- Object Permissions -->
+    <objectPermissions>
+        <object>Chat_Message__c</object>
+        <allowCreate>true</allowCreate>
+        <allowRead>true</allowRead>
+        <allowUpdate>true</allowUpdate>
+        <viewAllRecords>false</viewAllRecords>
+        <modifyAllRecords>false</modifyAllRecords>
+    </objectPermissions>
+    <objectPermissions>
+        <object>Chat_Transcript__c</object>
+        <allowCreate>true</allowCreate>
+        <allowRead>true</allowRead>
+        <allowUpdate>true</allowUpdate>
+        <viewAllRecords>false</viewAllRecords>
+        <modifyAllRecords>false</modifyAllRecords>
+    </objectPermissions>
+    
+    <!-- Field Level Security -->
+    <fieldPermissions>
+        <field>Chat_Message__c.Text__c</field>
+        <readable>true</readable>
+        <writable>true</writable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <field>Chat_Message__c.Sender__c</field>
+        <readable>true</readable>
+        <writable>true</writable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <field>Chat_Message__c.Transcript__c</field>
+        <readable>true</readable>
+        <writable>true</writable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <field>Chat_Transcript__c.Name</field>
+        <readable>true</readable>
+        <writable>true</writable>
+    </fieldPermissions>
+</PermissionSet>

@@ -1,0 +1,35 @@
+<template>
+    <lightning-card title="User Authentication" icon-name="utility:lock">
+        <div class="slds-p-around_medium">
+            <div class="slds-form-element slds-m-bottom_medium">
+                <label class="slds-form-element__label" for="username-input">
+                    <abbr class="slds-required" title="required">*</abbr>
+                    Username
+                </label>
+                <div class="slds-form-element__control">
+                    <input type="text" id="username-input" class="slds-input" 
+                           placeholder="Enter your username" required
+                           onkeyup={handleUsernameChange}>
+                </div>
+            </div>
+            <div class="slds-form-element">
+                <label class="slds-form-element__label" for="password-input">
+                    <abbr class="slds-required" title="required">*</abbr>
+                    Password
+                </label>
+                <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_right">
+                    <input type={inputType} id="password-input" class="slds-input" 
+                           placeholder="Enter your password" required
+                           onkeyup={handlePasswordChange}>
+                    <button class="slds-button slds-button_icon slds-input__icon slds-input__icon_right" 
+                            title="Toggle password visibility" onclick={togglePasswordVisibility}>
+                        <lightning-icon icon-name={eyeIcon} size="x-small" alternative-text="Toggle password visibility"></lightning-icon>
+                    </button>
+                </div>
+            </div>
+            <div class="slds-m-top_medium">
+                <lightning-button label="Submit" variant="brand" onclick={handleSubmit} disabled={isSubmitDisabled}></lightning-button>
+            </div>
+        </div>
+    </lightning-card>
+</template>

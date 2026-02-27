@@ -1,0 +1,55 @@
+<!-- componentDetail.html -->
+<template>
+  <!-- custom Toast Message Container -->
+  <c-toast-container></c-toast-container>
+  
+  <article class="blog-post">
+    <h1 class="blog-title">{listingData.Title__c}</h1>
+
+    <div class="author-rating-container">
+      <div class="author-info">
+        <img src={listingData.Author__r.Profile_Picture__c} alt="Author" class="author-avatar" />
+        <div class="author-details">
+          <p class="author-name">{listingData.Author__r.Name}</p>
+          <p class="publish-date">{formattedDate}</p>
+          <div class="rating">
+            <lightning-icon icon-name="utility:favorite" size="x-small" alternative-text="Rating" class="rating-icon"></lightning-icon>
+            <span>{listingData.Rating__c} ({listingData.Author__r.Total_Reviews__c} reviews)</span>
+          </div>
+        </div>
+        
+      </div>
+
+      <div class="rating-download">
+        <lightning-button variant="brand" label="Download" icon-name="utility:download" onclick={handleDownload} class="download-button"></lightning-button>
+      </div>
+    </div>
+
+    <div class="blog-content">
+      <div class="image-placeholder">
+        <c-record-image-slider record-id={recordId}></c-record-image-slider>
+        <!-- Image placeholder -->
+      </div>
+      <p class="image-caption">Lorem ipsum dolor sit amet adipiscing elit</p>
+      <div class="description-section">
+        <p>{listingData.Description__c}</p>
+      </div>
+      <div class="blog-text" lwc:dom="manual"></div>
+    </div>
+
+    <div class="share-section">
+      <div class="share-buttons">
+        <lightning-button variant="neutral" label="Share on LinkedIn" icon-name="utility:share" onclick={handleLinkedInShare} class="linkedin-share-button">
+          <svg slot="icon" class="linkedin-icon" viewBox="0 0 24 24" width="16" height="16">
+            <path fill="currentColor" d="..."/>
+          </svg>
+        </lightning-button>
+      </div>
+      <div class="tags">
+        <template for:each={tags} for:item="tag">
+          <span key={tag} class="tag">{tag}</span>
+        </template>
+      </div>
+    </div>
+  </article>
+</template>

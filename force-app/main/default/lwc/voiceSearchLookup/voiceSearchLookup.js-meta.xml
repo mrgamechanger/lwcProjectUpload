@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>60.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Voice Search Lookup</masterLabel>
+    <targets>
+        <target>lightning__AppPage</target>
+        <target>lightning__RecordPage</target>
+        <target>lightning__HomePage</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage,lightning__AppPage,lightning__HomePage">
+            <property name="label" type="String" label="Label" description="Input label"/>
+            <property name="placeholder" type="String" label="Placeholder" description="Search input placeholder"/>
+            <property name="objectApiName" type="String" label="Object to Search" datasource="Account,Contact" description="Select Account or Contact"/>
+            <property name="minChars" type="Number" label="Min Characters" description="Minimum characters to start search" />
+            <property name="maxResults" type="Number" label="Max Results" description="Maximum suggestion results" />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

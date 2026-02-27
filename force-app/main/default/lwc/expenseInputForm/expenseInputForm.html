@@ -1,0 +1,46 @@
+<template>
+    <lightning-card title="Enter Expense Details" class="custom-card">
+        <div class="slds-p-around_small slds-p-left_large">
+            <form>
+                <lightning-input 
+                    type="text"
+                    label="Expense Name"
+                    name="expenseName"
+                    required
+                    class="custom-input"
+                    onchange={handleExpName}>
+                </lightning-input>
+                <lightning-input 
+                    type="date"
+                    label="Expense Date"
+                    name="expenseDate"
+                    required
+                    class="custom-input"
+                    onchange={handleExpDate}>
+                </lightning-input>
+                <lightning-input 
+                    type="number"
+                    label="Expense Amount"
+                    name="expenseAmount"
+                    required
+                    class="custom-input"
+                    onchange={handleExpAmount}>
+                </lightning-input>
+
+                <div class="slds-p-around_small ">
+                    <lightning-button
+                        variant="brand"
+                        label="Create Expense"
+                        class="custom-button"
+                        onclick={createNewExpense}>
+                    </lightning-button>
+                    <lightning-button 
+                        label="Reset" 
+                        class="slds-p-around_small " 
+                        onclick={Reset}>
+                    </lightning-button>
+                </div>
+            </form>
+        </div>
+    </lightning-card>
+</template>

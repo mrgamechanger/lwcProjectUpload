@@ -1,0 +1,38 @@
+<template>
+    <lightning-card title="Generate Contact PDF & Email" icon-name="standard:contact">
+        <div class="slds-m-around_medium">
+            <lightning-input
+                name="conname"
+                label="Contact Name"
+                value={contactName}
+                onchange={handleInputChange}
+                required>
+            </lightning-input>
+
+            <lightning-input
+                name="Phone"
+                label="Phone"
+                type="tel"
+                value={contactPhone}
+                onchange={handleInputChange}>
+            </lightning-input>
+
+            <lightning-input
+                name="Email"
+                label="Email"
+                type="email"
+                value={contactEmail}
+                onchange={handleInputChange}
+                required>
+            </lightning-input>
+
+            <div class="slds-m-top_medium">
+                <lightning-button
+                    variant="brand"
+                    label="Generate PDF & Send Email"
+                    onclick={handleGenerateClick}>
+                </lightning-button>
+            </div>
+        </div>
+    </lightning-card>
+</template>

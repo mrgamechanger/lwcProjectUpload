@@ -1,0 +1,78 @@
+<template>
+    <lightning-card title="Expense Tracker" icon-name="standard:expense">
+        <div class="slds-p-around_medium">
+            <lightning-combobox
+                label="Expense Category"
+                name="category" class="slds-p-around_small"
+                value={newExpense.category}
+                options={categoryOptions}
+                onchange={handleInputChange}
+                required
+            ></lightning-combobox>
+            <lightning-input
+                type="number"
+                label="Amount"
+                name="amount" class="slds-p-around_small"
+                value={newExpense.amount}
+                onchange={handleInputChange}
+                required
+            ></lightning-input>
+            <lightning-button
+                label="Add Expense"
+                onclick={addExpense} 
+               class="slds-p-around_small"
+            ></lightning-button>
+
+            <div class="slds-m-top_medium">
+                <template if:true={paginatedExpenses.length}>
+                    <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                        <thead>
+                            <tr class="slds-line-height_reset">
+                                <th class="slds-text-title_caps" scope="col">
+                                    <div class="slds-truncate" title="Category">
+                                        Category
+                                    </div>
+                                </th>
+                                <th class="slds-text-title_caps" scope="col">
+                                    <div class="slds-truncate" title="Amount">
+                                        Amount
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template for:each={paginatedExpenses} for:item="expense">
+                                <tr key={expense.id}>
+                                    <td>{expense.category}</td>
+                                    <td>${expense.amount}</td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                    <div class="slds-grid slds-grid_align-spread slds-m-top_small">
+                        <lightning-button
+                            label="Previous"  class="slds-p-around_medium"
+                            onclick={handlePrevious}
+                            disabled={isPreviousDisabled}
+                        ></lightning-button>
+                        <span>Page {currentPage} of {totalPages}</span>
+                        <lightning-button
+                            label="Next"
+                            onclick={handleNext}
+                            disabled={isNextDisabled}
+                        ></lightning-button>
+                    </div>
+                    <div class="slds-text-heading_medium slds-m-top_small">
+                        Total: ${totalExpenses}
+                    </div>
+                    <div class="slds-m-top_medium" style="height: 400px; width: 100%;">
+                        <canvas lwc:dom="manual" class="expense-chart"></canvas>
+                    </div>
+                </template>
+                <template if:false={paginatedExpenses.length}>
+                    <p>No expenses added yet.</p>
+                </template>
+            </div>
+        </div>
+    </lightning-card>
+</template>

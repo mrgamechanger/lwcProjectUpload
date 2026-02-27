@@ -1,0 +1,35 @@
+<template>
+    <div class="chart-card slds-card" role="group" aria-label="Daily electricity consumption bar chart">
+        <header class="slds-card__header slds-grid">
+            <div class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__figure">
+                    <span class="slds-icon_container slds-icon-standard-dashboard" title="Consumption">
+                        <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                            <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#dashboard"></use>
+                        </svg>
+                    </span>
+                </div>
+                <div class="slds-media__body">
+                    <h2 class="slds-card__header-title slds-truncate" title="Electricity Consumption">
+                        Electricity Consumption (kWh)
+                    </h2>
+                    <p class="slds-text-title_caps slds-m-top_xxx-small slds-truncate" title={subtitle}>
+                        {subtitle}
+                    </p>
+                </div>
+            </div>
+        </header>
+
+        <div class="slds-card__body slds-card__body_inner">
+            <div class="chart-wrapper" lwc:dom="manual" data-chart-root onkeydown={handleKeyNav}>
+                <!-- SVG chart injected dynamically -->
+            </div>
+            <template if:true={showLegend}>
+                <div class="legend slds-m-top_small">
+                    <span class="legend-swatch" aria-hidden="true"></span>
+                    <span class="slds-text-body_small">Consumption (kWh)</span>
+                </div>
+            </template>
+        </div>
+    </div>
+</template>

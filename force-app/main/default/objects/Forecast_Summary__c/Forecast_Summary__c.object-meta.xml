@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <!-- Sales Cloud Forecasting Summary object for quarterly, owner-based, multi-currency predictions -->
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Stores historical aggregates and predicted sales amounts per quarter and owner, including confidence bounds and method metadata.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <label>Forecast Summary</label>
+    <pluralLabel>Forecast Summaries</pluralLabel>
+    <sharingModel>ReadWrite</sharingModel>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <nameField>
+        <displayFormat>FS-{000000}</displayFormat>
+        <label>Forecast Summary Number</label>
+        <type>AutoNumber</type>
+    </nameField>
+
+    <!-- Multi-currency supported implicitly by org's CurrencyIsoCode standard field -->
+
+    <!-- Fields -->
+    <fields>
+        <fullName>Grain__c</fullName>
+        <description>Aggregation grain for this record.</description>
+        <externalId>false</externalId>
+        <label>Grain</label>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>true</sorted>
+                <value>
+                    <fullName>Quarter</fullName>
+                    <default>true</default>
+                    <label>Quarter</label>
+                </value>
+                <value>
+                    <fullName>Month</fullName>
+                    <default>false</default>
+                    <label>Month</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+
+    <fields>
+        <fullName>PeriodStartDate__c</fullName>
+        <description>Start date of the aggregated period (first day of quarter).</description>
+        <externalId>false</externalId>
+        <label>Period Start Date</label>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+
+    <fields>
+        <fullName>FiscalYear__c</fullName>
+        <description>Fiscal year for this period.</description>
+        <externalId>false</externalId>
+        <label>Fiscal Year</label>
+        <precision>4</precision>
+        <scale>0</scale>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+    </fields>
+
+    <fields>
+        <fullName>FiscalQuarter__c</fullName>
+        <description>Fiscal quarter number (1-4).</description>
+        <externalId>false</externalId>
+        <label>Fiscal Quarter</label>
+        <precision>1</precision>
+        <scale>0</scale>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+    </fields>
+
+    <fields>
+        <fullName>Owner__c</fullName>
+        <description>Forecast owner (typically Opportunity Owner aggregated).</description>
+        <externalId>false</externalId>
+        <label>Owner</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>ForecastSummaries</relationshipName>
+        <relationshipLabel>Forecast Summaries</relationshipLabel>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+
+    <fields>
+        <fullName>Team__c</fullName>
+        <description>Optional team name for grouping (if applicable).</description>
+        <externalId>false</externalId>
+        <label>Team</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+    </fields>
+
+    <fields>
+        <fullName>Territory2Id__c</fullName>
+        <description>Optional reference to Territory2 for grouping.</description>
+        <externalId>false</externalId>
+        <label>Territory</label>
+        <referenceTo>Territory2</referenceTo>
+        <relationshipLabel>Forecast Summaries</relationshipLabel>
+        <relationshipName>ForecastSummaries_Territory</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+
+    <fields>
+        <fullName>ProductFamily__c</fullName>
+        <description>Optional product family grouping derived from OpportunityLineItem.</description>
+        <externalId>false</externalId>
+        <label>Product Family</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+    </fields>
+
+    <!-- Aggregates -->
+    <fields>
+        <fullName>HistoricAmount__c</fullName>
+        <description>Closed Won amount from comparable reference period in the past.</description>
+        <externalId>false</externalId>
+        <label>Historic Amount</label>
+        <precision>18</precision>
+        <scale>2</scale>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+
+    <fields>
+        <fullName>PipelineAmount__c</fullName>
+        <description>Current pipeline amount for this period.</description>
+        <externalId>false</externalId>
+        <label>Pipeline Amount</label>
+        <precision>18</precision>
+        <scale>2</scale>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+
+    <fields>
+        <fullName>ClosedWonAmount__c</fullName>
+        <description>Closed Won amount realized in this period to date.</description>
+        <externalId>false</externalId>
+        <label>Closed Won Amount</label>
+        <precision>18</precision>
+        <scale>2</scale>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+
+    <!-- Predictions -->
+    <fields>
+        <fullName>PredictedAmount__c</fullName>
+        <description>Predicted total amount for this period.</description>
+        <externalId>false</externalId>
+        <label>Predicted Amount</label>
+        <precision>18</precision>
+        <scale>2</scale>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+
+    <fields>
+        <fullName>LowerBound__c</fullName>
+        <description>Lower confidence bound for prediction.</description>
+        <externalId>false</externalId>
+        <label>Lower Bound</label>
+        <precision>18</precision>
+        <scale>2</scale>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+
+    <fields>
+        <fullName>UpperBound__c</fullName>
+        <description>Upper confidence bound for prediction.</description>
+        <externalId>false</externalId>
+        <label>Upper Bound</label>
+        <precision>18</precision>
+        <scale>2</scale>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+
+    <!-- Method metadata -->
+    <fields>
+        <fullName>Method__c</fullName>
+        <description>Prediction method identifier (e.g., WMA_v1).</description>
+        <externalId>false</externalId>
+        <label>Method</label>
+        <length>40</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+    </fields>
+
+    <fields>
+        <fullName>Version__c</fullName>
+        <description>Forecast model version.</description>
+        <externalId>false</externalId>
+        <label>Version</label>
+        <precision>3</precision>
+        <scale>0</scale>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+    </fields>
+
+    <fields>
+        <fullName>SnapshotDateTime__c</fullName>
+        <description>Date/time when this summary was computed.</description>
+        <externalId>false</externalId>
+        <label>Snapshot Date Time</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+
+    <!-- External Id for upsert (Owner+Quarter) -->
+    <fields>
+        <fullName>NaturalKey__c</fullName>
+        <description>Deterministic key composed of Owner+Period for idempotent upserts.</description>
+        <externalId>true</externalId>
+        <label>Natural Key</label>
+        <length>255</length>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <unique>true</unique>
+        <type>Text</type>
+    </fields>
+
+    <!-- Indexing for common filters -->
+    <indexes>
+        <fullName>Idx_Period_Owner</fullName>
+        <label>Idx Period Owner</label>
+        <fields>
+            <name>PeriodStartDate__c</name>
+            <sortDirection>ASC</sortDirection>
+        </fields>
+        <fields>
+            <name>Owner__c</name>
+            <sortDirection>ASC</sortDirection>
+        </fields>
+    </indexes>
+
+    <recordTypes>
+        <fullName>Quarterly</fullName>
+        <active>true</active>
+        <description>Quarterly forecast summary</description>
+        <label>Quarterly</label>
+    </recordTypes>
+</CustomObject>

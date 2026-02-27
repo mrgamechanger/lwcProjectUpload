@@ -1,0 +1,54 @@
+<template>
+    <lightning-card title="Parent Component">
+        <div>
+            <lightning-input 
+                label="Total" 
+                type="number" 
+                value={total} 
+                onchange={handleTotalChange}>
+            </lightning-input>
+            <lightning-input 
+                label="Percentage" 
+                type="number" 
+                value={percentage} 
+                onchange={handlePercentageChange}>
+            </lightning-input>
+            <lightning-input 
+                label="Discount" 
+                type="number" 
+                value={discount} 
+                onchange={handleDiscountChange}>
+            </lightning-input>
+
+            <lightning-input 
+            label="Markup" 
+            type="number" 
+            value={markup} 
+            onchange={handleMarupChange}>
+        </lightning-input>
+           
+
+
+</div>
+<div>
+            <lightning-button 
+                label="Calculate Percentage" 
+                onclick={calculatePercentage}>
+            </lightning-button>
+
+            <lightning-button 
+                label="Calculate Discount" 
+                onclick={calculateDiscount}>
+            </lightning-button>
+
+            <lightning-button 
+                label="Calculate markup" 
+                onclick={calculateincrease}>
+            </lightning-button>
+            <p>Result: {result}</p>
+        </div>
+
+        <!-- Include the child component -->
+        <c-child-calculator></c-child-calculator>
+    </lightning-card>
+</template>

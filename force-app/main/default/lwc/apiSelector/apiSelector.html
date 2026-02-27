@@ -1,0 +1,33 @@
+<template>
+    <lightning-card title="API Selector" icon-name="standard:connected_apps">
+        <div class="slds-p-around_medium">
+            <lightning-radio-group
+                name="apiOptions"
+                label="Select an API Service"
+                options={apiOptions}
+                value={selectedApi}
+                onchange={handleApiSelection}
+                variant="label-hidden">
+            </lightning-radio-group>
+            
+            <div class="slds-m-top_medium">
+                <lightning-button 
+                    label="Proceed" 
+                    variant="brand" 
+                    onclick={handleProceed}
+                    disabled={isButtonDisabled}>
+                </lightning-button>
+            </div>
+            
+            <div class="slds-m-top_medium" if:true={selectedApi}>
+                <lightning-card variant="narrow">
+                    <div class="slds-p-around_small">
+                        <h3 class="slds-text-heading_small slds-m-bottom_small">Selected API: {selectedApiLabel}</h3>
+                        <p class="slds-text-body_regular">{apiDescription}</p>
+                    </div>
+                </lightning-card>
+            </div>
+        </div>
+    </lightning-card>
+
+</template>

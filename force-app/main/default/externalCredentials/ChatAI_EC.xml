@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ExternalCredential xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ChatAI_EC</fullName>
+    <label>ChatAI External Credential</label>
+    <principalType>Named</principalType>
+    <protocol>Http</protocol>
+    <secretValue>{API_KEY_PLACEHOLDER}</secretValue>
+    <headerParameter>
+        <name>Authorization</name>
+        <value>Bearer {API_KEY_PLACEHOLDER}</value>
+    </headerParameter>
+</ExternalCredential>

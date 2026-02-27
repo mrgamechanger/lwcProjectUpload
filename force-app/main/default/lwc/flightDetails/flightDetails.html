@@ -1,0 +1,87 @@
+<template>
+    <lightning-card title="Check Flight Availability" variant="narrow" icon-name="custom:custom14">
+        <form>
+            <div class="slds-p-around_small">
+                <lightning-input type="text" required="true" name="FROM" placeholder="Enter travel city code (DEL, BOM)" label="FROM" onchange={handleInputChange}></lightning-input>
+                <lightning-input type="text" required="true" name="TO" label="TO" placeholder="Enter Destination code like (LHR, DXB)" onchange={handleInputChange}></lightning-input>
+            </div>
+
+            <lightning-layout>
+                <lightning-layout-item size="2">
+                    <div class="slds-p-around_small slds-p-left_large">
+                        <lightning-input type="text" required="true" name="Adult" label="Number OF ADULT" onchange={handleInputChange}></lightning-input>
+                    </div>
+                </lightning-layout-item>
+                <lightning-layout-item size="4">
+                    <div class="slds-p-around_small slds-p-left_large">
+                        <lightning-input type="date" required="true" name="date" label="Select a Date" onchange={handleInputChange}></lightning-input>
+                    </div>
+                </lightning-layout-item>
+            </lightning-layout>
+
+            <div class="slds-p-around_small slds-p-left_large">
+                <lightning-button label="Get flight details" variant="brand" onclick={handleflightInfo}></lightning-button>
+                <lightning-button label="Reset" class="slds-p-around_small" onclick={Reset}></lightning-button>
+            </div>
+
+            <template if:true={showSpinner}>
+                <lightning-spinner alternative-text="Loading"></lightning-spinner>
+            </template>
+
+            <template if:true={display}>
+                <div class="slds-box slds-box_xx-small">
+                    <template for:each={ItinerariesDisplay} for:item="itinerary">
+                        <div key={itinerary.id} class="flight-card">
+                            <div class="flight-card-header">
+                                <div class="flight-logo">
+                                    <img src={itinerary.url} alt="Airline Logo" />
+                                </div>
+                                <div class="flight-data">
+                                    <div class="passenger-details">
+                                        <span class="title">Airline</span>
+                                        <span class="detail">{itinerary.carrier}</span>
+                                    </div>
+                                    <div class="passenger-depart">
+                                        <span class="title">Departure</span>
+                                        <span class="detail">{itinerary.departureTime}</span>
+                                    </div>
+                                    <div class="passenger-arrives">
+                                        <span class="title">Arrival</span>
+                                        <span class="detail">{itinerary.arrivalTime}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flight-card-content">
+                                <div class="flight-row">
+                                    <div class="flight-from">
+                                        <span class="from-code">{itinerary.origin}</span>
+                                    </div>
+                                    <div class="plane">
+                                        <img src="https://cdn.onlinewebfonts.com/svg/img_537856.svg" alt="Plane" />
+                                    </div>
+                                    <div class="flight-to">
+                                        <span class="to-code">{itinerary.destination}</span>
+                                    </div>
+                                </div>
+                                <div class="flight-details-row">
+                                    <div class="flight-operator">
+                                        <span class="title">Duration</span>
+                                        <span class="detail">{itinerary.duration} minutes</span>
+                                    </div>
+                                    <div class="flight-number">
+                                        <span class="title">Price</span>
+                                        <span class="detail">{itinerary.price}</span>
+                                    </div>
+                                    <div class="flight-class">
+                                        <span class="title">Class</span>
+                                        <span class="detail">Economy</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </template>
+        </form>
+    </lightning-card>
+</template>

@@ -1,0 +1,311 @@
+.top-four {
+    background-color: #c6f6d5 !important; /* Light green color */
+    font-weight: 600;
+}
+
+/* Override SLDS table striping for top 4 rows */
+.slds-table_striped tbody tr.top-four:nth-of-type(even),
+.slds-table_striped tbody tr.top-four:nth-of-type(odd) {
+    background-color: #c6f6d5 !important;
+}
+
+.top-four td {
+    color: #1a1b1c;
+}
+
+.position-indicator {
+    color: #1589ee;
+}
+
+.position-badge {
+    background-color: #38a169; /* Darker green for the position badge */
+    color: white;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-weight: bold;
+    display: inline-block; /* Ensures consistent display */
+}
+
+/* Additional styling for position numbers */
+tr.top-four .position-badge {
+    background-color: #38a169;
+}
+
+.slds-scope {
+    background-color: #f3f2f2;
+    min-height: 100vh;
+}
+
+.slds-box.slds-theme_shade {
+    background-color: #ffffff;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1);
+}
+
+.slds-tabs_default__nav {
+    border-bottom: 2px solid #dddbda;
+    margin-bottom: 1rem;
+}
+
+.slds-tabs_default__item.slds-is-active {
+    border-bottom: 2px solid #1589ee;
+    margin-bottom: -2px;
+}
+
+.slds-card {
+    transition: transform 0.2s ease-in-out;
+    border: 1px solid #dddbda;
+    border-radius: 0.25rem;
+}
+
+.slds-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Match card specific styles */
+.match-card {
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.match-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.1) 100%);
+    transition: opacity 0.3s ease;
+    opacity: 0;
+}
+
+.match-card:hover::after {
+    opacity: 1;
+}
+
+.slds-avatar.slds-avatar_large {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    border: 2px solid #dddbda;
+}
+
+.slds-text-heading_large.slds-text-color_success {
+    color: #04844b;
+    font-weight: bold;
+}
+
+.top-four {
+    background-color: #fafaf9;
+}
+
+.position-badge {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    background-color: #1589ee;
+    color: white;
+    border-radius: 50%;
+    font-weight: bold;
+}
+
+.slds-table_container {
+    background-color: white;
+    border-radius: 0.25rem;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1);
+}
+
+.slds-badge.slds-theme_success {
+    background-color: #04844b;
+    color: white;
+}
+
+.slds-badge.slds-theme_inverse {
+    background-color: #706e6b;
+    color: white;
+}
+
+/* Loading spinner overlay */
+.slds-is-relative {
+    position: relative;
+    min-height: 200px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 48em) {
+    .slds-col.slds-size_1-of-2 {
+        width: 100%;
+    }
+    
+    .slds-tabs_default__nav {
+        flex-direction: column;
+    }
+    
+    .slds-tabs_default__item {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* Match Status Labels */
+.match-status {
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.match-status-today {
+    background-color: #4bca81;
+    color: white;
+}
+
+.match-status-upcoming {
+    background-color: #0070d2;
+    color: white;
+}
+
+.match-status-completed {
+    background-color: #706e6b;
+    color: white;
+}
+
+/* Team Images */
+.team-image {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #dddbda;
+    transition: transform 0.2s ease-in-out;
+}
+
+.team-image:hover {
+    transform: scale(1.1);
+}
+
+/* Match Card Hover Effects */
+.match-card {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.match-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Modal Styles */
+.slds-modal__container {
+    max-width: 80rem;
+}
+
+.slds-modal__content {
+    padding: 1.5rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 48em) {
+    .slds-modal__container {
+        max-width: 100%;
+    }
+    
+    .team-image {
+        width: 48px;
+        height: 48px;
+    }
+}
+
+/* Points Table Styles */
+.top-four {
+    background-color: #c6f6d5 !important; /* Light green color */
+    font-weight: 600;
+}
+
+/* Override SLDS table striping for top 4 rows */
+.slds-table_striped tbody tr.top-four:nth-of-type(even),
+.slds-table_striped tbody tr.top-four:nth-of-type(odd) {
+    background-color: #c6f6d5 !important;
+}
+
+.top-four td {
+    color: #1a1b1c;
+}
+
+.position-indicator {
+    color: #1589ee;
+}
+
+.position-badge {
+    background-color: #38a169; /* Darker green for the position badge */
+    color: white;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-weight: bold;
+    display: inline-block; /* Ensures consistent display */
+}
+
+/* Additional styling for position numbers */
+tr.top-four .position-badge {
+    background-color: #38a169;
+}
+
+/* Make table more compact and clean */
+.slds-table td, .slds-table th {
+    padding: 0.5rem;
+    vertical-align: middle;
+}
+
+.slds-table {
+    border: 1px solid #dddbda;
+}
+
+.slds-table th {
+    background-color: #f3f2f2;
+    font-weight: 600;
+    color: #514f4d;
+}
+
+.slds-table td {
+    color: #3e3e3c;
+}
+
+.slds-avatar_small {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+}
+
+/* Team name styling */
+.slds-grid_vertical-align-center span {
+    font-weight: 500;
+    color: #080707;
+}
+
+/* Points column styling */
+td strong {
+    font-weight: 600;
+    color: #080707;
+}
+
+.result-indicator {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 2px;
+}
+
+.result-win {
+    background-color: #28a745;
+}
+
+.result-loss {
+    background-color: #dc3545;
+}

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningMessageChannel xmlns="http://soap.sforce.com/2006/04/metadata">
+    <masterLabel>ExpenseChannel</masterLabel>
+    <isExposed>true</isExposed>
+    <description>Message Channel for Expense Tracker Component</description>
+    <lightningMessageFields>
+        <fieldName>recordId</fieldName>
+        <description>Record ID of the expense</description>
+    </lightningMessageFields>
+    <lightningMessageFields>
+        <fieldName>category</fieldName>
+        <description>Category of the expense</description>
+    </lightningMessageFields>
+    <lightningMessageFields>
+        <fieldName>amount</fieldName>
+        <description>Amount of the expense</description>
+    </lightningMessageFields>
+    <lightningMessageFields>
+        <fieldName>action</fieldName>
+        <description>Action performed on the expense</description>
+    </lightningMessageFields>
+</LightningMessageChannel> 

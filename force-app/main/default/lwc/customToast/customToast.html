@@ -1,0 +1,12 @@
+<!-- customOverlayToast/customOverlayToast.html -->
+<template>
+    <div class="custom-toast-overlay">
+        <div class={toastContainerClass}>
+            <lightning-icon class="custom-toast-icon" icon-name={iconName} size="small" variant="inverse"></lightning-icon>
+            <div class="custom-toast-message">{message}</div>
+            <div class="custom-toast-close" onclick={closeToast}>
+                <lightning-icon icon-name="utility:close" size="x-small" alternative-text="Close"></lightning-icon>
+            </div>
+        </div>
+    </div>
+</template>

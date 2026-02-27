@@ -1,0 +1,16 @@
+<!-- calculatorComponent.html -->
+<template>
+    <lightning-card title="Calculator" class="slds-p-around_medium">
+        <div class="calculator">
+            <lightning-input type="number" label="First Number" value={num1} onchange={handleNum1Change}></lightning-input>
+            <lightning-input type="number" label="Second Number" value={num2} onchange={handleNum2Change}></lightning-input>
+
+            <div class="slds-m-top_medium">
+                <lightning-button label="Add" onclick={handleAdd}></lightning-button>
+                <lightning-button label="Subtract" onclick={handleSubtract}></lightning-button>
+                <lightning-button label="Multiply" onclick={handleMultiply}></lightning-button>
+                <lightning-button label="Divide" onclick={handleDivide}></lightning-button>
+            </div>
+        </div>
+    </lightning-card>
+</template>

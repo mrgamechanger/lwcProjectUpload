@@ -1,0 +1,383 @@
+.meal-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: all 0.4s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.meal-image:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+lightning-card {
+    --sds-c-card-radius-border: 12px;
+    --sds-c-card-color-border: #e5e5e5;
+    --sds-c-card-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s ease;
+}
+
+lightning-card:hover {
+    --sds-c-card-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px);
+}
+
+/* Meal title styling */
+.slds-text-heading_small {
+    color: #0070d2;
+    font-weight: 600;
+    transition: color 0.3s ease;
+    margin-bottom: 0.5rem;
+}
+
+.slds-card:hover .slds-text-heading_small {
+    color: #005fb2;
+}
+
+/* Category styling */
+.slds-text-body_small {
+    color: #706e6b;
+    font-style: italic;
+    transition: color 0.3s ease;
+}
+
+.slds-card:hover .slds-text-body_small {
+    color: #3e3e3c;
+}
+
+/* Search input styling */
+lightning-input {
+    --sds-c-input-radius-border: 8px;
+    --sds-c-input-color-border: #dddbda;
+    --sds-c-input-color-border-focus: #0070d2;
+    --sds-c-input-shadow-focus: 0 0 3px #0070d2;
+    transition: all 0.3s ease;
+}
+
+/* Combobox styling */
+lightning-combobox {
+    --sds-c-input-radius-border: 8px;
+    --sds-c-input-color-border: #dddbda;
+    --sds-c-input-color-border-focus: #0070d2;
+    --sds-c-input-shadow-focus: 0 0 3px #0070d2;
+    transition: all 0.3s ease;
+}
+
+/* Reset button styling */
+lightning-button {
+    --sds-c-button-radius-border: 8px;
+    --sds-c-button-neutral-color-background: #f8f8f8;
+    --sds-c-button-neutral-color-background-hover: #eef1f6;
+    --sds-c-button-neutral-color-border: #dddbda;
+    --sds-c-button-neutral-color-border-hover: #0070d2;
+    transition: all 0.3s ease;
+}
+
+lightning-button:hover {
+    --sds-c-button-neutral-color-background: #eef1f6;
+    --sds-c-button-neutral-color-border: #0070d2;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Error notification styling */
+.slds-notify_alert {
+    border-radius: 8px;
+    animation: slideIn 0.5s ease-in-out;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* Loading spinner container */
+.slds-m-top_medium {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100px;
+}
+
+/* Card content padding */
+.slds-p-around_small {
+    padding: 1.25rem;
+    position: relative;
+    z-index: 1;
+}
+
+/* Grid spacing */
+.slds-gutters {
+    margin: -0.75rem;
+}
+
+.slds-gutters > .slds-col {
+    padding: 0.75rem;
+}
+
+/* Add a subtle overlay on hover */
+.slds-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.8) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.slds-card:hover::after {
+    opacity: 1;
+}
+
+/* Add a subtle pulse animation to the search input */
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(0, 112, 210, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(0, 112, 210, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(0, 112, 210, 0); }
+}
+
+lightning-input:focus-within {
+    animation: pulse 2s infinite;
+}
+
+/* Add a subtle shimmer effect to meal cards */
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+.slds-card {
+    background: linear-gradient(90deg, #f8f8f8 0%, #ffffff 50%, #f8f8f8 100%);
+    background-size: 200% 100%;
+    animation: shimmer 3s infinite linear;
+}
+
+/* Filter section styling */
+.slds-grid.slds-gutters.slds-wrap {
+    margin-bottom: 1rem;
+    background-color: #f8f8f8;
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Reset button container */
+.slds-text-align_right {
+    margin-bottom: 1rem;
+}
+
+/* Meal details modal styling */
+/* .slds-modal__container {
+    max-width: 80%;
+    background-color: #fff9f9;
+    color: #ffffff;
+} */
+
+.slds-modal__content {
+    padding: 1.5rem 2rem;
+    background-color: #e6e2e2f5;
+}
+
+.slds-modal__header {
+    padding: 1.25rem 2rem;
+    border-bottom: 1px solid #dddbda;
+    background-color: #ffffff;
+}
+
+.slds-modal__footer {
+    padding: 1.25rem 2rem;
+    border-top: 1px solid #dddbda;
+    background-color: #ffffff;
+}
+
+.slds-modal__title {
+    color: #0070d2;
+}
+
+.meal-detail-image {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1.5rem;
+}
+
+/* Description and Ingredients box styling */
+.slds-box.slds-theme_shade {
+    background-color: #2a2a2a;
+    color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    white-space: pre-line;
+    line-height: 1.6;
+    padding: 1.5rem;
+    margin: 1rem 0;
+    transition: all 0.3s ease;
+    border: 1px solid #333333;
+}
+
+.slds-box.slds-theme_shade:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Modal section spacing */
+.slds-modal__content .slds-grid {
+    margin-bottom: 2rem;
+}
+
+.slds-modal__content .slds-text-heading_small {
+    margin-bottom: 1rem;
+    color: #0070d2;
+    font-weight: 600;
+}
+
+/* Description text styling */
+.slds-box.slds-theme_shade p {
+    color: #ffffff;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Ingredients grid spacing */
+.slds-modal__content .slds-grid.slds-wrap.slds-gutters {
+    margin: -0.5rem;
+}
+
+.slds-modal__content .slds-grid.slds-wrap.slds-gutters > .slds-col {
+    padding: 0.5rem;
+}
+
+/* Ingredient card styling */
+.slds-box.slds-theme_shade .slds-text-heading_small {
+    color: #ffffff;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.slds-box.slds-theme_shade .slds-text-body_small {
+    color: #cccccc;
+    font-size: 0.8rem;
+}
+
+/* Meal card styling */
+.slds-card {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border-radius: 12px;
+    overflow: hidden;
+    background: linear-gradient(to bottom, #ffffff, #f8f8f8);
+    height: 100%;
+    position: relative;
+}
+
+.slds-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Meal card clickable styling */
+.meal-card {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.meal-card:hover {
+    background-color: rgba(0, 112, 210, 0.05);
+}
+
+/* Grid layout improvements */
+.slds-grid.slds-wrap.slds-gutters {
+    margin: -0.75rem;
+}
+
+.slds-grid.slds-wrap.slds-gutters > .slds-col {
+    padding: 0.75rem;
+}
+
+/* YouTube button styling */
+.slds-box.slds-theme_shade .slds-button_neutral {
+    --sds-c-button-radius-border: 8px;
+    --sds-c-button-neutral-color-background: #f8f8f8;
+    --sds-c-button-neutral-color-background-hover: #eef1f6;
+    --sds-c-button-neutral-color-border: #dddbda;
+    --sds-c-button-neutral-color-border-hover: #0070d2;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    color: #0070d2;
+}
+
+.slds-box.slds-theme_shade .slds-button_neutral:hover {
+    --sds-c-button-neutral-color-background: #eef1f6;
+    --sds-c-button-neutral-color-border: #0070d2;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.slds-box.slds-theme_shade .slds-button_neutral lightning-icon {
+    --sds-c-icon-color-foreground-default: #0070d2;
+}
+
+/* Pagination styling */
+.slds-button-group {
+    --sds-c-button-radius-border: 8px;
+    --sds-c-button-neutral-color-background: #f8f8f8;
+    --sds-c-button-neutral-color-background-hover: #eef1f6;
+    --sds-c-button-neutral-color-border: #dddbda;
+    --sds-c-button-neutral-color-border-hover: #0070d2;
+    transition: all 0.3s ease;
+}
+
+.slds-button-group .slds-button {
+    padding: 0.5rem 1rem;
+    font-weight: 600;
+}
+
+.slds-button-group .slds-button:not([disabled]):hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.slds-button-group .slds-button[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.slds-text-body_small {
+    color: #cccccc;
+    font-size: 0.8rem;
+}
+
+/* Modal backdrop styling */
+.slds-backdrop {
+    background-color: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(2px);
+}
+
+/* Modal animation */
+.slds-modal.slds-fade-in-open {
+    animation: modalFadeIn 0.3s ease-in-out;
+}
+
+@keyframes modalFadeIn {
+    from { 
+        opacity: 0; 
+        transform: scale(0.95); 
+    }
+    to { 
+        opacity: 1; 
+        transform: scale(1); 
+    }
+}

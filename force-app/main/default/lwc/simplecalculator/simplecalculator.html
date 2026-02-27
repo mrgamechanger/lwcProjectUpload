@@ -1,0 +1,23 @@
+<template>
+    <lightning-card  variant="Narrow"  title="calculator" icon-name="standard:account">
+        <form>
+       <div class="slds-p-around_small">
+        <lightning-input type="text" variant="standard" name="number1" label="enter fist number" onchange={handernumber}></lightning-input>
+        <lightning-input type="text" variant="standard" name="number2" label="enter second number" onchange={handernumber}></lightning-input>
+       </div>
+       <div class="slds-p-around_small">
+        <lightning-button  class="slds-p-around_small" variant="neutral" label="Add" name={add} onclick={handleCalculation}></lightning-button>
+        <lightning-button class="slds-p-around_small" variant="neutral" label="subtact" name={sub} onclick={handleCalculation}></lightning-button>
+        <lightning-button class="slds-p-around_small" variant="neutral" label="multiply" name={mul} onclick={handleCalculation}></lightning-button>
+        <lightning-button class="slds-p-around_small" variant="neutral" label="divide" name={div} onclick={handleCalculation}></lightning-button>
+        <lightning-button variant="neutral" label="percent"  onclick={handleCalculation}></lightning-button>
+        <lightning-button class="slds-p-around_small" variant="destructive" label="reset" name={reset} onclick={handleCalculation}></lightning-button>
+       </div>
+       <div>
+         <div class="slds-p-around_small"></div>
+         <p class="slds-p-around_small"> result:{result}</p>
+        
+       </div>
+    </form>
+    </lightning-card>
+</template>

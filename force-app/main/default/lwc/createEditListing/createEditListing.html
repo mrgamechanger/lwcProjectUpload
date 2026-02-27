@@ -1,0 +1,104 @@
+<template>
+    <lightning-card>
+        <div class="breadcrumb">
+            <a href="#">Home</a>
+            <span>&gt;</span>
+            <a href="#">My Profile</a>
+        </div>
+
+        <div class="main-content">
+            <h1>New Listing</h1>
+
+            <!-- Title Input -->
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input id="title" name="title" type="text" onchange={handleInputChange} />
+            </div>
+
+            <!-- Tagline Input -->
+            <div class="form-group">
+                <label for="tagline">Tagline</label>
+                <input id="tagline" name="tagline" type="text" onchange={handleInputChange} />
+            </div>
+
+            <!-- Description Input -->
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea id="description" name="description" onchange={handleInputChange}></textarea>
+            </div>
+
+            <!-- Category Selection -->
+            <div class="form-group">
+                <label for="category">Category*</label>
+                <select id="category" name="category" onchange={handleInputChange}>
+                    <option value="">Select...</option>
+                    <template for:each={categoryOptions} for:item="option">
+                        <option key={option.value} value={option.value}>{option.label}</option>
+                    </template>
+                </select>
+            </div>
+
+            <!-- Tags Selection -->
+            <div class="form-group">
+                <label for="tags">Tags*</label>
+                <select id="tags" name="tags" onchange={handleInputChange}>
+                    <option value="">Select...</option>
+                    <template for:each={tagOptions} for:item="option">
+                        <option key={option.value} value={option.value}>{option.label}</option>
+                    </template>
+                </select>
+            </div>
+
+            <!-- File Upload Section -->
+            <div class="slds-m-around_medium">
+                <lightning-input type="file" 
+                    accept=".zip" 
+                    label="Upload a ZIP file" 
+                    onchange={handleZipUpload}>
+                </lightning-input>
+            </div>
+            
+            <!-- Display uploaded ZIP file name if present -->
+            <template if:true={zipFileName}>
+                <p>Uploaded ZIP File: {zipFileName}</p>
+            </template>
+            
+            <!-- Picture Upload Section (JPEG/PNG Files) -->
+            <div class="slds-m-around_medium">
+                <lightning-input type="file" 
+                    accept=".jpeg,.jpg,.png" 
+                    label="Upload an Image" 
+                    onchange={handleImageUpload}>
+                </lightning-input>
+            </div>
+            
+            <!-- Display uploaded image file name if present -->
+            <template if:true={imageFileName}>
+                <p>Uploaded Image File: {imageFileName}</p>
+            </template>
+            
+            <div class="upload-note">
+                You can upload ZIP files for attachments and JPEG/PNG files for images.
+            </div>
+
+            <!-- Buttons Section -->
+            <div class="buttons">
+                <button class="publish" onclick={handleSave}>Publish</button>
+                <button class="draft" onclick={handleCancel}>Save as a Draft</button>
+            </div>
+        </div>
+
+        <!-- Footer Section -->
+        <div class="footer">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Cookies Settings</a>
+            <div class="social-links">
+                <span>Follow on LinkedIn:</span>
+                <a href="#">Salesforce LWC and JavaScript Enthusiasts</a>
+                <a href="#">Salesforce AI Enthusiasts</a>
+            </div>
+            <div class="social-links" >© All rights reserved.</div>
+        </div>
+    </lightning-card>
+</template>

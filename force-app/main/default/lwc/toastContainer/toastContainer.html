@@ -1,0 +1,11 @@
+<!-- toastContainer/toastContainer.html -->
+<template>
+    <template if:true={showToast}>
+        <c-custom-toast
+            message={message}
+            variant={variant}
+            auto-close-time={autoCloseTime}
+            onclose={handleCloseToast}
+        ></c-custom-toast>
+    </template>
+</template>

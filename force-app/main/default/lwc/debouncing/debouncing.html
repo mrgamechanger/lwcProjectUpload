@@ -1,0 +1,45 @@
+<template>
+    <lightning-card title="Account Search" class="slds-p-around_medium">
+        <div class="slds-m-bottom_medium">
+            <!-- Search Input -->
+            <lightning-input 
+                label="Search Account Name" 
+                value={searchTerm} 
+                onchange={seachnamehandler} 
+                placeholder="Enter account name" 
+                class="slds-m-bottom_medium">
+            </lightning-input>
+        </div>
+
+        <!-- Button to Reset Search -->
+        <div class="slds-m-bottom_medium">
+            <lightning-button label="Reset" onclick={handleReset} class="slds-m-right_small"></lightning-button>
+        </div>
+
+        <!-- Spinner (display when data is being fetched) -->
+        <template if:true={display}>
+            <lightning-spinner alternative-text="Loading" size="medium" class="slds-m-bottom_medium"></lightning-spinner>
+        </template>
+
+        <!-- Display Results -->
+        <template if:true={result}>
+            <lightning-datatable
+                key-field="Id"
+                data={result}
+                columns={columns}
+                hide-checkbox-column="true"
+                class="custom-datatable">
+            </lightning-datatable>
+        </template>
+
+        <!-- No Results Message (using getter property) -->
+        <template if:true={noResults}>
+            <p>No results found</p>
+        </template>
+
+        <!-- Error Message -->
+        <template if:true={error}>
+            <p class="slds-text-color_error">Error fetching data. Please try again later.</p>
+        </template>
+    </lightning-card>
+</template>

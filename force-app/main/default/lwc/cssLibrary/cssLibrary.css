@@ -1,0 +1,523 @@
+/***** CSS VARIABLES *****/
+/*************************/
+:host {
+    /* Primitive colours */
+    /* P.S. Don't use the "Primitive colours" directly, as they are already used as input for other CSS variables like background colours etc. */
+    --sfe-brand-primary-colour:   #D99430;
+    --sfe-brand-secondary-colour: #C7882C;
+    --sfe-brand-tertiary-colour:  #B87A21; 
+    --sfe-neutral-colour:         #FFFFFF;
+    --sfe-neutral-95-colour:      #F3F3F3;
+    --sfe-neutral-70-colour:      #AEAEAE;
+    --sfe-neutral-50-colour:      #747474;
+    --sfe-neutral-30-colour:      #444444;
+    --sfe-neutral-10-colour:      #181818;
+    --sfe-blue-50-colour:         #0B5CAB;
+    --sfe-blue-60-colour:         #014486;
+    --sfe-success-colour:         #2E844A;
+    --sfe-warning-colour:         #F6BA00;
+    --sfe-error-colour:           #EA001E;         
+
+    /* Background colours */
+    --sfe-colour-bg-surface:      var(--sfe-neutral-colour);    /* the default state background surface colour */
+    --sfe-colour-bg-hover:        var(--sfe-neutral-95-colour); /* the hover state background surface colour */
+    --sfe-colour-bg-active:       var(--sfe-neutral-70-colour); /* the active or pressed state background surface colour */
+    --sfe-colour-bg-selected:     var(--sfe-neutral-95-colour); /* the selected state background surface colour */
+    --sfe-colour-bg-inactive:     var(--sfe-neutral-95-colour); /* the inactive state background surface colour */
+
+    --sfe-colour-bg-surface-inverse:      var(--sfe-neutral-10-colour); /* the inverse default state background surface colour */
+    --sfe-colour-bg-hover-inverse:        var(--sfe-neutral-30-colour); /* the inverse hover state background surface colour */
+    --sfe-colour-bg-active-inverse:       var(--sfe-neutral-50-colour); /* the inverse active or pressed state background surface colour */
+    --sfe-colour-bg-selected-inverse:     var(--sfe-neutral-30-colour); /* the inverse selected state background surface colour */
+    --sfe-colour-bg-inactive-inverse:     var(--sfe-neutral-30-colour); /* the inverse inactive state background surface colour */
+
+    --sfe-colour-bg-brand:        var(--sfe-brand-primary-colour);   /* the brand background surface colour */
+    --sfe-colour-bg-brand-hover:  var(--sfe-brand-secondary-colour); /* the brand hover state background surface colour */
+    --sfe-colour-bg-brand-active: var(--sfe-brand-tertiary-colour);  /* the brand pressed state background surface colour */
+    
+    --sfe-colour-bg-success:  var(--sfe-success-colour); /* the success state background colour */
+    --sfe-colour-bg-warning:  var(--sfe-warning-colour); /* the warning state background colour */
+    --sfe-colour-bg-error:    var(--sfe-error-colour);   /* the error state background colour */
+
+    /* Text/Icon colours */
+    --sfe-colour-text-default:      var(--sfe-neutral-10-colour);     /* the default text colour */
+    --sfe-colour-text-hover:        var(--sfe-neutral-30-colour);     /* the hover state text colour */
+    --sfe-colour-text-active:       var(--sfe-brand-primary-colour);  /* the active or pressed text colour */
+    --sfe-colour-text-selected:     var(--sfe-neutral-50-colour);     /* the selected state text colour */
+    --sfe-colour-text-inactive:     var(--sfe-neutral-50-colour);     /* the inactive state text colour */
+    --sfe-colour-text-placeholder:  var(--sfe-neutral-70-colour);     /* the placeholder text colour */
+
+    --sfe-colour-text-default-inverse:      var(--sfe-neutral-colour);     /* the inverse default text colour */
+    --sfe-colour-text-hover-inverse:        var(--sfe-neutral-95-colour);     /* the inverse hover state text colour */
+    --sfe-colour-text-active-inverse:       var(--sfe-brand-primary-colour);  /* the inverse active or pressed text colour */
+    --sfe-colour-text-selected-inverse:     var(--sfe-neutral-95-colour);     /* the inverse selected state text colour */
+    --sfe-colour-text-inactive-inverse:     var(--sfe-neutral-95-colour);     /* the inverse inactive state text colour */
+
+    --sfe-colour-text-brand:        var(--sfe-brand-primary-colour); /* the brand text colour */
+    --sfe-colour-text-brand-hover:  var(--sfe-brand-secondary-colour); /* the brand hover state text colour */
+    --sfe-colour-text-brand-active: var(--sfe-brand-tertiary-colour); /* the brand pressed state text colour */
+
+    --sfe-colour-text-link:        var(--sfe-blue-50-colour); /* the link text colour */
+    --sfe-colour-text-link-focus:  var(--sfe-blue-60-colour); /* the link focus or hover text colour */
+    --sfe-colour-text-success:     var(--sfe-success-colour); /* the brand text colour */
+    --sfe-colour-text-warning:     var(--sfe-warning-colour); /* the brand text colour */
+    --sfe-colour-text-error:       var(--sfe-error-colour);   /* the brand text colour */
+
+    /* Border colours */
+    --sfe-colour-border-default:          var(--sfe-neutral-50-colour);    /* the default border colour */
+    --sfe-colour-border-default-inverse:  var(--sfe-neutral-95-colour);    /* the inverse default border colour */
+    --sfe-colour-border-brand:            var(--sfe-brand-primary-colour); /* the brand  border colour */
+
+    /* Text/Font */
+    --sfe-text-fontFamily-light: 'SalesforceSans-Light';
+    --sfe-text-fontFamily-regular: 'SalesforceSans-Regular';
+
+    /* Primitive spacing values */
+    --sfe-space-0:  0px;   /* Sets space at 0px */
+    --sfe-space-1:  2px;   /* Sets space at 2px */
+    --sfe-space-2:  4px;   /* Sets space at 4px */
+    --sfe-space-3:  6px;   /* Sets space at 6px */
+    --sfe-space-4:  8px;   /* Sets space at 8px */
+    --sfe-space-5:  10px;  /* Sets space at 10px */
+    --sfe-space-6:  12px;  /* Sets space at 12px */
+    --sfe-space-7:  14px;  /* Sets space at 14px */
+    --sfe-space-8:  16px;  /* Sets space at 16px */
+    --sfe-space-9:  18px;  /* Sets space at 18px */
+    --sfe-space-10: 20px;  /* Sets space at 20px */
+    --sfe-space-11: 24px;  /* Sets space at 24px */
+    --sfe-space-12: 32px;  /* Sets space at 32px */
+    --sfe-space-13: 48px;  /* Sets space at 48px */
+    --sfe-space-14: 64px;  /* Sets space at 64px */
+    --sfe-space-15: 80px;  /* Sets space at 80px */
+    --sfe-space-16: 96px;  /* Sets space at 96px */
+    --sfe-space-17: 112px; /* Sets space at 112px */
+    --sfe-space-18: 128px; /* Sets space at 128px */
+    --sfe-space-19: 192px; /* Sets space at 192px */
+    --sfe-space-20: 288px; /* Sets space at 288px */
+  }
+
+  /***** HTML ELEMENTS *****/
+  /*************************/
+
+  button {
+    border-radius: var(--sfe-space-2);
+    font-family: var(--sfe-text-fontFamily-regular, sans-serif, initial);
+  }
+
+  button:hover {
+    cursor: pointer;
+  }
+
+  a {
+    text-decoration: underline;
+    color: var(--sfe-colour-text-default);
+  }
+
+  a:hover {
+    color: var(--sfe-colour-text-hover);
+  }
+
+  a:active {
+    color: var(--sfe-colour-text-active);
+  }
+
+  /* mobile devices */
+  @media (min-width:320px) and (max-width:960px) {
+    h1 {
+      margin: 0px;
+      font-size: 40px;
+      line-height: 40px;
+    }
+
+    h2 {
+      margin: 0px;
+      font-size: 36px;
+      line-height: 40px;
+    }
+
+    h3 {
+      margin: 0px;
+      font-size: 30px;
+      line-height: 36px;
+    }
+
+    h4 {
+      margin: 0px;
+      font-size: 24px;
+      line-height: 32px;
+    }
+  }
+
+  /* laptops, desktops */
+  @media (min-width:961px) {
+    h1 {
+      margin: 0px;
+      font-size: 60px;
+      line-height: 60px;
+    }
+
+    h2 {
+      margin: 0px;
+      font-size: 48px;
+      line-height: 48px;
+    }
+
+    h3 {
+      margin: 0px;
+      font-size: 36px;
+      line-height: 40px;
+    }
+
+    h4 {
+      margin: 0px;
+      font-size: 30px;
+      line-height: 36px;
+    }
+  }
+
+  /***** CLASSES *****/
+  /*******************/
+
+  .margin-top-0 { margin-top: var(--sfe-space-0);}
+  .margin-top-1 { margin-top: var(--sfe-space-1);}
+  .margin-top-2 { margin-top: var(--sfe-space-2);}
+  .margin-top-3 { margin-top: var(--sfe-space-3);}
+  .margin-top-4 { margin-top: var(--sfe-space-4);}
+  .margin-top-5 { margin-top: var(--sfe-space-5);}
+  .margin-top-6 { margin-top: var(--sfe-space-6);}
+  .margin-top-7 { margin-top: var(--sfe-space-7);}
+  .margin-top-8 { margin-top: var(--sfe-space-8);}
+  .margin-top-9 { margin-top: var(--sfe-space-9);}
+  .margin-top-10 { margin-top: var(--sfe-space-10);}
+  .margin-top-11 { margin-top: var(--sfe-space-11);}
+  .margin-top-12 { margin-top: var(--sfe-space-12);}
+  .margin-top-13 { margin-top: var(--sfe-space-13);}
+  .margin-top-14 { margin-top: var(--sfe-space-14);}
+  .margin-top-15 { margin-top: var(--sfe-space-15);}
+  .margin-top-16 { margin-top: var(--sfe-space-16);}
+  .margin-top-17 { margin-top: var(--sfe-space-17);}
+  .margin-top-18 { margin-top: var(--sfe-space-18);}
+  .margin-top-19 { margin-top: var(--sfe-space-19);}
+  .margin-top-20 { margin-top: var(--sfe-space-20);}
+  .margin-right-0 { margin-right: var(--sfe-space-0);}
+  .margin-right-1 { margin-right: var(--sfe-space-1);}
+  .margin-right-2 { margin-right: var(--sfe-space-2);}
+  .margin-right-3 { margin-right: var(--sfe-space-3);}
+  .margin-right-4 { margin-right: var(--sfe-space-4);}
+  .margin-right-5 { margin-right: var(--sfe-space-5);}
+  .margin-right-6 { margin-right: var(--sfe-space-6);}
+  .margin-right-7 { margin-right: var(--sfe-space-7);}
+  .margin-right-8 { margin-right: var(--sfe-space-8);}
+  .margin-right-9 { margin-right: var(--sfe-space-9);}
+  .margin-right-10 { margin-right: var(--sfe-space-10);}
+  .margin-right-11 { margin-right: var(--sfe-space-11);}
+  .margin-right-12 { margin-right: var(--sfe-space-12);}
+  .margin-right-13 { margin-right: var(--sfe-space-13);}
+  .margin-right-14 { margin-right: var(--sfe-space-14);}
+  .margin-right-15 { margin-right: var(--sfe-space-15);}
+  .margin-right-16 { margin-right: var(--sfe-space-16);}
+  .margin-right-17 { margin-right: var(--sfe-space-17);}
+  .margin-right-18 { margin-right: var(--sfe-space-18);}
+  .margin-right-19 { margin-right: var(--sfe-space-19);}
+  .margin-right-20 { margin-right: var(--sfe-space-20);}
+  .margin-bottom-0 { margin-bottom: var(--sfe-space-0);}
+  .margin-bottom-1 { margin-bottom: var(--sfe-space-1);}
+  .margin-bottom-2 { margin-bottom: var(--sfe-space-2);}
+  .margin-bottom-3 { margin-bottom: var(--sfe-space-3);}
+  .margin-bottom-4 { margin-bottom: var(--sfe-space-4);}
+  .margin-bottom-5 { margin-bottom: var(--sfe-space-5);}
+  .margin-bottom-6 { margin-bottom: var(--sfe-space-6);}
+  .margin-bottom-7 { margin-bottom: var(--sfe-space-7);}
+  .margin-bottom-8 { margin-bottom: var(--sfe-space-8);}
+  .margin-bottom-9 { margin-bottom: var(--sfe-space-9);}
+  .margin-bottom-10 { margin-bottom: var(--sfe-space-10);}
+  .margin-bottom-11 { margin-bottom: var(--sfe-space-11);}
+  .margin-bottom-12 { margin-bottom: var(--sfe-space-12);}
+  .margin-bottom-13 { margin-bottom: var(--sfe-space-13);}
+  .margin-bottom-14 { margin-bottom: var(--sfe-space-14);}
+  .margin-bottom-15 { margin-bottom: var(--sfe-space-15);}
+  .margin-bottom-16 { margin-bottom: var(--sfe-space-16);}
+  .margin-bottom-17 { margin-bottom: var(--sfe-space-17);}
+  .margin-bottom-18 { margin-bottom: var(--sfe-space-18);}
+  .margin-bottom-19 { margin-bottom: var(--sfe-space-19);}
+  .margin-bottom-20 { margin-bottom: var(--sfe-space-20);}
+  .margin-left-0 { margin-left: var(--sfe-space-0);}
+  .margin-left-1 { margin-left: var(--sfe-space-1);}
+  .margin-left-2 { margin-left: var(--sfe-space-2);}
+  .margin-left-3 { margin-left: var(--sfe-space-3);}
+  .margin-left-4 { margin-left: var(--sfe-space-4);}
+  .margin-left-5 { margin-left: var(--sfe-space-5);}
+  .margin-left-6 { margin-left: var(--sfe-space-6);}
+  .margin-left-7 { margin-left: var(--sfe-space-7);}
+  .margin-left-8 { margin-left: var(--sfe-space-8);}
+  .margin-left-9 { margin-left: var(--sfe-space-9);}
+  .margin-left-10 { margin-left: var(--sfe-space-10);}
+  .margin-left-11 { margin-left: var(--sfe-space-11);}
+  .margin-left-12 { margin-left: var(--sfe-space-12);}
+  .margin-left-13 { margin-left: var(--sfe-space-13);}
+  .margin-left-14 { margin-left: var(--sfe-space-14);}
+  .margin-left-15 { margin-left: var(--sfe-space-15);}
+  .margin-left-16 { margin-left: var(--sfe-space-16);}
+  .margin-left-17 { margin-left: var(--sfe-space-17);}
+  .margin-left-18 { margin-left: var(--sfe-space-18);}
+  .margin-left-19 { margin-left: var(--sfe-space-19);}
+  .margin-left-20 { margin-left: var(--sfe-space-20);}
+  .padding-top-0 { padding-top: var(--sfe-space-0);}
+  .padding-top-1 { padding-top: var(--sfe-space-1);}
+  .padding-top-2 { padding-top: var(--sfe-space-2);}
+  .padding-top-3 { padding-top: var(--sfe-space-3);}
+  .padding-top-4 { padding-top: var(--sfe-space-4);}
+  .padding-top-5 { padding-top: var(--sfe-space-5);}
+  .padding-top-6 { padding-top: var(--sfe-space-6);}
+  .padding-top-7 { padding-top: var(--sfe-space-7);}
+  .padding-top-8 { padding-top: var(--sfe-space-8);}
+  .padding-top-9 { padding-top: var(--sfe-space-9);}
+  .padding-top-10 { padding-top: var(--sfe-space-10);}
+  .padding-top-11 { padding-top: var(--sfe-space-11);}
+  .padding-top-12 { padding-top: var(--sfe-space-12);}
+  .padding-top-13 { padding-top: var(--sfe-space-13);}
+  .padding-top-14 { padding-top: var(--sfe-space-14);}
+  .padding-top-15 { padding-top: var(--sfe-space-15);}
+  .padding-top-16 { padding-top: var(--sfe-space-16);}
+  .padding-top-17 { padding-top: var(--sfe-space-17);}
+  .padding-top-18 { padding-top: var(--sfe-space-18);}
+  .padding-top-19 { padding-top: var(--sfe-space-19);}
+  .padding-top-20 { padding-top: var(--sfe-space-20);}
+  .padding-right-0 { padding-right: var(--sfe-space-0);}
+  .padding-right-1 { padding-right: var(--sfe-space-1);}
+  .padding-right-2 { padding-right: var(--sfe-space-2);}
+  .padding-right-3 { padding-right: var(--sfe-space-3);}
+  .padding-right-4 { padding-right: var(--sfe-space-4);}
+  .padding-right-5 { padding-right: var(--sfe-space-5);}
+  .padding-right-6 { padding-right: var(--sfe-space-6);}
+  .padding-right-7 { padding-right: var(--sfe-space-7);}
+  .padding-right-8 { padding-right: var(--sfe-space-8);}
+  .padding-right-9 { padding-right: var(--sfe-space-9);}
+  .padding-right-10 { padding-right: var(--sfe-space-10);}
+  .padding-right-11 { padding-right: var(--sfe-space-11);}
+  .padding-right-12 { padding-right: var(--sfe-space-12);}
+  .padding-right-13 { padding-right: var(--sfe-space-13);}
+  .padding-right-14 { padding-right: var(--sfe-space-14);}
+  .padding-right-15 { padding-right: var(--sfe-space-15);}
+  .padding-right-16 { padding-right: var(--sfe-space-16);}
+  .padding-right-17 { padding-right: var(--sfe-space-17);}
+  .padding-right-18 { padding-right: var(--sfe-space-18);}
+  .padding-right-19 { padding-right: var(--sfe-space-19);}
+  .padding-right-20 { padding-right: var(--sfe-space-20);}
+  .padding-bottom-0 { padding-bottom: var(--sfe-space-0);}
+  .padding-bottom-1 { padding-bottom: var(--sfe-space-1);}
+  .padding-bottom-2 { padding-bottom: var(--sfe-space-2);}
+  .padding-bottom-3 { padding-bottom: var(--sfe-space-3);}
+  .padding-bottom-4 { padding-bottom: var(--sfe-space-4);}
+  .padding-bottom-5 { padding-bottom: var(--sfe-space-5);}
+  .padding-bottom-6 { padding-bottom: var(--sfe-space-6);}
+  .padding-bottom-7 { padding-bottom: var(--sfe-space-7);}
+  .padding-bottom-8 { padding-bottom: var(--sfe-space-8);}
+  .padding-bottom-9 { padding-bottom: var(--sfe-space-9);}
+  .padding-bottom-10 { padding-bottom: var(--sfe-space-10);}
+  .padding-bottom-11 { padding-bottom: var(--sfe-space-11);}
+  .padding-bottom-12 { padding-bottom: var(--sfe-space-12);}
+  .padding-bottom-13 { padding-bottom: var(--sfe-space-13);}
+  .padding-bottom-14 { padding-bottom: var(--sfe-space-14);}
+  .padding-bottom-15 { padding-bottom: var(--sfe-space-15);}
+  .padding-bottom-16 { padding-bottom: var(--sfe-space-16);}
+  .padding-bottom-17 { padding-bottom: var(--sfe-space-17);}
+  .padding-bottom-18 { padding-bottom: var(--sfe-space-18);}
+  .padding-bottom-19 { padding-bottom: var(--sfe-space-19);}
+  .padding-bottom-20 { padding-bottom: var(--sfe-space-20);}
+  .padding-left-0 { padding-left: var(--sfe-space-0);}
+  .padding-left-1 { padding-left: var(--sfe-space-1);}
+  .padding-left-2 { padding-left: var(--sfe-space-2);}
+  .padding-left-3 { padding-left: var(--sfe-space-3);}
+  .padding-left-4 { padding-left: var(--sfe-space-4);}
+  .padding-left-5 { padding-left: var(--sfe-space-5);}
+  .padding-left-6 { padding-left: var(--sfe-space-6);}
+  .padding-left-7 { padding-left: var(--sfe-space-7);}
+  .padding-left-8 { padding-left: var(--sfe-space-8);}
+  .padding-left-9 { padding-left: var(--sfe-space-9);}
+  .padding-left-10 { padding-left: var(--sfe-space-10);}
+  .padding-left-11 { padding-left: var(--sfe-space-11);}
+  .padding-left-12 { padding-left: var(--sfe-space-12);}
+  .padding-left-13 { padding-left: var(--sfe-space-13);}
+  .padding-left-14 { padding-left: var(--sfe-space-14);}
+  .padding-left-15 { padding-left: var(--sfe-space-15);}
+  .padding-left-16 { padding-left: var(--sfe-space-16);}
+  .padding-left-17 { padding-left: var(--sfe-space-17);}
+  .padding-left-18 { padding-left: var(--sfe-space-18);}
+  .padding-left-19 { padding-left: var(--sfe-space-19);}
+  .padding-left-20 { padding-left: var(--sfe-space-20);}
+  
+  .align-left {
+    text-align: left;
+  }
+
+  .align-center {
+    text-align: center;
+  }
+
+  .align-right {
+    text-align: right;
+  }
+
+  .float-left {
+    float: left;
+  }
+
+  .float-center {
+    float: center;
+  }
+
+  .float-right {
+    float: right;
+  }
+  
+  .make-bold {
+    font-weight: 700;
+  }
+
+  .make-bolder {
+    font-weight: 500;
+  }
+
+  .make-light {
+    font-weight: 300;
+  }
+
+  .use-regular-font {
+    font-family: var(--sfe-text-fontFamily-regular, sans-serif, initial);
+  }
+
+  .use-light-font {
+    font-family: var(--sfe-text-fontFamily-light, sans-serif, initial);
+  }
+
+  .body-large {
+    font-size: 20px;
+    line-height: 28px;
+  }
+
+  .body-base {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .body-small {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .body-xsmall {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .button-primary {
+      background-color: var(--sfe-brand-primary-colour);
+      color: var(--sfe-neutral-colour);
+      border: 1px solid var(--sfe-brand-primary-colour);
+  }
+
+  .button-primary:hover {
+    background-color: var(--sfe-brand-secondary-colour);
+    color: var(--sfe-neutral-colour);
+    border: 1px solid var(--sfe-brand-secondary-colour);
+  }
+
+  .button-primary:active {
+    background-color: var(--sfe-brand-tertiary-colour);
+    color: var(--sfe-neutral-colour);
+    border: 1px solid var(--sfe-brand-tertiary-colour);
+  }
+
+  .button-primary:disabled {
+    background-color: var(--sfe-colour-bg-inactive);
+    color: var(--sfe-colour-text-inactive);
+    border: 1px solid var(--sfe-colour-bg-inactive);
+  }
+
+  .button-secondary {
+    background-color: var(--sfe-neutral-colour); 
+    color: var(--sfe-brand-primary-colour);
+    border: 1px solid var(--sfe-brand-primary-colour);
+  }
+
+  .button-secondary:hover {
+    background-color: var(--sfe-neutral-colour);
+    color: var(--sfe-brand-secondary-colour);
+    border: 1px solid var(--sfe-brand-secondary-colour);
+  }
+
+  .button-secondary:active {
+    background-color: var(--sfe-neutral-colour);
+    color: var(--sfe-brand-tertiary-colour);
+    border: 1px solid var(--sfe-brand-tertiary-colour);
+  }
+
+  .button-secondary:disabled {
+    background-color: var(--sfe-neutral-colour);
+    color: var(--sfe-colour-text-inactive);
+    border: 1px solid var(- --sfe-colour-border-default);
+  }
+
+  /*To put icons directly on the input fields */
+  .input-icon {
+    position: absolute;
+    bottom: 0px;
+    z-index: 999;
+    right: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    width: 30px;
+  }
+
+  .input-icon:hover {
+    cursor: pointer;
+  }
+
+  /* mobile devices */
+  @media (min-width:320px) and (max-width:960px) {
+    .logo-image {
+      height: 30px;
+      width: auto;
+    }
+
+    .big-display-headline  {
+      font-size: 96px;
+      line-height: 96px;
+    }
+
+    .big-display-headline-2 {
+      font-size: 72px;
+      line-height: 72px;
+    }
+
+    .big-display-headline-3 {
+      font-size: 48px;
+      line-height: 48px;
+    }
+  }
+
+  /* laptops, desktops */
+  @media (min-width:961px) {
+    .logo-image {
+      height: 50px;
+      width: auto  ;
+    }
+
+    .big-display-headline {
+      font-size: 128px;
+      line-height: 128px;
+    }
+
+    .big-display-headline-2 {
+      font-size: 96px;
+      line-height: 96px;
+    }
+
+    .big-display-headline-3 {
+      font-size: 72px;
+      line-height: 72px;
+    }
+  }

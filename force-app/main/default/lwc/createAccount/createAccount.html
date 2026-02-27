@@ -1,0 +1,18 @@
+<template>
+    <lightning-card title="Create New Account" icon-name="standard:account">
+        <div class="slds-p-around_medium">
+            <lightning-input label="Account Name" value={accountName} onchange={handleInputChange} data-id="Name" required></lightning-input>
+            <lightning-input label="Annual Revenue" value={annualRevenue} onchange={handleInputChange} data-id="AnnualRevenue" type="number"></lightning-input>
+            <lightning-input label="Phone" value={phone} onchange={handleInputChange} data-id="Phone" type="tel"></lightning-input>
+            <lightning-combobox 
+                label="Rating" 
+                value={rating} 
+                placeholder="Select Rating" 
+                options={ratingOptions} 
+                onchange={handleInputChange} 
+                data-id="Rating">
+            </lightning-combobox>
+            <lightning-button label="Create Account" onclick={handleCreateAccount} class="slds-m-top_medium" variant="brand"></lightning-button>
+        </div>
+    </lightning-card>
+</template>

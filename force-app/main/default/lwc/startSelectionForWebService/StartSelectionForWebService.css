@@ -1,0 +1,110 @@
+:host {
+    display: block;
+}
+
+/* OS-friendly: remove dependency on SLDS CSS custom properties and use plain colors */
+.selection-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+}
+
+/* Hide the native radio visually but keep it accessible */
+.option-card input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+    width: 0;
+    height: 0;
+}
+
+.option-card {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid #d8dde6; /* neutral border */
+    background: #ffffff;
+    color: #181818;
+    cursor: pointer;
+    user-select: none;
+    min-height: 36px;
+    min-width: 160px;
+    max-width: 100%;
+    transition: transform 120ms ease, box-shadow 120ms ease, border-color 120ms ease, background-color 120ms ease;
+    outline: none;
+}
+
+.option-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(16, 24, 40, 0.06);
+}
+
+.option-card:focus,
+.option-card:focus-visible {
+    border-color: #1589ee; /* brand blue */
+    box-shadow: 0 0 0 3px rgba(21, 137, 238, 0.25), 0 6px 18px rgba(21, 137, 238, 0.12);
+}
+
+/* Visual selection via class or when radio is checked */
+.option-card.selected,
+.option-card[aria-selected="true"],
+.option-card:has(input[type="radio"]:checked) {
+    border-color: #1589ee;
+    box-shadow: 0 6px 18px rgba(21, 137, 238, 0.12);
+    background: linear-gradient(180deg, #f3f9ff, #ffffff);
+}
+
+.option-card:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(16, 24, 40, 0.08);
+}
+
+/* Custom radio indicator */
+.option-card::before {
+    content: '';
+    box-sizing: border-box;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid #7f8ea3;
+    display: inline-block;
+    margin-right: 6px;
+}
+
+.option-card.selected::before,
+.option-card[aria-selected="true"]::before,
+.option-card:has(input[type="radio"]:checked)::before {
+    border-color: #1589ee;
+    background: radial-gradient(#1589ee 0 40%, transparent 41%);
+}
+
+.option-card .label {
+    font-weight: 600;
+    color: #181818;
+    line-height: 20px;
+    flex: 1 1 auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.selection-info {
+    margin-top: 12px;
+    color: #253858;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .option-card {
+        transition: none;
+    }
+    .option-card:hover,
+    .option-card:active {
+        transform: none;
+    }
+}

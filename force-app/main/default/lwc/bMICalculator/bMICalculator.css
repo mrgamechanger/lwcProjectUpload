@@ -1,0 +1,50 @@
+.bmi-calculator-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh; /* Adjust height as needed */
+    background-color: #baacac; /* White card background */
+    
+}
+
+.bmi-calculator-card {
+    width: 500px; /* Adjust width as needed */
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #67cfce; /* White card background */
+}
+
+.bmi-calculator-input-group {
+    margin-bottom: 10px;
+}
+
+.bmi-calculator-button-group {
+    display: flex;
+    justify-content: space-between;
+}
+
+.bmi-calculator-button {
+    margin: 5px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.bmi-calculator-button.variant-brand {
+    background-color: #4caf50; /* Green for brand button */
+    color: #fff; /* White text for brand button */
+}
+
+.bmi-calculator-button.variant-destructive {
+    background-color: #f44336; /* Red for destructive button */
+    color: #fff; /* White text for destructive button */
+}
+
+.bmi-calculator-info {
+    padding: 15px;
+    border-radius: 5px;
+    background-color: #e0ffe0; /* Light green for info box */
+}

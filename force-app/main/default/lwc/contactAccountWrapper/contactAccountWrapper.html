@@ -1,0 +1,45 @@
+<template>
+    <!-- Display error if data fetch fails -->
+    <template if:true={error}>
+        <p class="slds-text-color_error">Error: {error}</p>
+    </template>
+
+    <!-- Display contact and account data in a table -->
+    <template if:true={contactAccountData}>
+        <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+            <thead>
+                <tr>
+                    <th>Select</th>
+                    <th>Contact Name</th>
+                    <th>Email</th>
+                    <th>Account Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                <template for:each={contactAccountData} for:item="wrapper">
+                    <tr key={wrapper.contact.Id}>
+                        <td>
+                            <input type="checkbox" 
+                                   data-id={wrapper.contact.Id}
+                                   checked={wrapper.isSelected}
+                                   onchange={handleCheckboxChange} />
+                        </td>
+                        <td>{wrapper.contact.FirstName} {wrapper.contact.LastName}</td>
+                        <td>{wrapper.contact.Email}</td>
+                        <td>{wrapper.account.Name}</td>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+    </template>
+
+    <!-- Display selected account details -->
+    <template if:true={selectedAccount}>
+        <div class="slds-box slds-theme_default slds-m-top_medium">
+            <h2 class="slds-text-heading_medium">Selected Account Details</h2>
+            <p><strong>Account Name:</strong> {selectedAccount.Name}</p>
+            <p><strong>Industry:</strong> {selectedAccount.Industry}</p>
+            <p><strong>Account ID:</strong> {selectedAccount.Id}</p>
+        </div>
+    </template>
+</template>

@@ -1,0 +1,144 @@
+<template>
+    <div class="slds-card slds-card_boundary">
+        <div class="slds-card__header slds-grid slds-gutters slds-p-around_medium">
+            <div class="slds-col slds-size_1-of-1">
+                <h2 class="slds-text-heading_medium slds-text-align_center">PDF Email Table</h2>
+            </div>
+        </div>
+        
+        <div class="slds-card__body slds-p-around_medium">
+            <!-- Loading Spinner -->
+            <template if:true={isLoading}>
+                <div class="slds-is-relative slds-m-vertical_medium">
+                    <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+                </div>
+            </template>
+            
+            <!-- Error Message -->
+            <template if:true={error}>
+                <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error" role="alert">
+                    <span class="slds-assistive-text">error</span>
+                    <h2>{error}</h2>
+                </div>
+            </template>
+            
+            <!-- Data Table -->
+            <div class="slds-box slds-box_shadow slds-m-bottom_medium">
+                <lightning-datatable
+                    key-field="id"
+                    data={tableData}
+                    columns={columns}
+                    hide-checkbox-column
+                    sorted-by={sortBy}
+                    sorted-direction={sortDirection}
+                    onsort={handleSort}
+                    onrowaction={handleRowAction}>
+                </lightning-datatable>
+            </div>
+            
+            <!-- Email Modal -->
+            <template if:true={showEmailModal}>
+                <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+                    <div class="slds-modal__container">
+                        <header class="slds-modal__header slds-theme_shade">
+                            <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={handleCloseModal}>
+                                <lightning-icon icon-name="utility:close" alternative-text="Close" variant="inverse" size="small"></lightning-icon>
+                            </button>
+                            <h2 class="slds-text-heading_medium slds-hyphenate slds-text-color_inverse">Send PDF via Email</h2>
+                        </header>
+                        <div class="slds-modal__content slds-p-around_medium">
+                            <div class="slds-form slds-form_stacked">
+                                <div class="slds-form-element slds-m-bottom_medium">
+                                    <label class="slds-form-element__label" for="emailTo">To</label>
+                                    <div class="slds-form-element__control">
+                                        <lightning-input 
+                                            type="email" 
+                                            id="emailTo" 
+                                            name="emailTo" 
+                                            value={emailTo}
+                                            onchange={handleEmailToChange}
+                                            placeholder="Enter recipient email"
+                                            required>
+                                        </lightning-input>
+                                    </div>
+                                </div>
+                                
+                                <div class="slds-form-element slds-m-bottom_medium">
+                                    <label class="slds-form-element__label" for="emailSubject">Subject</label>
+                                    <div class="slds-form-element__control">
+                                        <lightning-input 
+                                            type="text" 
+                                            id="emailSubject" 
+                                            name="emailSubject" 
+                                            value={emailSubject}
+                                            onchange={handleEmailSubjectChange}
+                                            placeholder="Enter email subject"
+                                            required>
+                                        </lightning-input>
+                                    </div>
+                                </div>
+                                
+                                <div class="slds-form-element slds-m-bottom_medium">
+                                    <label class="slds-form-element__label" for="emailBody">Message</label>
+                                    <div class="slds-form-element__control">
+                                        <lightning-textarea 
+                                            id="emailBody" 
+                                            name="emailBody" 
+                                            value={emailBody}
+                                            onchange={handleEmailBodyChange}
+                                            placeholder="Enter email message"
+                                            required>
+                                        </lightning-textarea>
+                                    </div>
+                                </div>
+                                
+                                <div class="slds-form-element slds-m-bottom_medium">
+                                    <label class="slds-form-element__label">Selected Record</label>
+                                    <div class="slds-form-element__control">
+                                        <div class="slds-box slds-box_shadow slds-p-around_small">
+                                            <p class="slds-text-body_regular"><strong>Name:</strong> {selectedRecord.name}</p>
+                                            <p class="slds-text-body_regular"><strong>Description:</strong> {selectedRecord.description}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <footer class="slds-modal__footer">
+                            <lightning-button 
+                                label="Cancel" 
+                                onclick={handleCloseModal} 
+                                class="slds-m-right_x-small">
+                            </lightning-button>
+                            <lightning-button 
+                                label="Send Email" 
+                                variant="brand" 
+                                onclick={handleSendEmail}
+                                disabled={isSending}>
+                            </lightning-button>
+                        </footer>
+                    </div>
+                </section>
+                <div class="slds-backdrop slds-backdrop_open"></div>
+            </template>
+            
+            <!-- Success Toast -->
+            <template if:true={showSuccessToast}>
+                <div class="slds-notify slds-notify_toast slds-theme_success" role="status">
+                    <span class="slds-assistive-text">success</span>
+                    <span class="slds-icon_container slds-icon-utility-success">
+                        <lightning-icon icon-name="utility:success" alternative-text="Success" variant="inverse" size="small"></lightning-icon>
+                    </span>
+                    <div class="slds-notify__content">
+                        <h2 class="slds-text-heading_small">Success</h2>
+                        <p>Email sent successfully!</p>
+                    </div>
+                    <div class="slds-notify__close">
+                        <button class="slds-button slds-button_icon slds-button_icon-inverse" title="Close" onclick={handleCloseToast}>
+                            <lightning-icon icon-name="utility:close" alternative-text="Close" variant="inverse" size="small"></lightning-icon>
+                        </button>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </div>
+</template> 

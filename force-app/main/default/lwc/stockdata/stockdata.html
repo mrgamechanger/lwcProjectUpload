@@ -1,0 +1,262 @@
+<template>
+    <lightning-card title="Stock Market Data" icon-name="standard:stock">
+        <div class="slds-p-around_medium">
+            <!-- Search Form -->
+            <form onsubmit={handleStockInfo} class="slds-form">
+                <div class="slds-form-element">
+                    <div class="slds-form-element__control">
+                        <div class="slds-input-has-icon slds-input-has-icon_left">
+                            <lightning-icon icon-name="utility:search" size="x-small" class="slds-input__icon"></lightning-icon>
+                            <input type="text" 
+                                   class="slds-input" 
+                                   placeholder="Enter Stock Symbol (e.g., AAPL)"
+                                   onchange={handleInputChange}
+                                   value={stock}/>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-m-top_medium slds-grid slds-gutters">
+                    <div class="slds-col">
+                        <lightning-button 
+                            label="Search" 
+                            variant="brand" 
+                            onclick={handleStockInfo}
+                            class="slds-m-right_x-small">
+                        </lightning-button>
+                        <lightning-button 
+                            label="Reset" 
+                            variant="neutral" 
+                            onclick={Reset}
+                            class="slds-m-right_x-small">
+                        </lightning-button>
+                        <lightning-button 
+                            label="Get Trending Stocks" 
+                            variant="success" 
+                            onclick={handleTrendingStocks}>
+                        </lightning-button>
+                    </div>
+                </div>
+            </form>
+
+            <!-- Loading Spinner -->
+            <template if:true={showSpinner}>
+                <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+            </template>
+
+            <!-- Stock Data Display -->
+            <template if:true={display}>
+                <div class="slds-m-top_medium">
+                    <template for:each={StockDisplay} for:item="stock">
+                        <div key={stock.id} class="slds-card slds-m-bottom_medium">
+                            <div class="slds-card__body slds-card__body_inner">
+                                <div class="slds-grid slds-wrap">
+                                    <!-- Stock Symbol and Name -->
+                                    <div class="slds-col slds-size_1-of-1 slds-m-bottom_small">
+                                        <h2 class="slds-text-heading_medium">
+                                            <span class="slds-text-color_default">{stock.symbol}</span>
+                                            <span class="slds-text-color_weak slds-m-left_small">{stock.name}</span>
+                                        </h2>
+                                    </div>
+                                    
+                                    <!-- Price Information -->
+                                    <div class="slds-col slds-size_1-of-2 slds-medium-size_1-of-3">
+                                        <div class="slds-text-title">Current Price</div>
+                                        <div class="slds-text-heading_medium slds-text-color_default">${stock.price}</div>
+                                    </div>
+                                    
+                                    <!-- Change Information -->
+                                    <div class="slds-col slds-size_1-of-2 slds-medium-size_1-of-3">
+                                        <div class="slds-text-title">Change</div>
+                                        <div class={stock.changeClass}>
+                                            {stock.change} ({stock.change_percent}%)
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Previous Close -->
+                                    <div class="slds-col slds-size_1-of-2 slds-medium-size_1-of-3">
+                                        <div class="slds-text-title">Previous Close</div>
+                                        <div class="slds-text-body_regular">${stock.previous_close}</div>
+                                    </div>
+                                    
+                                    <!-- Exchange -->
+                                    <div class="slds-col slds-size_1-of-2 slds-medium-size_1-of-3">
+                                        <div class="slds-text-title">Exchange</div>
+                                        <div class="slds-text-body_regular">{stock.exchange}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </template>
+
+            <!-- Trending Stocks Modal -->
+            <template if:true={showTrendingModal}>
+                <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_large" aria-modal="true">
+                    <div class="slds-modal__container">
+                        <!-- Modal Header -->
+                        <header class="slds-modal__header">
+                            <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeTrendingModal}>
+                                <lightning-icon icon-name="utility:close" alternative-text="Close" variant="inverse" size="small"></lightning-icon>
+                                <span class="slds-assistive-text">Close</span>
+                            </button>
+                            <h2 class="slds-modal__title slds-hyphenate">Trending Stocks</h2>
+                        </header>
+
+                        <!-- Modal Body -->
+                        <div class="slds-modal__content slds-p-around_medium slds-scrollable_y" style="max-height: 70vh;">
+                            <!-- Tabs -->
+                            <div class="slds-tabs_default">
+                                <ul class="slds-tabs_default__nav" role="tablist">
+                                    <li class="slds-tabs_default__item" title="Top Gainers" role="presentation">
+                                        <a class="slds-tabs_default__link" 
+                                           role="tab" 
+                                           tabindex="0" 
+                                           aria-selected={activeTabGainers} 
+                                           aria-controls="tab-gainers" 
+                                           id="tab-gainers__item"
+                                           data-tab="gainers"
+                                           onclick={handleTabChange}>
+                                            Top Gainers
+                                        </a>
+                                    </li>
+                                    <li class="slds-tabs_default__item" title="Top Losers" role="presentation">
+                                        <a class="slds-tabs_default__link" 
+                                           role="tab" 
+                                           tabindex="-1" 
+                                           aria-selected={activeTabLosers} 
+                                           aria-controls="tab-losers" 
+                                           id="tab-losers__item"
+                                           data-tab="losers"
+                                           onclick={handleTabChange}>
+                                            Top Losers
+                                        </a>
+                                    </li>
+                                </ul>
+
+                                <!-- Gainers Tab Content -->
+                                <div id="tab-gainers" 
+                                     role="tabpanel" 
+                                     aria-labelledby="tab-gainers__item"
+                                     class={gainersTabClass}>
+                                    <div class="slds-grid slds-wrap">
+                                        <template for:each={trendingStocks.gainers} for:item="stock">
+                                            <div key={stock.id} class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-3 slds-p-around_small">
+                                                <div class="slds-card">
+                                                    <div class="slds-card__body slds-card__body_inner">
+                                                        <div class="slds-grid slds-grid_vertical">
+                                                            <div class="slds-col">
+                                                                <h3 class="slds-text-heading_small">
+                                                                    <span class="slds-text-color_default">{stock.symbol}</span>
+                                                                    <span class="slds-text-color_weak slds-m-left_small">{stock.name}</span>
+                                                                </h3>
+                                                            </div>
+                                                            <div class="slds-col slds-m-top_small">
+                                                                <div class="slds-text-title">Price</div>
+                                                                <div class="slds-text-heading_medium">₹{stock.price}</div>
+                                                            </div>
+                                                            <div class="slds-col slds-m-top_small">
+                                                                <div class="slds-text-title">Change</div>
+                                                                <div class={stock.changeClass}>
+                                                                    {stock.change} ({stock.change_percent}%)
+                                                                </div>
+                                                            </div>
+                                                            <div class="slds-col slds-m-top_small">
+                                                                <div class="slds-grid slds-gutters">
+                                                                    <div class="slds-col">
+                                                                        <div class="slds-text-title">High</div>
+                                                                        <div class="slds-text-body_regular">₹{stock.high}</div>
+                                                                    </div>
+                                                                    <div class="slds-col">
+                                                                        <div class="slds-text-title">Low</div>
+                                                                        <div class="slds-text-body_regular">₹{stock.low}</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="slds-col slds-m-top_small">
+                                                                <div class="slds-text-title">Volume</div>
+                                                                <div class="slds-text-body_regular">{stock.volume}</div>
+                                                            </div>
+                                                            <div class="slds-col slds-m-top_small">
+                                                                <div class="slds-text-title">Rating</div>
+                                                                <div class="slds-text-body_regular">{stock.rating}</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </div>
+
+                                <!-- Losers Tab Content -->
+                                <div id="tab-losers" 
+                                     role="tabpanel" 
+                                     aria-labelledby="tab-losers__item"
+                                     class={losersTabClass}>
+                                    <div class="slds-grid slds-wrap">
+                                        <template for:each={trendingStocks.losers} for:item="stock">
+                                            <div key={stock.id} class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-3 slds-p-around_small">
+                                                <div class="slds-card">
+                                                    <div class="slds-card__body slds-card__body_inner">
+                                                        <div class="slds-grid slds-grid_vertical">
+                                                            <div class="slds-col">
+                                                                <h3 class="slds-text-heading_small">
+                                                                    <span class="slds-text-color_default">{stock.symbol}</span>
+                                                                    <span class="slds-text-color_weak slds-m-left_small">{stock.name}</span>
+                                                                </h3>
+                                                            </div>
+                                                            <div class="slds-col slds-m-top_small">
+                                                                <div class="slds-text-title">Price</div>
+                                                                <div class="slds-text-heading_medium">₹{stock.price}</div>
+                                                            </div>
+                                                            <div class="slds-col slds-m-top_small">
+                                                                <div class="slds-text-title">Change</div>
+                                                                <div class={stock.changeClass}>
+                                                                    {stock.change} ({stock.change_percent}%)
+                                                                </div>
+                                                            </div>
+                                                            <div class="slds-col slds-m-top_small">
+                                                                <div class="slds-grid slds-gutters">
+                                                                    <div class="slds-col">
+                                                                        <div class="slds-text-title">High</div>
+                                                                        <div class="slds-text-body_regular">₹{stock.high}</div>
+                                                                    </div>
+                                                                    <div class="slds-col">
+                                                                        <div class="slds-text-title">Low</div>
+                                                                        <div class="slds-text-body_regular">₹{stock.low}</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="slds-col slds-m-top_small">
+                                                                <div class="slds-text-title">Volume</div>
+                                                                <div class="slds-text-body_regular">{stock.volume}</div>
+                                                            </div>
+                                                            <div class="slds-col slds-m-top_small">
+                                                                <div class="slds-text-title">Rating</div>
+                                                                <div class="slds-text-body_regular">{stock.rating}</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Modal Footer -->
+                        <footer class="slds-modal__footer">
+                            <lightning-button 
+                                label="Close" 
+                                variant="neutral" 
+                                onclick={closeTrendingModal}>
+                            </lightning-button>
+                        </footer>
+                    </div>
+                </section>
+            </template>
+        </div>
+    </lightning-card>
+</template>

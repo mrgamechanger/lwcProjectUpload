@@ -1,0 +1,28 @@
+<template>
+  <!-- custom Toast Message Container -->
+  <c-toast-container></c-toast-container>
+  <section class="reviews-section">
+    <div class="reviews-content">
+      <h2 class="reviews-title">Listing Reviews</h2>
+      <div class="rating-summary">
+        <span class="average-rating">{averageRating}</span>
+        <div class="star-rating">
+          <!-- Add star rating component here if needed -->
+        </div>
+        <span class="review-count">{totalReviews} reviews</span>
+      </div>
+      <lightning-button variant="brand" label="Write Review" onclick={handleWriteReview} class="write-review-button"></lightning-button>
+      <div class="reviews-placeholder">
+        <!-- Placeholder for reviews -->
+        <c-review-list reviews={reviews} onreviewsloaded={handleReviewsLoaded}></c-review-list>
+      </div>
+      <template if:true={showReviewPopup}>
+        <c-write-review-popup 
+          component-listing-id={recordId} 
+          onclosepopup={handleCloseReviewPopup}
+          onreviewsubmitted={handleReviewSubmitted}
+        ></c-write-review-popup>
+      </template>
+    </div>
+  </section>
+</template>

@@ -1,0 +1,34 @@
+<template>
+    <div class="review-list-container" onscroll={handleScroll}>
+        <template for:each={reviews} for:item="review">
+            <div key={review.Id} class="review-item">
+                <div class="reviewer-info">
+                    <img src={review.reviewerProfilePicture} alt="Reviewer" class="reviewer-avatar" />
+                    <div class="reviewer-details">
+                        <p class="reviewer-name">{review.reviewerName}</p>
+                        <p class="review-date">{review.formattedDate}</p>
+                    </div>
+                </div>
+                <div class="review-rating">
+                    <template for:each={review.ratingStars} for:item="star" for:index="index">
+                        <lightning-icon
+                            key={star}
+                            icon-name="utility:star"
+                            size="x-small"
+                            class={star}
+                        ></lightning-icon>
+                    </template>
+                </div>
+                <p class="review-comment">{review.Comment__c}</p>
+            </div>
+        </template>
+        <template if:true={isLoading}>
+            <div class="loading-indicator">
+                <lightning-spinner alternative-text="Loading"></lightning-spinner>
+            </div>
+        </template>
+        <template if:true={error}>
+            <p class="error-message">{error}</p>
+        </template>
+    </div>
+</template>

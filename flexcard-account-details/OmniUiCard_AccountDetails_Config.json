@@ -1,0 +1,9 @@
+{
+  "Name": "AccountDetailsCard",
+  "Description": "Displays Account Name, Phone, and Industry with a refresh button",
+  "OmniUiCardType": "Parent",
+  "IsActive": true,
+  "DataSourceConfig": "{\"type\":\"Query\",\"value\":{\"query\":\"SELECT Id, Name, Phone, Industry FROM Account WHERE Id = '{recordId}' LIMIT 1\"}}",
+  "SampleDataSourceResponse": "{\"Id\":\"001000000000001AAA\",\"Name\":\"Sample Account\",\"Phone\":\"(555) 123-4567\",\"Industry\":\"Technology\"}",
+  "PropertySetConfig": "{\"states\":[{\"props\":{\"label\":\"Account Details\"},\"children\":[{\"descriptor\":\"Text\",\"props\":{\"label\":\"Account Name\",\"value\":\"{Name}\",\"editable\":false}},{\"descriptor\":\"Text\",\"props\":{\"label\":\"Phone\",\"value\":\"{Phone}\",\"editable\":false}},{\"descriptor\":\"Text\",\"props\":{\"label\":\"Industry\",\"value\":\"{Industry}\",\"editable\":false}},{\"descriptor\":\"Action\",\"props\":{\"label\":\"Refresh\",\"actionType\":\"Update Datasource\"}}]}]}"
+}

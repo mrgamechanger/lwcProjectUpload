@@ -1,0 +1,31 @@
+th, td {
+    border: 1px solid black;
+    text-align: center;
+    min-width: min-content !important;
+}
+.scrollContainer {
+    max-height: 600px;
+    overflow-y: auto;
+}
+.rank-column {
+    width: 15%;
+}
+
+.name-column {
+    width: 50%;
+}
+
+.score-column {
+    width: 15%;
+}
+
+.action-column {
+    width: 20%;
+}
+
+.div-warning {
+    height:100px; 
+    color:red; 
+    font-size:larger; 
+    background-color:white;
+}

@@ -1,0 +1,11 @@
+<template>
+    <lightning-card  variant="Narrow"  title="Calculator" icon-name="standard:account">
+        <div class="slds-p-horizontal_small">
+           
+                <lightning-input type="number" label="First Number" value={firstNumber} onchange={handleFirstNumberChange}></lightning-input>
+                <lightning-input type="number" label="Second Number" value={secondNumber} onchange={handleSecondNumberChange}></lightning-input>
+                <lightning-button variant="brand" label="Calculate" onclick={calculateSum}></lightning-button>
+              
+        </div>
+    </lightning-card>
+</template>

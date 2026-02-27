@@ -1,0 +1,26 @@
+<template>
+    <lightning-card title="Weather API" class="weather-card">
+        <form>
+        <div class="slds-p-around_medium">
+            <lightning-input 
+                label="Search City" 
+                onchange={handleCityChange} 
+                class="weather-input slds-p-around_medium">
+            </lightning-input>
+            <lightning-button 
+                label="Get Weather" 
+                variant="brand" 
+                onclick={handleGetResult} 
+                class="weather-button slds-p-around_medium">
+            </lightning-button>
+            <lightning-button 
+                label="Reset" 
+                variant="destructive" 
+                onclick={handleReset} 
+                class="weather-button slds-p-around_medium">
+            </lightning-button>
+        </div>
+       
+    </form>
+    </lightning-card>
+</template>

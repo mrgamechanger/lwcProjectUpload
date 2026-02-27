@@ -1,0 +1,15 @@
+.lookup-container {
+    position: relative;
+}
+
+.lookup-input {
+    width: 100%;
+}
+
+.slds-combobox__dropdown {
+    z-index: 7000; /* keep above record page sections */
+}
+
+.controls {
+    margin-top: 0.5rem;
+}

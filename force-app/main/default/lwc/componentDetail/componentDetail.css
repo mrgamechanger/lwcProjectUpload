@@ -1,0 +1,133 @@
+/* Styles specific to componentDetail.css */
+
+  .blog-post {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .blog-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  
+  .author-rating-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  
+  .author-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .author-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    margin-right: 1rem;
+  }
+  
+  .author-details {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .author-name {
+    font-weight: bold;
+  }
+  
+  .publish-date {
+    color: #706e6b;
+    font-size: 0.875rem;
+  }
+  
+  .rating-download {
+    display: flex;
+    align-items: center;
+  }
+  
+  .rating {
+    display: flex;
+    align-items: center;
+    margin-right: 1rem;
+  }
+  
+  .rating-icon {
+    margin-right: 0.25rem;
+  }
+  
+  .download-button {
+    --slds-c-button-brand-color-background: #0070d2;
+  }
+  
+  .blog-content {
+    margin-bottom: 2rem;
+  }
+  
+  .image-placeholder {
+    background-color: #f3f2f2;
+    height: 400px;
+    margin-bottom: 0.5rem;
+    position: relative; /* Add this to allow child elements to be positioned absolutely if needed */
+    overflow: hidden; /* Optional: to hide any overflow from child elements */
+  }
+  
+  .image-caption {
+    color: #706e6b;
+    font-size: 0.875rem;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  
+  .description-section {
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+  
+  .blog-text {
+    line-height: 1.6;
+  }
+  
+  .share-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  
+  .share-buttons {
+    display: flex;
+    gap: 0.5rem;
+  }
+  
+  .linkedin-share-button {
+    --slds-c-button-neutral-color-background: #0077B5;
+    --slds-c-button-text-color: #ffffff;
+    --slds-c-button-neutral-color-border: #0077B5;
+  }
+  
+  .linkedin-share-button:hover {
+    --slds-c-button-neutral-color-background-hover: #006699;
+    --slds-c-button-text-color-hover: #ffffff;
+    --slds-c-button-neutral-color-border-hover: #006699;
+  }
+  
+  .linkedin-icon {
+    margin-right: 0.5rem;
+  }
+  
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  
+  .tag {
+    background-color: #f3f2f2;
+    padding: 0.25rem 0.25rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+  }

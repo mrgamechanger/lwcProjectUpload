@@ -1,0 +1,20 @@
+<template>
+    <lightning-input 
+        label="Filter by Account Name"
+        placeholder="Enter account name"
+        value={filterText}
+        onchange={handleFilterChange}>
+    </lightning-input>
+
+    <lightning-datatable
+        data={displayData}
+        columns={columns}
+        key-field="Id"
+        draft-values={draftValues}
+        onsave={handleSave}>
+    </lightning-datatable>
+
+    <template if:true={showMoreVisible}>
+        <lightning-button label="Show More" onclick={handleShowMore}></lightning-button>
+    </template>
+</template>

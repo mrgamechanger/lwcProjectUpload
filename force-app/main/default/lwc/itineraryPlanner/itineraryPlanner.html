@@ -1,0 +1,40 @@
+<template>
+    <lightning-card title="Travel Itinerary Planner">
+        <div class="slds-p-around_medium">
+            <div class="mb-4 flex">
+                <lightning-input
+                    label="Add Item"
+                    value={newItem}
+                    onchange={handleInput}
+                    class="mr-2 flex-1"
+                ></lightning-input>
+                <lightning-button
+                    label="Add"
+                    onclick={addItem}
+                    class="ml-2"
+                ></lightning-button>
+            </div>
+            <ul>
+                <template for:each={itemsWithClass} for:item="item">
+                    <li key={item.id} class="flex items-center mb-2">
+                        <input
+                            type="checkbox"
+                            checked={item.completed}
+                            onchange={toggleItem}
+                            data-id={item.id}
+                            class="mr-2"
+                        />
+                        <span class={item.cssClass}>{item.name}</span>
+                        <lightning-button-icon
+                            icon-name="utility:delete"
+                            alternative-text="Delete"
+                            onclick={deleteItem}
+                            data-id={item.id}
+                            class="ml-2"
+                        ></lightning-button-icon>
+                    </li>
+                </template>
+            </ul>
+        </div>
+    </lightning-card>
+</template>

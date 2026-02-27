@@ -1,0 +1,211 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 1rem;
+    background: #f0f8ff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.score-panel {
+    text-align: left;
+    margin-bottom: 12px;
+    width: 100%;
+}
+
+.timer {
+    display: inline-block;
+    margin: 1rem;
+}
+
+.restart {
+    cursor: pointer;
+    margin: 0 8px;
+    background-color: #ff0000; /* Red background for reset button */
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.restart:hover {
+    background-color: #cc0000; /* Darker red on hover */
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-rows: auto;
+    grid-gap: 16px;
+    background: #1c3260;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 8px 9px 26px rgba(46, 61, 73, 0.5);
+    color: #fff; /* White text for details */
+}
+
+.card {
+    background: #f03d5f;
+    color: #ffffff; /* White text for cards */
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    box-shadow: 5px 2px 20px rgba(46, 61, 73, 0.5);
+    transition: transform 0.3s, background 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    background: #e2043b;
+}
+
+.card p {
+    margin: 0;
+}
+
+.card.open {
+    background: #02b3e4;
+    cursor: default;
+    animation: flipInY 0.75s;
+}
+
+.card.show {
+    font-size: 1rem;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.card.disabled {
+    pointer-events: none;
+    opacity: 0.9;
+}
+
+.card.match {
+    background: #e5f720;
+    animation: rubberBand 0.75s;
+}
+
+.card.unmatched {
+    animation: pulse 0.75s;
+    background: #e2043b;
+}
+
+/* Additional styling for info-container */
+.info-container {
+    background: #3b5998; /* Different background color */
+    color: #fff; /* White text */
+    padding: 1rem;
+    border-radius: 8px;
+    margin-top: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Animations */
+@keyframes flipInY {
+    from {
+        transform: perspective(400px) rotate3d(0, 1, 0, 90deg);
+        animation-timing-function: ease-in;
+        opacity: 0;
+    }
+    40% {
+        transform: perspective(400px) rotate3d(0, 1, 0, -20deg);
+        animation-timing-function: ease-in;
+    }
+    60% {
+        transform: perspective(400px) rotate3d(0, 1, 0, 10deg);
+        opacity: 1;
+    }
+    80% {
+        transform: perspective(400px) rotate3d(0, 1, 0, -5deg);
+    }
+    to {
+        transform: perspective(400px);
+    }
+}
+
+@keyframes rubberBand {
+    from {
+        transform: scale3d(1, 1, 1);
+    }
+    30% {
+        transform: scale3d(1.25, 0.75, 1);
+    }
+    40% {
+        transform: scale3d(0.75, 1.25, 1);
+    }
+    50% {
+        transform: scale3d(1.15, 0.85, 1);
+    }
+    65% {
+        transform: scale3d(0.95, 1.05, 1);
+    }
+    75% {
+        transform: scale3d(1.05, 0.95, 1);
+    }
+    to {
+        transform: scale3d(1, 1, 1);
+    }
+}
+
+@keyframes pulse {
+    from {
+        transform: scale3d(1, 1, 1);
+    }
+    50% {
+        transform: scale3d(1.2, 1.2, 1.2);
+    }
+    to {
+        transform: scale3d(1, 1, 1);
+    }
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.slds-p-around_small {
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.slds-p-left_large {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.lightning-input input {
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s;
+}
+
+.lightning-input input:focus {
+    border-color: #007bff;
+}
+
+.lightning-button {
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.lightning-button:hover {
+    background-color: #0056b3;
+}

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OmniUiCard xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CricketMatchesCard</fullName>
+    <name>CricketMatchesCard</name>
+    <description>Displays cricket matches fetched from Integration Procedure api_cricket in a datatable format</description>
+    <isActive>true</isActive>
+    <omniUiCardType>Parent</omniUiCardType>
+    <authorName>OmniStudio</authorName>
+    <versionNumber>2</versionNumber>
+    <dataSourceConfig>{"type":"IntegrationProcedure","value":{"ipName":"api_cricket","input":{}}}</dataSourceConfig>
+    <sampleDataSourceResponse>[{"id":"1","series":"World Cup","t1":"India","t2":"Australia","t1img":"https://example.com/india.png","t2img":"https://example.com/aus.png","dateTimeGMT":"2026-02-21T10:00:00Z","ms":"Live","status":"LIVE","matchType":"ODI","t1s":"250/8","t2s":"120/3"}]</sampleDataSourceResponse>
+    <propertySetConfig>{"states":[{"props":{"label":"Cricket Matches"},"children":[{"descriptor":"DataTable","props":{"label":"Match Details","columns":[{"fieldName":"series","label":"Series","type":"text","sortable":true},{"fieldName":"matchTeams","label":"Teams","type":"text","sortable":false},{"fieldName":"dateTimeGMT","label":"Date &amp; Time","type":"date","sortable":true},{"fieldName":"matchType","label":"Match Type","type":"text","sortable":true},{"fieldName":"status","label":"Status","type":"text","sortable":true},{"fieldName":"scores","label":"Scores","type":"text","sortable":false}],"data":"{_data}","hideCheckboxColumn":true,"rowNumberOffset":0}},{"descriptor":"Action","props":{"label":"Refresh","actionType":"Update Datasource"}}]}]}</propertySetConfig>
+</OmniUiCard>

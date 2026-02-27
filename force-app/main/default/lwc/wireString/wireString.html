@@ -1,0 +1,30 @@
+<template>
+    <lightning-card title="Wire method by funtion call">
+        <div class="slds-p-around_medium">
+            <lightning-combobox
+        name="Choose your type"
+        label="Choose your type"
+        
+        value={searchvalue}
+        options={options}
+        onchange={handleChange}>
+    </lightning-combobox>
+            <template if:true={Acclist.data}>
+
+            <template for:each={Acclist.data} for:item="acc" >
+              
+                  <div class="slds-box  slds-box_xx-small"  key={acc.Id}>
+
+                  <p>{acc.Name}</p> 
+                  <p>{acc.Type}</p>  
+                  <p>{acc.Industry}</p> 
+                  <p>{acc.Phone}</p>  
+                </div>
+              
+               </template>
+            </template>
+
+        </div>
+
+    </lightning-card>
+</template>

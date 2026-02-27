@@ -1,0 +1,23 @@
+<!-- detailListing.html -->
+<template>
+  <div class="slds-container_center slds-container_large detail-listing-container">
+    <template if:true={listingData}>
+      <c-component-detail listing-data={listingData}></c-component-detail>
+      <c-author-component author-data={listingData.Author__r} onlistingselected={handleClickView}></c-author-component>
+      <c-listing-reviews record-id={listingData.Id}></c-listing-reviews>
+      <!-- <c-related-listings category={listingData.Category__c}></c-related-listings> -->
+    </template>
+    <!-- Footer Section -->
+    <div class="footer">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="#">Cookies Settings</a>
+      <div class="social-links">
+          <span>Follow on LinkedIn:</span>
+          <a href="#">Salesforce LWC and JavaScript Enthusiasts</a>
+          <a href="#">Salesforce AI Enthusiasts</a>
+      </div>
+      <div class="social-links" >© All rights reserved.</div>
+    </div>
+  </div>
+</template>

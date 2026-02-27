@@ -1,0 +1,33 @@
+<template>
+    <lightning-card title="Search">
+        <div class="slds-form-element">
+            <input 
+                type="text" 
+                class="slds-input" 
+                placeholder="Search..." 
+                oninput={handleInput} 
+                onkeyup={handleKeyUp}>
+            <template if:true={showSuggestions}>
+                <ul class="slds-dropdown slds-dropdown_fluid">
+                    <template for:each={suggestions} for:item="suggestion">
+                        <li key={suggestion} class="slds-dropdown__item" role="presentation">
+                            <a href="javascript:void(0);" role="menuitem" onclick={handleSuggestionClick}>
+                                {suggestion}
+                            </a>
+                        </li>
+                    </template>
+                </ul>
+            </template>
+        </div>
+        <div class="tags">
+            <template for:each={tags} for:item="tag">
+                <span key={tag} class="slds-pill">
+                    <span class="slds-pill__label">{tag}</span>
+                    <button class="slds-button slds-button_icon slds-pill__remove" title="Remove" onclick={handleRemoveTag} data-tag={tag}>
+                        <lightning-icon icon-name="utility:close" alternative-text="Remove" size="x-small"></lightning-icon>
+                    </button>
+                </span>
+            </template>
+        </div>
+    </lightning-card>
+</template>

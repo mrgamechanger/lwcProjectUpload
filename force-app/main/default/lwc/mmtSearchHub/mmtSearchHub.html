@@ -1,0 +1,49 @@
+<template>
+    <div class="hub">
+        <div class="brand">Travel Hub</div>
+
+        <div class="tabs" role="tablist" aria-label="Search Options">
+            <button class={flightTabClass} data-tab="Flights" role="tab" aria-selected={isFlights} onclick={handleTabClick}>Flights</button>
+            <button class={hotelTabClass} data-tab="Hotels" role="tab" aria-selected={isHotels} onclick={handleTabClick}>Hotels</button>
+            <button class={trainTabClass} data-tab="Trains" role="tab" aria-selected={isTrains} onclick={handleTabClick}>Trains</button>
+            <button class={cricketTabClass} data-tab="Cricket" role="tab" aria-selected={isCricket} onclick={handleTabClick}>Cricket</button>
+        </div>
+
+        <div class="panel">
+            <!-- Flights -->
+            <template if:true={isFlights}>
+                <!-- Embed existing Flights component (assumes it renders its own search UI/results) -->
+                <c-flight-details-ip></c-flight-details-ip>
+            </template>
+
+            <!-- Hotels (simple placeholder search form for now) -->
+            <template if:true={isHotels}>
+                <div class="section-heading">Search Hotels</div>
+                <div class="grid">
+                    <lightning-input type="text" label="City" value={hotel.city} onchange={handleHotelChange} data-field="city"></lightning-input>
+                    <lightning-input type="date" label="Check-in" value={hotel.checkin} onchange={handleHotelChange} data-field="checkin"></lightning-input>
+                    <lightning-input type="date" label="Check-out" value={hotel.checkout} onchange={handleHotelChange} data-field="checkout"></lightning-input>
+                    <lightning-input type="number" label="Guests" value={hotel.guests} onchange={handleHotelChange} data-field="guests" min="1"></lightning-input>
+                    <div class="actions">
+                        <lightning-button variant="brand" label="Search Hotels" onclick={searchHotels}></lightning-button>
+                    </div>
+                </div>
+                <template if:true={hotelSearchInfo}>
+                    <div class="info">{hotelSearchInfo}</div>
+                </template>
+            </template>
+
+            <!-- Trains -->
+            <template if:true={isTrains}>
+                <!-- Embed existing Trains component -->
+                <c-traindetails-i-p></c-traindetails-i-p>
+            </template>
+
+            <!-- Cricket -->
+            <template if:true={isCricket}>
+                <!-- Embed existing Cricket component -->
+                <c-cricketapp></c-cricketapp>
+            </template>
+        </div>
+    </div>
+</template>

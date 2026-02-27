@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<NamedCredential xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ChatAI_NC</fullName>
+    <label>ChatAI Named Credential</label>
+    <endpoint>https://api.openai.com</endpoint>
+    <generateAuthorizationHeader>true</generateAuthorizationHeader>
+    <principalType>NamedUser</principalType>
+    <protocol>Http_ExternalCredential</protocol>
+    <externalCredential>ChatAI_EC</externalCredential>
+</NamedCredential>

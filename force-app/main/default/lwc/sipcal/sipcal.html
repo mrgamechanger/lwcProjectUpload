@@ -1,0 +1,69 @@
+<template>
+    <div class="slds-container_fluid slds-p-top_medium">
+        <div class="slds-grid slds-wrap slds-gutters">
+            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_4-of-12">
+                <lightning-card title="SIP Calculator" icon-name="standard:number_input">
+                    <div class="slds-p-around_medium">
+                        <form>
+                            <lightning-input
+                                label="Monthly Investment Amount"
+                                type="number"
+                                name="monthlyInvestment"
+                                value={monthlyInvestment}
+                                onchange={handleInput}
+                                required
+                                min="0"
+                                placeholder="Enter monthly amount">
+                            </lightning-input>
+
+                            <lightning-input
+                                label="Annual Interest Rate (%)"
+                                type="number"
+                                name="annualInterestRate"
+                                value={annualInterestRate}
+                                onchange={handleInput}
+                                required
+                                min="0"
+                                placeholder="Enter interest rate">
+                            </lightning-input>
+
+                            <lightning-input
+                                label="Investment Period (Years)"
+                                type="number"
+                                name="years"
+                                value={years}
+                                onchange={handleInput}
+                                required
+                                min="1"
+                                placeholder="Enter number of years">
+                            </lightning-input>
+
+                            <div class="slds-m-top_medium">
+                                <lightning-button
+                                    label="Calculate SIP"
+                                    variant="brand"
+                                   class="slds-p-around_small"
+                                    onclick={handleCalculation}>
+                                </lightning-button>
+                                <lightning-button
+                                    label="Reset"
+                                    variant="destructive"
+                                    class="slds-p-around_small"
+                                    onclick={handleCalculation}>
+                                </lightning-button>
+                            </div>
+                        </form>
+
+                        <template if:true={result}>
+                            <div class="result slds-m-top_medium">
+                                <p class="slds-text-heading_medium slds-text-color_success slds-m-top_small">Future Amount: <strong>{result}</strong></p>
+                            </div>
+                        </template>
+
+                        
+                    </div>
+                </lightning-card>
+            </div>
+        </div>
+    </div>
+</template>

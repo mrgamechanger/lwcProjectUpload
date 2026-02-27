@@ -1,0 +1,118 @@
+<template>
+    <lightning-card title="Flight Details">
+        <!-- Form to input search details -->
+        <form class="slds-form_stacked">
+            <lightning-input
+                label="From"
+                name="from"
+                type="text"
+                value={from}
+                onchange={handleInputChange}>
+            </lightning-input>
+            <lightning-input
+                label="To"
+                name="to"
+                type="text"
+                value={to}
+                onchange={handleInputChange}>
+            </lightning-input>
+            <lightning-input
+                label="Date"
+                name="date"
+                type="date"
+                value={date}
+                onchange={handleInputChange}>
+            </lightning-input>
+            <lightning-input
+                label="Adults"
+                name="Adult"
+                type="number"
+                value={Adult}
+                onchange={handleInputChange}>
+            </lightning-input>
+            <lightning-button variant="brand" label="Search" onclick={handleflightInfo} disabled={isSearchButtonDisabled}></lightning-button>
+            <lightning-button variant="neutral" label="Reset" onclick={Reset}></lightning-button>
+        </form>
+
+       
+       
+
+        <!-- Show spinner while loading -->
+        <template if:true={showSpinner}>
+            <lightning-spinner alternative-text="Loading"></lightning-spinner>
+        </template>
+
+        <!-- Display fetched itineraries -->
+        <template if:true={display}>
+            <template for:each={ItinerariesDisplay} for:item="itinerary">
+                <div key={itinerary.id} class="slds-box slds-m-top_medium">
+                    <p>
+                        <a href="javascript:void(0);" data-id={itinerary.id} onclick={handleEdit}>
+                            {itinerary.origin} ➡️ {itinerary.destination}
+                        </a>
+                    </p>
+                    <p>Duration: {itinerary.duration} mins</p>
+                    <p>Price: {itinerary.price}</p>
+                </div>
+            </template>
+        </template>
+
+        <!-- Modal -->
+        <template if:true={showModal}>
+            <section class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <h2 class="slds-text-heading_medium">{modalHeader}</h2>
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                            onclick={closeModal}>
+                            <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse"></lightning-icon>
+                        </button>
+                    </header>
+                    <div class="slds-modal__content">
+                        <lightning-input
+                            label="Duration (mins)"
+                            name="duration"
+                            type="number"
+                            value={editData.duration}
+                            onchange={handleModalInputChange}>
+                        </lightning-input>
+                        <lightning-input
+                            label="Carrier"
+                            name="carrier"
+                            type="text"
+                            value={editData.carrier}
+                            onchange={handleModalInputChange}>
+                        </lightning-input>
+                        <lightning-input
+                            label="Origin"
+                            name="origin"
+                            type="text"
+                            value={editData.origin}
+                            onchange={handleModalInputChange}>
+                        </lightning-input>
+                        <lightning-input
+                            label="Destination"
+                            name="destination"
+                            type="text"
+                            value={editData.destination}
+                            onchange={handleModalInputChange}>
+                        </lightning-input>
+                        <lightning-input
+                            label="Price"
+                            name="price"
+                            type="text"
+                            value={editData.price}
+                            onchange={handleModalInputChange}>
+                        </lightning-input>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <lightning-button variant="neutral" label="Cancel" onclick={closeModal}></lightning-button>
+                        <lightning-button variant="destructive" label="Delete" onclick={deleteItinerary} if:true={isEdit}></lightning-button>
+                        <lightning-button variant="brand" label="Save" onclick={saveChanges}></lightning-button>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+    </lightning-card>
+</template>

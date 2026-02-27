@@ -1,0 +1,39 @@
+<template>
+    <lightning-card title="Call Integration Procedure" icon-name="utility:process">
+        <!-- Input Section -->
+        <div class="slds-p-horizontal_medium slds-p-vertical_small">
+            <lightning-input
+                label="Example Input Key"
+                name="exampleKey"
+                type="text"
+                onchange={handleInputChange}>
+            </lightning-input>
+            <lightning-button
+                label="Call Integration Procedure"
+                variant="brand"
+                onclick={invokeIntegrationProcedure}
+                class="slds-m-top_small">
+            </lightning-button>
+        </div>
+
+        <!-- Response Section -->
+        <template if:true={responseData}>
+            <div class="slds-box slds-theme_shade slds-m-top_medium">
+                <p><strong>Response Data:</strong></p>
+                <pre>{responseData}</pre>
+            </div>
+        </template>
+
+        <!-- Error Section -->
+        <template if:true={error}>
+            <div class="slds-text-color_error slds-p-horizontal_medium slds-m-top_medium">
+                <p><strong>Error:</strong> {error}</p>
+            </div>
+        </template>
+
+        <!-- Loading Spinner -->
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Loading"></lightning-spinner>
+        </template>
+    </lightning-card>
+</template>

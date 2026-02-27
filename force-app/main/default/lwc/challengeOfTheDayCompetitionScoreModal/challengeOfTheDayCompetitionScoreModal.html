@@ -1,0 +1,52 @@
+<template>
+    <template if:true={isOpen}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!-- Modal/Popup Header -->
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                            title="Close" onclick={handleClose}>
+                        <lightning-icon icon-name="utility:close" alternative-text="close" size="small"></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 class="slds-text-heading_medium">Scores per Challenge</h2>
+                    <h3 class="slds-text-heading_small">{participantName}</h3>
+                </header>
+
+                <!-- Modal/Popup Body -->
+                <div class="slds-modal__content slds-p-around_medium">
+                    <template if:true={scores.length}>
+                        <table>
+                            <thead>
+                                <tr style="font-size:larger;">
+                                    <th>Challenge Name</th>
+                                    <th>Score</th>
+                                </tr>
+                                <tr><th colspan="2">&nbsp;</th></tr>
+                            </thead>
+                            <tbody>
+                                <template for:each={scores} for:item="score">
+                                    <tr key={score.challengeName}>
+                                        <td>{score.challengeName}</td> 
+                                        <td>{score.score}</td>
+                                    </tr>
+                                </template>
+                                <tr><td colspan="2">&nbsp;</td></tr>
+                                <tr><td colspan="2"><span style="font-size:larger;"><strong>TOTAL: </strong>{totalScore}</span></td></tr>
+                            </tbody>
+                        </table>
+                    </template>
+                    <template if:false={scores.length}>
+                        <p>No scores found for the selected participant.</p>
+                    </template>
+                </div>
+
+                <!-- Modal/Popup Footer -->
+                <footer class="slds-modal__footer">
+                    <button class="slds-button slds-button_neutral" onclick={handleClose}>Close</button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

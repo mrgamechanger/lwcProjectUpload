@@ -1,0 +1,117 @@
+<template>
+    <lightning-card title="OmniStudio Tracking Dashboard" icon-name="utility:metrics">
+        <div class="slds-p-around_medium">
+            <!-- Error Handling -->
+            <template if:true={error}>
+                <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error">
+                    <span class="slds-assistive-text">error</span>
+                    <h2>{error}</h2>
+                </div>
+            </template>
+
+            <!-- Filters -->
+            <div class="slds-grid slds-gutters slds-p-bottom_medium">
+                <div class="slds-col slds-size_1-of-2">
+                    <lightning-combobox
+                        label="Component Type"
+                        value={selectedComponentType}
+                        options={componentTypeOptions}
+                        onchange={handleComponentTypeChange}>
+                    </lightning-combobox>
+                </div>
+                <div class="slds-col slds-size_1-of-2">
+                    <lightning-combobox
+                        label="Event Type"
+                        value={selectedEventType}
+                        options={eventTypeOptions}
+                        onchange={handleEventTypeChange}>
+                    </lightning-combobox>
+                </div>
+            </div>
+
+            <!-- Tracking Data Table -->
+            <template if:true={hasData}>
+                <lightning-datatable
+                    key-field="Id"
+                    data={trackingData}
+                    columns={columns}
+                    hide-checkbox-column>
+                </lightning-datatable>
+            </template>
+
+            <!-- Statistics Section -->
+            <div class="slds-grid slds-gutters slds-p-top_medium">
+                <!-- Average Execution Times -->
+                <div class="slds-col slds-size_1-of-3">
+                    <div class="slds-card">
+                        <div class="slds-card__header slds-grid">
+                            <header class="slds-media slds-media_center">
+                                <div class="slds-media__body">
+                                    <h2 class="slds-card__header-title">
+                                        <span>Average Execution Times</span>
+                                    </h2>
+                                </div>
+                            </header>
+                        </div>
+                        <div class="slds-card__body">
+                            <template for:each={averageExecutionTimes} for:item="stat">
+                                <div key={stat.ComponentType__c} class="slds-p-around_small">
+                                    <div class="slds-text-title_caps">{stat.ComponentType__c}</div>
+                                    <div class="slds-text-heading_medium">{stat.avgTime} ms</div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event Counts -->
+                <div class="slds-col slds-size_1-of-3">
+                    <div class="slds-card">
+                        <div class="slds-card__header slds-grid">
+                            <header class="slds-media slds-media_center">
+                                <div class="slds-media__body">
+                                    <h2 class="slds-card__header-title">
+                                        <span>Event Counts</span>
+                                    </h2>
+                                </div>
+                            </header>
+                        </div>
+                        <div class="slds-card__body">
+                            <template for:each={eventCounts} for:item="stat">
+                                <div key={stat.EventType__c} class="slds-p-around_small">
+                                    <div class="slds-text-title_caps">{stat.EventType__c}</div>
+                                    <div class="slds-text-heading_medium">{stat.totalCount}</div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Success Rates -->
+                <div class="slds-col slds-size_1-of-3">
+                    <div class="slds-card">
+                        <div class="slds-card__header slds-grid">
+                            <header class="slds-media slds-media_center">
+                                <div class="slds-media__body">
+                                    <h2 class="slds-card__header-title">
+                                        <span>Success Rates</span>
+                                    </h2>
+                                </div>
+                            </header>
+                        </div>
+                        <div class="slds-card__body">
+                            <template for:each={successRates} for:item="stat">
+                                <div key={stat.OmniScriptId__c} class="slds-p-around_small">
+                                    <div class="slds-text-title_caps">{stat.OmniScriptId__c}</div>
+                                    <div class="slds-text-heading_medium">
+                                        {stat.successCount} / {stat.totalExecutions}
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </lightning-card>
+</template> 

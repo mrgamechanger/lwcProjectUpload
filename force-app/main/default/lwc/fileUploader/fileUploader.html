@@ -1,0 +1,38 @@
+<template>
+    <lightning-card title="File Upload" icon-name="custom:custom63">
+        <div class="slds-m-around_medium">
+
+            <!-- ZIP File Upload -->
+            <div class="slds-m-top_medium">
+                <lightning-input
+                    type="file"
+                    label="Upload ZIP file"
+                    accept=".zip"
+                    onchange={handleZipUpload}
+                ></lightning-input>
+                <template if:true={zipFileName}>
+                    <p>
+                        <lightning-icon icon-name="utility:check" alternative-text="Success" size="small"></lightning-icon>
+                        Selected File: {zipFileName}
+                    </p>
+                </template>
+            </div>
+
+            <!-- Image File Upload -->
+            <div class="slds-m-top_medium">
+                <lightning-input
+                    type="file"
+                    label="Upload Image (JPEG/PNG)"
+                    accept=".jpeg,.jpg,.png"
+                    onchange={handleImageUpload}
+                ></lightning-input>
+                <template if:true={imageFileName}>
+                    <p>
+                        <lightning-icon icon-name="utility:check" alternative-text="Success" size="small"></lightning-icon>
+                        Selected Image: {imageFileName}
+                    </p>
+                </template>
+            </div>
+        </div>
+    </lightning-card>
+</template>

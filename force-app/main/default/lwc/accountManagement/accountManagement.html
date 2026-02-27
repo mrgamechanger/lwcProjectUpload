@@ -1,0 +1,27 @@
+<template>
+    <lightning-card title="Account Management" icon-name="standard:account">
+        <!-- Datatable to display and edit the account list -->
+        <div class="slds-p-around_medium">
+            <lightning-datatable
+                key-field="Id"
+                data={accountList}
+                columns={cols}
+                draft-values={draftValues}
+                onrowselection={handleSelection}
+                onsave={handleSave}
+                editable>
+            </lightning-datatable>
+        </div>
+
+        <!-- Section for deleting the selected account -->
+        <div class="slds-p-around_medium">
+            <lightning-button
+                label="Delete Selected Account"
+                onclick={deleteRecord}
+                class="slds-m-top_small"
+                variant="destructive"
+                disabled={isDeleteDisabled}>
+            </lightning-button>
+        </div>
+    </lightning-card>
+</template>

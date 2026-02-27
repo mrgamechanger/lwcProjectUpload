@@ -1,0 +1,27 @@
+<template>
+    <lightning-card title="Expense Subscriber" icon-name="standard:expense">
+        <div class="slds-p-around_medium">
+            <template if:true={receivedMessages.length}>
+                <div class="slds-text-heading_small slds-m-bottom_small">
+                    Recent Messages:
+                </div>
+                <ul class="slds-has-dividers_bottom-space">
+                    <template for:each={receivedMessages} for:item="message">
+                        <li key={message.recordId} class="slds-item">
+                            <div class="slds-grid slds-gutters">
+                                <div class="slds-col">
+                                    <p><strong>Category:</strong> {message.category}</p>
+                                    <p><strong>Amount:</strong> ${message.amount}</p>
+                                    <p><strong>Action:</strong> {message.action}</p>
+                                </div>
+                            </div>
+                        </li>
+                    </template>
+                </ul>
+            </template>
+            <template if:false={receivedMessages.length}>
+                <p>No messages received yet.</p>
+            </template>
+        </div>
+    </lightning-card>
+</template> 

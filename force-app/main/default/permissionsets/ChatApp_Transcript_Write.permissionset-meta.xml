@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>ChatApp_Transcript_Write</label>
+    <description>Permission set for writing chat transcript data</description>
+    
+    <!-- Object Permissions -->
+    <objectPermissions>
+        <object>Chat_Message__c</object>
+        <allowCreate>true</allowCreate>
+        <allowDelete>false</allowDelete>
+        <allowEdit>false</allowEdit>
+        <allowRead>true</allowRead>
+        <allowUpdate>false</allowUpdate>
+        <viewAllRecords>false</viewAllRecords>
+        <modifyAllRecords>false</modifyAllRecords>
+    </objectPermissions>
+    <objectPermissions>
+        <object>Chat_Transcript__c</object>
+        <allowCreate>true</allowCreate>
+        <allowDelete>false</allowDelete>
+        <allowEdit>false</allowEdit>
+        <allowRead>true</allowRead>
+        <allowUpdate>false</allowUpdate>
+        <viewAllRecords>false</viewAllRecords>
+        <modifyAllRecords>false</modifyAllRecords>
+    </objectPermissions>
+    
+    <!-- Field Permissions -->
+    <fieldPermissions>
+        <field>Chat_Message__c.Chat_Transcript__c</field>
+        <readable>true</readable>
+        <writable>true</writable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <field>Chat_Message__c.Message__c</field>
+        <readable>true</readable>
+        <writable>true</writable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <field>Chat_Message__c.Message_Type__c</field>
+        <readable>true</readable>
+        <writable>true</writable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <field>Chat_Message__c.Timestamp__c</field>
+        <readable>true</readable>
+        <writable>true</writable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <field>Chat_Transcript__c.Name</field>
+        <readable>true</readable>
+        <writable>true</writable>
+    </fieldPermissions>
+    
+    <!-- Record Type Permissions -->
+    <recordTypeVisibilities>
+        <recordType>Chat_Transcript__c.Chat_Transcript</recordType>
+        <visible>true</visible>
+    </recordTypeVisibilities>
+</PermissionSet>

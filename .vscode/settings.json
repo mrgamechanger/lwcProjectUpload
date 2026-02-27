@@ -1,0 +1,21 @@
+{
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/.sfdx": true
+  },
+  "xml.preferences.showSchemaDocumentationType": "none",
+  "modelContextProtocol": {
+    "servers": {
+      "omnistudio": {
+        "command": "npx",
+        "args": ["-y", "@sf-explorer/omnistudio-mcp-server"],
+        "env": {
+          "SF_AUTH_MODE": "sfdx",
+          "SF_SFDX_ORG_ALIAS": "dev-ed",
+          "SF_API_VERSION": "61.0"
+        }
+      }
+    }
+  }
+}

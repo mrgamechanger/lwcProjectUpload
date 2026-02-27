@@ -1,0 +1,36 @@
+.weather-card {
+  background-color: #f5f5f5;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: auto;
+  width: 50px;
+  padding: 0px;
+}
+
+.weather-input {
+  width: 100%;
+}
+
+.weather-button {
+  width: 100%;
+}
+
+.weather-info {
+  text-align: center;
+  margin-top: 20px;
+  background-color: #5993c2;
+
+}
+
+.weather-icon {
+  width: 100px;
+  height: 100px;
+  padding: 10px;
+  margin-top: 20px;
+}
+
+.weather-condition,
+.weather-temperature {
+  font-size: 18px;
+  margin-bottom: 5px;
+}

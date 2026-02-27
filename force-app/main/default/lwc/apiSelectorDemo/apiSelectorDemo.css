@@ -1,0 +1,15 @@
+.selected-api-card {
+    background-color: #f8f9fa;
+    border-left: 4px solid #0176d3;
+    margin-top: 1rem;
+}
+
+.slds-card {
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.slds-text-heading_small {
+    color: #0176d3;
+    font-weight: 600;
+} 

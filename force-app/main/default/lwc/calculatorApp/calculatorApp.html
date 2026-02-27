@@ -1,0 +1,7 @@
+<template>
+    <lightning-card  variant="Narrow"  title="Calculator App" icon-name="standard:account">
+        <c-calculator-operations oncalculate={handleCalculation}></c-calculator-operations>
+        <p><strong>Operation:</strong> {operation}</p>
+        <p><strong>Result:</strong> {result}</p>
+    </lightning-card>
+</template>
